@@ -183,7 +183,8 @@
                 <RowDefinition Height="*"/>
               </Grid.RowDefinitions>
               <TemplatedControl x:Name="PART_HeaderControl"
-                                Template="{Binding Path=HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                Template="{Binding Path=HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                IsVisible="{Binding Path=IsCustomHeaderVisible, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
 
               <Grid Grid.Row="1">
                 <Border x:Name="BackgroundBorder"

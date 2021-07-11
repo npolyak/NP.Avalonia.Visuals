@@ -35,6 +35,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         IDisposable _windowStateChangeDisposer;
 
+        IDisposable _windowCustomFeatureDisposer;
+
         public CustomWindow()
         {
 #if DEBUG
@@ -44,6 +46,24 @@ namespace NP.Avalonia.Visuals.Controls
 
             _windowStateChangeDisposer = 
                 WindowStateProperty.Changed.Subscribe(OnWindowStateChanged);
+
+            _windowCustomFeatureDisposer =
+                HasCustomWindowFeaturesProperty.Changed.Subscribe(OnHasCustomFeaturesChanged);
+        }
+
+        private void OnHasCustomFeaturesChanged(AvaloniaPropertyChangedEventArgs<bool> hasCustomFeaturesContainer)
+        {
+            if (!hasCustomFeaturesContainer.NewValue.Value)
+            {
+                SetIsHitVisibleOnResizeControls(false);
+                this.IsCustomHeaderVisible = false;
+                this.SystemDecorations = SystemDecorations.Full;
+            }
+            else
+            {
+                SetIsHitVisibleOnResizeControls(true);
+                this.IsCustomHeaderVisible = true;
+            }
         }
 
         private void OnWindowStateChanged(AvaloniaPropertyChangedEventArgs<WindowState> windowStateChange)
@@ -59,7 +79,10 @@ namespace NP.Avalonia.Visuals.Controls
 
             if (oldWindowState == WindowState.Maximized)
             {
-                SetIsHitVisibleOnResizeControls(true);
+                if (HasCustomWindowFeatures)
+                {
+                    SetIsHitVisibleOnResizeControls(true);
+                }
             }
         }
 
@@ -371,5 +394,38 @@ namespace NP.Avalonia.Visuals.Controls
                 nameof(HeaderContentTemplate)
             );
         #endregion HeaderContentTemplate Styled Avalonia Property
+
+
+        #region IsCustomHeaderVisible Styled Avalonia Property
+        public bool IsCustomHeaderVisible
+        {
+            get { return GetValue(IsCustomHeaderVisibleProperty); }
+            set { SetValue(IsCustomHeaderVisibleProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> IsCustomHeaderVisibleProperty =
+            AvaloniaProperty.Register<CustomWindow, bool>
+            (
+                nameof(IsCustomHeaderVisible),
+                true
+            );
+        #endregion IsCustomHeaderVisible Styled Avalonia Property
+
+
+        #region HasCustomWindowFeatures Styled Avalonia Property
+        public bool HasCustomWindowFeatures
+        {
+            get { return GetValue(HasCustomWindowFeaturesProperty); }
+            set { SetValue(HasCustomWindowFeaturesProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> HasCustomWindowFeaturesProperty =
+            AvaloniaProperty.Register<CustomWindow, bool>
+            (
+                nameof(HasCustomWindowFeatures), 
+                true
+            );
+        #endregion HasCustomWindowFeatures Styled Avalonia Property
+
     }
 }
