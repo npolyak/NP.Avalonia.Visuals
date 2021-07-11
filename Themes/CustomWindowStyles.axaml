@@ -5,24 +5,37 @@
         xmlns:controls="clr-namespace:NP.Avalonia.Visuals.Controls">
   
   <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/ButtonStyles.axaml"/>
+
+  <Style Selector="TextBlock.DefaultWindowTitle">
+    <Setter Property="Foreground"
+            Value="Black"/>
+    <Setter Property="FontFamily"
+            Value="Calibri"/>
+    <Setter Property="FontSize"
+            Value="16"/>
+    <Setter Property="VerticalAlignment"
+            Value="Center"/>
+    <Setter Property="HorizontalAlignment"
+            Value="Left"/>
+  </Style>
   
   <Style Selector=":is(controls|CustomWindow)">
+    <Setter Property="ResizeMargin"
+        Value="5"/>
+    <Setter Property="BorderThickness"
+            Value="1"/>
+    <Setter Property="SystemDecorations"
+            Value="None"/>
+    <Setter Property="MinWidth"
+        Value="100"/>
+    <Setter Property="MinHeight"
+            Value="100"/>
+    <Setter Property="TitleClasses"
+            Value="DefaultWindowTitle"/>
     <Setter Property="Icon"
             Value="{Binding Path=CustomHeaderIcon,
                             Converter={x:Static converters:ToWindowIconConverter.Instance},
                             RelativeSource={RelativeSource Self}}"/>
-    <Setter Property="HeaderContentTemplate">
-      <Setter.Value>
-        <DataTemplate>
-          <Grid>
-            <TextBlock HorizontalAlignment="Right"
-                       Foreground="Black"
-                       Text="Hello World!!!"
-                       VerticalAlignment="Center"/>
-          </Grid>
-        </DataTemplate>
-      </Setter.Value>
-    </Setter>
     <Setter Property="HeaderTemplate">
       <Setter.Value>
         <ControlTemplate>
@@ -36,10 +49,6 @@
                 </ResourceDictionary.MergedDictionaries>
               </ResourceDictionary>
             </Grid.Resources>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
             <Grid VerticalAlignment="Center">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -115,22 +124,16 @@
                        Margin="{Binding Path=CustomHeaderIconMargin, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
                 <TextBlock x:Name="TheTitle"
                            Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           FontStyle="{Binding Path=FontStyle, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           FontWeight="{Binding Path=FontWeight, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           TextWrapping="{Binding Path=TextWrapping, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                           VerticalAlignment="Center"/>
+                           behaviors:ClassesBehavior.TheClasses="{Binding Path=TitleClasses, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
               </StackPanel>
 
               <ContentPresenter HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Grid.Column="1"
-                                Content="{Binding Path=HeaderDataContext, 
-                                                        RelativeSource={RelativeSource AncestorType=controls:CustomWindow}, 
-                                                        TargetNullValue='', 
-                                                        FallbackValue=''}"
+                                Content="{Binding Path=HeaderContent, 
+                                                  RelativeSource={RelativeSource AncestorType=controls:CustomWindow}, 
+                                                  TargetNullValue='', 
+                                                  FallbackValue=''}"
                                 ContentTemplate="{Binding Path=HeaderContentTemplate, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
               <StackPanel x:Name="WindowButtonsPanel"
                           Orientation="Horizontal"
@@ -159,11 +162,6 @@
                         behaviors:CallAction.MethodName="Close"/>
               </StackPanel>
             </Grid>
-            <Panel x:Name="HeaderSeparator"
-                   HorizontalAlignment="Stretch"
-                   Grid.Row="1"
-                   Height="{Binding Path=HeaderSeparatorHeight, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
-                   Background="{Binding Path=HeaderSeparatorBrush, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -171,33 +169,34 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
-          
           <Border Name="PART_TransparencyFallback"
                   IsHitTestVisible="False" />
-
           <Panel Background="Transparent" Margin="{TemplateBinding WindowDecorationMargin}" />
           <VisualLayerManager>
             <Grid>
               <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
               </Grid.RowDefinitions>
               <TemplatedControl x:Name="PART_HeaderControl"
                                 Template="{Binding Path=HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
                                 IsVisible="{Binding Path=IsCustomHeaderVisible, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
+              <Panel x:Name="HeaderSeparator"
+                     HorizontalAlignment="Stretch"
+                     Grid.Row="1"
+                     Height="{Binding Path=HeaderSeparatorHeight, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"
+                     Background="{Binding Path=HeaderSeparatorBrush, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
 
-              <Grid Grid.Row="1">
+
+              <Grid Grid.Row="2">
                 <Border x:Name="BackgroundBorder"
                         Background="{TemplateBinding Background}"
                         IsHitTestVisible="False"
-                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderThickness="{Binding Path=BorderThickness, 
+                                                  Converter={x:Static converters:NoTopBorderThicknessConverter.Instance},
+                                                  RelativeSource={RelativeSource TemplatedParent}}"
                         BorderBrush="{x:Null}"/>
-
-                <Border x:Name="WindowBorder"
-                        Background="{x:Null}"
-                        IsHitTestVisible="False"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
 
                 <Grid Margin="{Binding Path=BorderThickness,
                                          Converter={x:Static converters:NoTopBorderThicknessConverter.Instance},
@@ -210,6 +209,14 @@
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Grid>
               </Grid>
+
+              <Border x:Name="WindowBorder"
+                      Grid.RowSpan="3"
+                      Background="{x:Null}"
+                      IsHitTestVisible="False"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+              
               <Grid x:Name="ResizeGrid"
                     Grid.RowSpan="2" Margin="{Binding Path=BorderThickness,
                                          Converter={x:Static converters:NoTopBorderThicknessConverter.Instance},
@@ -249,17 +256,8 @@
   </Style>
 
   <Style Selector=":is(controls|CustomWindow).PlainCustomWindow">
-    <Setter Property="ResizeMargin"
-        Value="5"/>
-    <Setter Property="SystemDecorations"
-            Value="None"/>
     <Setter Property="Title"
             Value="My Test Window"/>
-    <Setter Property="BorderThickness" Value="1"/>
-    <Setter Property="MinWidth"
-            Value="100"/>
-    <Setter Property="MinHeight"
-            Value="100"/>
     <Setter Property="HeaderBackground"
             Value="Transparent"/>
     <Setter Property="HeaderHeight"

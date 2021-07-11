@@ -367,19 +367,33 @@ namespace NP.Avalonia.Visuals.Controls
         #endregion CustomHeaderIconMargin Avalonia Property
 
 
-        #region HeaderDataContext Styled Avalonia Property
-        public object HeaderDataContext
+        #region TitleClasses Styled Avalonia Property
+        public string TitleClasses
         {
-            get { return GetValue(HeaderDataContextProperty); }
-            set { SetValue(HeaderDataContextProperty, value); }
+            get { return GetValue(TitleClassesProperty); }
+            set { SetValue(TitleClassesProperty, value); }
         }
 
-        public static readonly StyledProperty<object> HeaderDataContextProperty =
+        public static readonly StyledProperty<string> TitleClassesProperty =
+            AvaloniaProperty.Register<CustomWindow, string>
+            (
+                nameof(TitleClasses)
+            );
+        #endregion TitleClasses Styled Avalonia Property
+
+        #region HeaderContent Styled Avalonia Property
+        public object HeaderContent
+        {
+            get { return GetValue(HeaderContentProperty); }
+            set { SetValue(HeaderContentProperty, value); }
+        }
+
+        public static readonly StyledProperty<object> HeaderContentProperty =
             AvaloniaProperty.Register<CustomWindow, object>
             (
-                nameof(HeaderDataContext)
+                nameof(HeaderContent)
             );
-        #endregion HeaderDataContext Styled Avalonia Property
+        #endregion HeaderContent Styled Avalonia Property
 
         #region HeaderContentTemplate Styled Avalonia Property
         public DataTemplate HeaderContentTemplate
