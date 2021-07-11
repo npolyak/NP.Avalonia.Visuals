@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using System;
@@ -282,14 +283,14 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region CustomHeaderIcon Avalonia Property
-        public IImage CustomHeaderIcon
+        public IBitmap CustomHeaderIcon
         {
             get { return GetValue(CustomHeaderIconProperty); }
             set { SetValue(CustomHeaderIconProperty, value); }
         }
 
-        public static readonly AttachedProperty<IImage> CustomHeaderIconProperty =
-            AvaloniaProperty.RegisterAttached<CustomWindow, Control, IImage>
+        public static readonly AttachedProperty<IBitmap> CustomHeaderIconProperty =
+            AvaloniaProperty.RegisterAttached<CustomWindow, Control, IBitmap>
             (
                 "CustomHeaderIcon"
             );

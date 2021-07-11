@@ -7,6 +7,10 @@
   <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/ButtonStyles.axaml"/>
   
   <Style Selector=":is(controls|CustomWindow)">
+    <Setter Property="Icon"
+            Value="{Binding Path=CustomHeaderIcon,
+                            Converter={x:Static converters:ToWindowIconConverter.Instance},
+                            RelativeSource={RelativeSource Self}}"/>
     <Setter Property="HeaderContentTemplate">
       <Setter.Value>
         <DataTemplate>
