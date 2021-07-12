@@ -218,7 +218,7 @@
                       BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
               
               <Grid x:Name="ResizeGrid"
-                    Grid.RowSpan="2" Margin="{Binding Path=BorderThickness,
+                    Grid.RowSpan="3" Margin="{Binding Path=BorderThickness,
                                          Converter={x:Static converters:NoTopBorderThicknessConverter.Instance},
                                          RelativeSource={RelativeSource TemplatedParent}}">
                 <Grid.RowDefinitions>
