@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using System.Collections.Generic;
 using System;
+using NP.Utilities;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -38,7 +39,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
             if (classesStr != null)
             {
-                var classes = classesStr.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var classes = classesStr.Split(StrUtils.WHITESPACE_CHARS, StringSplitOptions.RemoveEmptyEntries);
                 sender.Classes = new Classes(classes);
             }
             else

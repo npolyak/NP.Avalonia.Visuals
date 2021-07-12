@@ -1,4 +1,5 @@
 using Avalonia.Metadata;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // In SDK-style projects such as this one, several assembly attributes that were historically
@@ -10,6 +11,11 @@ using System.Runtime.InteropServices;
 // Setting ComVisible to false makes the types in this assembly not visible to COM
 // components.  If you need to access a type in this assembly from COM, set the ComVisible
 // attribute to true on that type.
+
+[assembly: AssemblyDescription("Visual Controls, Utilities and Behaviors for AvaloniaUI")]
+[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 

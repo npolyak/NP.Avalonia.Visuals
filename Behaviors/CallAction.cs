@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using NP.Utilities;
 using System;
+using System.Collections.Generic;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -113,8 +114,81 @@ namespace NP.Avalonia.Visuals.Behaviors
             if (targetObject == null)
                 return;
 
-            targetObject.CallMethod(methodName);
+            object[] args = null;
+            if (GetHasArg(avaloniaObject))
+            {
+                args = new []{ GetArg1(avaloniaObject) };
+            }
+            else
+            {
+                args = GetArgs(avaloniaObject)?.ToArray();
+            }
+
+            if (args == null)
+            {
+                args = new object[] { };
+            }
+
+            targetObject.CallMethod(methodName, args);
         }
+
+
+        #region HasArg Attached Avalonia Property
+        public static bool GetHasArg(AvaloniaObject obj)
+        {
+            return obj.GetValue(HasArgProperty);
+        }
+
+        public static void SetHasArg(AvaloniaObject obj, bool value)
+        {
+            obj.SetValue(HasArgProperty, value);
+        }
+
+        public static readonly AttachedProperty<bool> HasArgProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, bool>
+            (
+                "HasArg"
+            );
+        #endregion HasArg Attached Avalonia Property
+
+
+        #region Arg1 Attached Avalonia Property
+        public static object GetArg1(AvaloniaObject obj)
+        {
+            return obj.GetValue(Arg1Property);
+        }
+
+        public static void SetArg1(AvaloniaObject obj, object value)
+        {
+            obj.SetValue(Arg1Property, value);
+        }
+
+        public static readonly AttachedProperty<object> Arg1Property =
+            AvaloniaProperty.RegisterAttached<object, Control, object>
+            (
+                "Arg1"
+            );
+        #endregion Arg1 Attached Avalonia Property
+
+
+        #region Args Attached Avalonia Property
+        public static List<object> GetArgs(AvaloniaObject obj)
+        {
+            return obj.GetValue(ArgsProperty);
+        }
+
+        public static void SetArgs(AvaloniaObject obj, List<object> value)
+        {
+            obj.SetValue(ArgsProperty, value);
+        }
+
+        public static readonly AttachedProperty<List<object>> ArgsProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, List<object>>
+            (
+                "Args"
+            );
+        #endregion Args Attached Avalonia Property
+
 
         static CallAction()
         {
