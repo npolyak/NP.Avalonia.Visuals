@@ -24,7 +24,8 @@ namespace NP.Demos.MultiPlatformWindowDemo
         {
             var window = new CustomWindow
             {
-                Classes = new Classes("WindowContentHeaderAndViewModel")
+                Classes = new Classes("WindowContentHeaderAndViewModel"),
+                DragOnBeginMove = false
             };
 
             window.Show();

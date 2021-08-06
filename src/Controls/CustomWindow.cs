@@ -195,6 +195,9 @@ namespace NP.Avalonia.Visuals.Controls
 
         Type IStyleable.StyleKey => typeof(CustomWindow);
 
+        private PixelPoint _startMovePointer;
+        private PixelPoint _startPosition;
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -223,8 +226,83 @@ namespace NP.Avalonia.Visuals.Controls
 
         private void _headerControl_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            BeginMoveDrag(e);
+            if (DragOnBeginMove)
+            {
+                BeginMoveDrag(e);
+            }
+            else
+            {
+                SetMovePointer(e);
+            }
         }
+
+
+        #region PointerShift Styled Avalonia Property
+        public PixelPoint PointerShift
+        {
+            get { return GetValue(PointerShiftProperty); }
+            set { SetValue(PointerShiftProperty, value); }
+        }
+
+        public static readonly StyledProperty<PixelPoint> PointerShiftProperty =
+            AvaloniaProperty.Register<CustomWindow, PixelPoint>
+            (
+                nameof(PointerShift)
+            );
+        #endregion PointerShift Styled Avalonia Property
+
+
+        public void SetMovePointer(PointerEventArgs e)
+        {
+            if (!e.GetCurrentPoint(_headerControl).Properties.IsLeftButtonPressed)
+            {
+                return;
+            }
+
+            _startMovePointer = GetCurrentPointInScreen(e);
+            _startPosition = this.Position;
+            PointerShift = GetCurrentPointInScreen(e) - _startMovePointer;
+
+            _headerControl.PointerMoved += _headerControl_PointerMoved;
+
+            _headerControl.PointerReleased += _headerControl_PointerReleased;
+        }
+
+        public PixelPoint GetCurrentPointInScreen(PointerEventArgs e)
+        {
+            return _headerControl.PointToScreen(e.GetPosition(_headerControl));
+        }
+
+        private void _headerControl_PointerReleased(object sender, PointerReleasedEventArgs e)
+        {
+            _headerControl.PointerMoved -= _headerControl_PointerMoved;
+
+            _headerControl.PointerReleased -= _headerControl_PointerReleased;
+        }
+
+        private void _headerControl_PointerMoved(object sender, PointerEventArgs e)
+        {
+            PointerShift = GetCurrentPointInScreen(e) - _startMovePointer;
+
+            this.Position = _startPosition + PointerShift;
+        }
+
+
+        #region DragOnBeginMove Styled Avalonia Property
+        public bool DragOnBeginMove
+        {
+            get { return GetValue(DragOnBeginMoveProperty); }
+            set { SetValue(DragOnBeginMoveProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> DragOnBeginMoveProperty =
+            AvaloniaProperty.Register<CustomWindow, bool>
+            (
+                nameof(DragOnBeginMove),
+                true
+            );
+        #endregion DragOnBeginMove Styled Avalonia Property
+
 
         #region HeaderTemplate Avalonia Property
         public ControlTemplate HeaderTemplate
