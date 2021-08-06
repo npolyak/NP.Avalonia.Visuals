@@ -80,33 +80,71 @@ namespace NP.Avalonia.Visuals.Behaviors
         {
             Interactive? sender = e.Sender as Interactive;
 
-            if (sender == null)
-                return;
-
             if (e.OldValue.HasValue)
             {
-                RoutedEvent value = e.OldValue.Value;
+                RoutedEvent routedEvent = e.OldValue.Value;
 
-                if (value != null)
-                {
-                    sender?.RemoveHandler(value, (EventHandler<RoutedEventArgs>)OnEvent);
-                }
+                DisconnectEventHandling(sender, routedEvent);
             }
 
             if (e.NewValue.HasValue)
             {
-                RoutedEvent value = e.NewValue.Value;
+                RoutedEvent routedEvent = e.NewValue.Value;
 
-                if (value != null)
-                {
-                    sender?.AddHandler
-                        (
-                        value,
-                        (EventHandler<RoutedEventArgs>)OnEvent,
-                        RoutingStrategies.Bubble | RoutingStrategies.Direct | RoutingStrategies.Tunnel);
-                }
+                ConnectEventHandling(sender, routedEvent);
             }
         }
+
+        private static void DisconnectEventHandling(Interactive? sender, RoutedEvent routedEvent)
+        {
+            if (sender == null)
+                return;
+
+            if (routedEvent != null)
+            {
+                sender?.RemoveHandler(routedEvent, (EventHandler<RoutedEventArgs>)OnEvent);
+            }
+        }
+
+
+        private static void ConnectEventHandling(Interactive? sender, RoutedEvent routedEvent)
+        {
+            if (sender == null)
+                return;
+
+            var routingStr = GetTheRoutingStrategy(sender);
+
+            RoutingStrategies routingStrategies = routingStr ?? RoutingStrategies.Bubble | RoutingStrategies.Direct | RoutingStrategies.Tunnel;
+
+            if (routedEvent != null)
+            {
+                sender?.AddHandler
+                    (
+                    routedEvent,
+                    (EventHandler<RoutedEventArgs>)OnEvent,
+                    routingStrategies);
+            }
+        }
+
+
+        #region TheRoutingStrategy Attached Avalonia Property
+        public static RoutingStrategies? GetTheRoutingStrategy(AvaloniaObject obj)
+        {
+            return obj.GetValue(TheRoutingStrategyProperty);
+        }
+
+        public static void SetTheRoutingStrategy(AvaloniaObject obj, RoutingStrategies? value)
+        {
+            obj.SetValue(TheRoutingStrategyProperty, value);
+        }
+
+        public static readonly AttachedProperty<RoutingStrategies?> TheRoutingStrategyProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, RoutingStrategies?>
+            (
+                "TheRoutingStrategy"
+            );
+        #endregion TheRoutingStrategy Attached Avalonia Property
+
 
         private static void OnEvent(object? sender, RoutedEventArgs e)
         {
@@ -200,10 +238,32 @@ namespace NP.Avalonia.Visuals.Behaviors
             );
         #endregion Args Attached Avalonia Property
 
+        private static IDisposable _eventSubscription = null;
+        private static void Init()
+        {
+
+            _eventSubscription?.Dispose();
+            _eventSubscription = TheEventProperty.Changed.Subscribe(ResetEvent);
+        }
+
+        private static void ResetRoutingStrategy(AvaloniaPropertyChangedEventArgs<RoutingStrategies?> e)
+        {
+            Interactive sender = e.Sender as Interactive;
+
+            if (sender == null)
+                return;
+
+            RoutedEvent routedEvent = GetTheEvent(sender);
+            DisconnectEventHandling(sender, routedEvent);
+
+            ConnectEventHandling(sender, routedEvent);
+        }
 
         static CallAction()
         {
-            TheEventProperty.Changed.Subscribe(ResetEvent);
+            Init();
+
+            TheRoutingStrategyProperty.Changed.Subscribe(ResetRoutingStrategy);
         }
     }
 }
