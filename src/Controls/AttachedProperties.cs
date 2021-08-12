@@ -148,5 +148,24 @@ namespace NP.Avalonia.Visuals.Controls
                 "IconStretch"
             );
         #endregion IconStretch Attached Avalonia Property
+
+
+        #region CurrentScreenPoint Attached Avalonia Property
+        public static PixelPoint GetCurrentScreenPoint(AvaloniaObject obj)
+        {
+            return obj.GetValue(CurrentScreenPointProperty);
+        }
+
+        public static void SetCurrentScreenPoint(AvaloniaObject obj, PixelPoint value)
+        {
+            obj.SetValue(CurrentScreenPointProperty, value);
+        }
+
+        public static readonly AttachedProperty<PixelPoint> CurrentScreenPointProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, PixelPoint>
+            (
+                "CurrentScreenPoint"
+            );
+        #endregion CurrentScreenPoint Attached Avalonia Property
     }
 }

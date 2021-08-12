@@ -12,9 +12,20 @@ namespace NP.Avalonia.Visuals
             return new Point2D(point.X, point.Y);
         }
 
+
+        public static Point2D ToPoint2D(this PixelPoint point)
+        {
+            return new Point2D(point.X, point.Y);
+        }
+
         public static Point ToPoint(this Point2D pt)
         {
             return new Point(pt.X, pt.Y);
+        }
+
+        public static PixelPoint ToPixelPoint(this Point2D pt)
+        {
+            return new PixelPoint((int) pt.X, (int) pt.Y);
         }
 
         public static Point2D ToPoint2D(this Size size)
@@ -49,7 +60,15 @@ namespace NP.Avalonia.Visuals
         {
             Rect2D bounds = new Rect2D(new Point2D(), c.GetSize());
 
-            return bounds.IsPointInside(p.ToPoint2D());
+            return bounds.ContainsPoint(p.ToPoint2D());
+        }
+
+        public static Rect2D GetScreenBounds(this Control c)
+        {
+            PixelPoint startPoint = c.PointToScreen(new Point(0, 0));
+            PixelPoint endPoint = c.PointToScreen(new Point(c.Bounds.Width, c.Bounds.Height));
+
+            return new Rect2D(startPoint.ToPoint2D(), endPoint.ToPoint2D());
         }
 
         public static bool IsPointerWithinControl(this Control c, PointerEventArgs e)
