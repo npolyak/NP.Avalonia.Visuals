@@ -21,6 +21,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
+using NP.Utilities;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -251,7 +252,7 @@ namespace NP.Avalonia.Visuals.Controls
             );
         #endregion PointerShift Styled Avalonia Property
 
-
+        bool _startMoving = false;
         public void SetMovePointer(PointerEventArgs e)
         {
             if (!e.GetCurrentPoint(_headerControl).Properties.IsLeftButtonPressed)
@@ -259,6 +260,7 @@ namespace NP.Avalonia.Visuals.Controls
                 return;
             }
 
+            _startMoving = false;
             _startMovePointer = GetCurrentPointInScreen(e);
             _startPosition = this.Position;
             PointerShift = GetCurrentPointInScreen(e) - _startMovePointer;
@@ -275,6 +277,7 @@ namespace NP.Avalonia.Visuals.Controls
 
         private void _headerControl_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
+            _startMoving = false;
             _headerControl.PointerMoved -= _headerControl_PointerMoved;
 
             _headerControl.PointerReleased -= _headerControl_PointerReleased;
@@ -283,8 +286,17 @@ namespace NP.Avalonia.Visuals.Controls
         private void _headerControl_PointerMoved(object sender, PointerEventArgs e)
         {
             PointerShift = GetCurrentPointInScreen(e) - _startMovePointer;
+            Point2D pointerShift = PointerShift.ToPoint2D();
 
-            this.Position = _startPosition + PointerShift;
+            if (pointerShift.AbsSquared() > 9)
+            {
+                _startMoving = true;
+            }
+
+            if (_startMoving)
+            {
+                this.Position = _startPosition + PointerShift;
+            }
         }
 
 
