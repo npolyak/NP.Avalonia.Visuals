@@ -12,6 +12,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using NP.Utilities;
 
 namespace NP.Avalonia.Visuals.Controls
 {
@@ -148,5 +149,24 @@ namespace NP.Avalonia.Visuals.Controls
                 "IconStretch"
             );
         #endregion IconStretch Attached Avalonia Property
+
+
+        #region CurrentScreenPoint Attached Avalonia Property
+        public static Point2D GetCurrentScreenPoint(AvaloniaObject obj)
+        {
+            return obj.GetValue(CurrentScreenPointProperty);
+        }
+
+        public static void SetCurrentScreenPoint(AvaloniaObject obj, Point2D value)
+        {
+            obj.SetValue(CurrentScreenPointProperty, value);
+        }
+
+        public static readonly AttachedProperty<Point2D> CurrentScreenPointProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, Point2D>
+            (
+                "CurrentScreenPoint"
+            );
+        #endregion CurrentScreenPoint Attached Avalonia Property
     }
 }

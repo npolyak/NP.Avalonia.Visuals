@@ -13,7 +13,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Input;
+using Avalonia.Input.Raw;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Templates;
@@ -21,11 +23,12 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
+using NP.Avalonia.Visuals.Behaviors;
 using NP.Utilities;
 using System;
 using System.ComponentModel;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace NP.Avalonia.Visuals.Controls
 {
@@ -45,6 +48,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         private Control? _headerControl = null;
 
+        public Control? HeaderControl => _headerControl;
+
         IDisposable _windowStateChangeDisposer;
 
         IDisposable _windowCustomFeatureDisposer;
@@ -56,12 +61,13 @@ namespace NP.Avalonia.Visuals.Controls
 #endif
             (this as INotifyPropertyChanged).PropertyChanged += CustomWindow_PropertyChanged;
 
-            _windowStateChangeDisposer = 
+            _windowStateChangeDisposer =
                 WindowStateProperty.Changed.Subscribe(OnWindowStateChanged);
 
             _windowCustomFeatureDisposer =
                 HasCustomWindowFeaturesProperty.Changed.Subscribe(OnHasCustomFeaturesChanged);
         }
+
 
         private void OnHasCustomFeaturesChanged(AvaloniaPropertyChangedEventArgs<bool> hasCustomFeaturesContainer)
         {
@@ -126,7 +132,7 @@ namespace NP.Avalonia.Visuals.Controls
             {
                 WindowState = WindowState.Normal;
             }
-            else 
+            else
             {
                 WindowState = WindowState.Maximized;
             }
@@ -196,9 +202,6 @@ namespace NP.Avalonia.Visuals.Controls
 
         Type IStyleable.StyleKey => typeof(CustomWindow);
 
-        private PixelPoint _startMovePointer;
-        private PixelPoint _startPosition;
-
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -215,7 +218,7 @@ namespace NP.Avalonia.Visuals.Controls
 
             _headerControl = this.GetControlByName("PART_HeaderControl");
 
-            _headerControl.PointerPressed += _headerControl_PointerPressed;
+            _headerControl.PointerPressed += OnHeaderPointerPressed;
 
             _headerControl.DoubleTapped += _headerControl_DoubleTapped;
         }
@@ -225,16 +228,9 @@ namespace NP.Avalonia.Visuals.Controls
             MaximizeOrRestore();
         }
 
-        private void _headerControl_PointerPressed(object? sender, PointerPressedEventArgs e)
+        protected virtual void OnHeaderPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (DragOnBeginMove)
-            {
-                BeginMoveDrag(e);
-            }
-            else
-            {
-                SetMovePointer(e);
-            }
+            BeginMoveDrag(e);
         }
 
 
@@ -420,6 +416,19 @@ namespace NP.Avalonia.Visuals.Controls
             );
         #endregion CustomHeaderIcon Avalonia Property
 
+        #region TitleMargin Styled Avalonia Property
+        public Thickness TitleMargin
+        {
+            get { return GetValue(TitleMarginProperty); }
+            set { SetValue(TitleMarginProperty, value); }
+        }
+
+        public static readonly StyledProperty<Thickness> TitleMarginProperty =
+            AvaloniaProperty.Register<CustomWindow, Thickness>
+            (
+                nameof(TitleMargin)
+            );
+        #endregion TitleMargin Styled Avalonia Property
 
         #region CustomHeaderIconWidth Avalonia Property
         public double CustomHeaderIconWidth
@@ -497,14 +506,14 @@ namespace NP.Avalonia.Visuals.Controls
         #endregion HeaderContent Styled Avalonia Property
 
         #region HeaderContentTemplate Styled Avalonia Property
-        public DataTemplate HeaderContentTemplate
+        public IDataTemplate HeaderContentTemplate
         {
             get { return GetValue(HeaderContentTemplateProperty); }
             set { SetValue(HeaderContentTemplateProperty, value); }
         }
 
-        public static readonly StyledProperty<DataTemplate> HeaderContentTemplateProperty =
-            AvaloniaProperty.Register<CustomWindow, DataTemplate>
+        public static readonly StyledProperty<IDataTemplate> HeaderContentTemplateProperty =
+            AvaloniaProperty.Register<CustomWindow, IDataTemplate>
             (
                 nameof(HeaderContentTemplate)
             );
