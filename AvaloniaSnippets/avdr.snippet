@@ -32,12 +32,25 @@
             <Code Language="csharp">
                 <![CDATA[
 #region $property$ Direct Avalonia Property
+private $type$ _$property$ = default;
+
 public static readonly DirectProperty<$ownerclass$, $type$> $property$Property =
     AvaloniaProperty.RegisterDirect<$ownerclass$, $type$>
     (
         nameof($property$),
-        o => o.$property$
+        o => o.$property$,
+        (o, v) => o.$property$ = v
     );
+
+public $type$ $property$
+{
+   get => _$property$;
+   set 
+   {
+       SetAndRaise($property$Property, ref _$property$, value);
+   }
+}
+
 #endregion $property$ Direct Avalonia Property
 $end$]]>
             </Code>
