@@ -32,6 +32,8 @@ namespace NP.Avalonia.Visuals.Controls
 {
     public class CustomWindow : Window, IStyleable
     {
+        private const string ComponentName = nameof(CustomWindow);
+
         private (string ControlName, StandardCursorType CursorType, WindowEdge TheWindowEdge)[] ResizeCursorInfos =
         {
             ("Left", StandardCursorType.LeftSide, WindowEdge.West),
@@ -175,6 +177,8 @@ namespace NP.Avalonia.Visuals.Controls
 
             handler = (i, e) =>
             {
+                Logger.Log(LogKind.Info, ComponentName, $"Inside PointerPressed Handler - Cursor is {cursorType}.");
+
                 Cursor? oldWindowCursor = this.Cursor;
                 this.Cursor = new Cursor(cursorType);
 
