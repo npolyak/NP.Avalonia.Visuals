@@ -39,3 +39,4 @@ using System.Runtime.InteropServices;
 [assembly: XmlnsDefinition("https://np.com/visuals", "NP.Avalonia.Visuals.Controls")]
 [assembly: XmlnsDefinition("https://np.com/visuals", "NP.Avalonia.Visuals.Behaviors")]
 [assembly: XmlnsDefinition("https://np.com/visuals", "NP.Avalonia.Visuals.MarkupExtensions")]
+[assembly: XmlnsDefinition("https://np.com/visuals", "NP.Avalonia.Visuals.ThemingAndL10N")]
