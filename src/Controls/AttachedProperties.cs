@@ -1,4 +1,6 @@
-﻿// (c) Nick Polyak 2021 - http://awebpros.com/
+﻿
+
+// (c) Nick Polyak 2021 - http://awebpros.com/
 // License: MIT License (https://opensource.org/licenses/MIT)
 //
 // short overview of copyright rules:
@@ -224,5 +226,24 @@ namespace NP.Avalonia.Visuals.Controls
                 "AlternateIconData"
             );
         #endregion AlternateIconData Attached Avalonia Property
+
+
+        #region UriString Attached Avalonia Property
+        public static string GetUriString(AvaloniaObject obj)
+        {
+            return obj.GetValue(UriStringProperty);
+        }
+
+        public static void SetUriString(AvaloniaObject obj, string value)
+        {
+            obj.SetValue(UriStringProperty, value);
+        }
+
+        public static readonly AttachedProperty<string> UriStringProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, string>
+            (
+                "UriString"
+            );
+        #endregion UriString Attached Avalonia Property
     }
 }
