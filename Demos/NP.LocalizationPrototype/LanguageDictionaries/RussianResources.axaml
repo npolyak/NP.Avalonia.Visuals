@@ -6,7 +6,7 @@
   <x:Double x:Key="WindowHeight">340</x:Double>
   <x:String x:Key="WindowTitle">Демонстрационное Окно</x:String>
   <x:String x:Key="SimpleText">Это просто текст</x:String>
-  <x:String x:Key="FormattedText">Это отформатированный текст {0}. Например, ширина окна {0} и высота {1}</x:String>
+  <x:String x:Key="FormattedText">Это отформатированный текст. Например, ширина окна {0} и высота {1}</x:String>
   <x:Double x:Key="ControlWidth">660</x:Double>
   <x:Double x:Key="ControlHeight">70</x:Double>
   <SolidColorBrush x:Key="ControlBackground" Color="DarkGray"/>

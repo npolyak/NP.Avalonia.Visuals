@@ -10,11 +10,11 @@
         <np:ThemeLoader Name="LanguageLoader"
                         SelectedDictionaryId="English">
           <np:ThemeLoader.ThemeDictionaries>
-            <ResourceInclude Source="/Dictionaries/EnglishResources.axaml"
+            <ResourceInclude Source="/LanguageDictionaries/EnglishResources.axaml"
                              x:Key="English"/>
-            <ResourceInclude Source="/Dictionaries/HebrewResources.axaml"
+            <ResourceInclude Source="/LanguageDictionaries/HebrewResources.axaml"
                              x:Key="Hebrew"/>
-            <ResourceInclude Source="/Dictionaries/RussianResources.axaml"
+            <ResourceInclude Source="/LanguageDictionaries/RussianResources.axaml"
                              x:Key="Russian"/>
           </np:ThemeLoader.ThemeDictionaries>
         </np:ThemeLoader>

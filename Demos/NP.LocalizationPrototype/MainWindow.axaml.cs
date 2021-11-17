@@ -7,6 +7,7 @@ using Avalonia.Layout;
 using System;
 using System.Linq;
 using NP.Avalonia.Visuals.ThemingAndL10N;
+using NP.Avalonia.Visuals.Behaviors;
 
 namespace NP.LocalizationPrototype
 {
@@ -23,7 +24,7 @@ namespace NP.LocalizationPrototype
             this.AttachDevTools();
 #endif
             _themeLoader = 
-                Application.Current.Resources.MergedDictionaries.OfType<ThemeLoader>().FirstOrDefault()!;
+                Application.Current.Resources.GetThemeLoader("LanguageLoader");
 
             this.GetObservable<Language>(SelectedLanguageProperty).Subscribe(OnSelectedLanguageChanged);
 
