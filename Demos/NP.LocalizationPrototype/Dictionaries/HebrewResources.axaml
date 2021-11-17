@@ -15,7 +15,7 @@
   <x:String x:Key="FirstDataTemplateText">טקסט וצבע מתוך תבנית-נתונים עבור אובייקט מספר {0}</x:String>
   <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="DarkGray"/>
   <x:String x:Key="SecondDataTemplateText">טקסט וצבע נוסף מתוך תבנית-נתונים עבור אובייקט מספר {0}</x:String>
-  <x:String x:Key="Flag">avares://NP.LocalizationPrototype/Images/English.jpg</x:String>
+  <x:String x:Key="Flag">avares://NP.LocalizationPrototype/Images/Hebrew.jpg</x:String>
   <x:String x:Key="CloseWindowMessage">צא</x:String>
   <x:String x:Key="ShowError">הצג שגיאה</x:String>
   <x:String x:Key="NotEnoughMemory">אין מספיק זכרון</x:String>

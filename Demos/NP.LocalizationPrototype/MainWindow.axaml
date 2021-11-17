@@ -33,41 +33,44 @@
       </TextBlock>
     </DataTemplate>
   </Window.DataTemplates>
-  <Window.Styles>
 
-    <Style Selector="Button.FlagButton">
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type Button}">
-            <Border Classes="BorderStyle"
-                    Padding="4">
-              <Image np:AttachedProperties.UriString="{DynamicResource Flag}"
-                     Source="{Binding Path=(np:AttachedProperties.UriString), 
-                                      Converter={x:Static np:BitmapConverter.Instance},
-                                      RelativeSource={RelativeSource Self}}"
-                     Height="24" />
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-      <Setter Property="HorizontalAlignment" Value="Left" />
-    </Style>
-
-  </Window.Styles>
   <Border Classes="BorderStyle"
                        RenderTransform="{StaticResource TheScale}">
     <Grid x:Name="_panel"
           RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
       <Grid HorizontalAlignment="Stretch">
-        <Button x:Name="FlagButton"
-                Classes="FlagButton"
-                Margin="8"
-                HorizontalAlignment="Right" />
-        <Label Content="{DynamicResource SimpleText}"
-               FontSize="14"
-               HorizontalAlignment="Left"
-               Foreground="{DynamicResource ForegroundBrush}"
-               RenderTransform="{StaticResource TheScale}"/>
+        <ComboBox x:Name="LanguageChoosingCombo"
+                   RenderTransform="{StaticResource TheScale}"
+                  np:HandleEventBehavior.TheEvent="{x:Static InputElement.PointerPressedEvent}"
+                  Items="{Binding Source={x:Static local:LanguageHelper.Languages}}"
+                  SelectedItem="{Binding Path=SelectedLanguage, 
+                                         Mode=TwoWay, 
+                                         RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
+                  Margin="8"
+                  HorizontalAlignment="Right"
+                  Background="Transparent">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <Grid>
+                <TextBlock Text="{Binding}"/>
+              </Grid>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Image np:AttachedProperties.UriString="{DynamicResource Flag}"
+               Source="{Binding Path=(np:AttachedProperties.UriString), 
+                                Converter={x:Static np:BitmapConverter.Instance},
+                                RelativeSource={RelativeSource Self}}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Height="24" />
+        
+        <TextBlock Text="{DynamicResource SimpleText}"
+                   FontSize="14"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource ForegroundBrush}"
+                   RenderTransform="{StaticResource TheScale}"/>
       </Grid>
 
       <Grid RowDefinitions="Auto, Auto"

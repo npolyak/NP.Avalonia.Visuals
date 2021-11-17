@@ -26,16 +26,13 @@ namespace NP.LocalizationPrototype
             _themeLoader = 
                 Application.Current.Resources.MergedDictionaries.OfType<ThemeLoader>().FirstOrDefault()!;
 
-            this.GetObservable<bool>(IsEnglishProperty).Subscribe(OnIsEnglishChanged);
+            this.GetObservable<Language>(SelectedLanguageProperty).Subscribe(OnSelectedLanguageChanged);
 
             ContentControl el1 = this.FindControl<ContentControl>("_elementI");
             ContentControl el2 = this.FindControl<ContentControl>("_elementII");
 
             el1.Content = _data;
             el2.Content = new Data("SecondDataTemplateText");
-
-            Button flagButton = this.FindControl<Button>("FlagButton");
-            flagButton.Click += ButtonFlag_Click;
 
             Button errorButton = this.FindControl<Button>("ErrorButton");
             errorButton.Click += ButtonError_Click;
@@ -45,6 +42,13 @@ namespace NP.LocalizationPrototype
 
             //Button changeUidButton = this.FindControl<Button>("ChangeUidButton");
             //changeUidButton.Click += ChangeUidButton_Click;
+
+
+        }
+
+        private void OnSelectedLanguageChanged(Language language)
+        {
+            _themeLoader.SelectedDictionaryId = language.ToString();
         }
 
         private void ChangeUidButton_Click(object? sender, RoutedEventArgs e)
@@ -52,27 +56,21 @@ namespace NP.LocalizationPrototype
             _data.Uid = "SecondDataTemplateText";
         }
 
-        private void OnIsEnglishChanged(bool obj)
+        #region SelectedLanguage Styled Avalonia Property
+        public Language SelectedLanguage
         {
-            string localeName = IsEnglish ? "English" : "Hebrew";
-
-            _themeLoader.SelectedDictionaryId = localeName;
+            get { return GetValue(SelectedLanguageProperty); }
+            set { SetValue(SelectedLanguageProperty, value); }
         }
 
-        #region IsEnglish Styled Avalonia Property
-        public bool IsEnglish
-        {
-            get { return GetValue(IsEnglishProperty); }
-            set { SetValue(IsEnglishProperty, value); }
-        }
-
-        public static readonly StyledProperty<bool> IsEnglishProperty =
-            AvaloniaProperty.Register<MainWindow, bool>
+        public static readonly StyledProperty<Language> SelectedLanguageProperty =
+            AvaloniaProperty.Register<MainWindow, Language>
             (
-                nameof(IsEnglish),
-                true
+                nameof(SelectedLanguage),
+                Language.English
             );
-        #endregion IsEnglish Styled Avalonia Property
+        #endregion SelectedLanguage Styled Avalonia Property
+
 
 
         private void InitializeComponent()
@@ -90,11 +88,6 @@ namespace NP.LocalizationPrototype
         {
             base.OnPointerPressed(e);
             BeginMoveDrag(e);
-        }
-
-        private void ButtonFlag_Click(object sender, RoutedEventArgs e)
-        {
-            IsEnglish = !IsEnglish;
         }
 
         private void ButtonError_Click(object sender, RoutedEventArgs e)

@@ -8,10 +8,14 @@
     <None Remove=".gitignore" />
     <None Remove="Images\English.jpg" />
     <None Remove="Images\Hebrew.jpg" />
+    <None Remove="Images\Russian.jpg" />
+    <None Remove="Images\USA.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Images\English.jpg" />
     <AvaloniaResource Include="Images\Hebrew.jpg" />
+    <AvaloniaResource Include="Images\Russian.jpg" />
+    <AvaloniaResource Include="Images\USA.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.10" />

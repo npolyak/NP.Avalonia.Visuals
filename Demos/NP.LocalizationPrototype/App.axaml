@@ -9,12 +9,13 @@
       <ResourceDictionary.MergedDictionaries>
         <np:ThemeLoader Name="LanguageLoader"
                         SelectedDictionaryId="English">
-
           <np:ThemeLoader.ThemeDictionaries>
             <ResourceInclude Source="/Dictionaries/EnglishResources.axaml"
                              x:Key="English"/>
             <ResourceInclude Source="/Dictionaries/HebrewResources.axaml"
                              x:Key="Hebrew"/>
+            <ResourceInclude Source="/Dictionaries/RussianResources.axaml"
+                             x:Key="Russian"/>
           </np:ThemeLoader.ThemeDictionaries>
         </np:ThemeLoader>
       </ResourceDictionary.MergedDictionaries>
@@ -33,7 +34,8 @@
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
-    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
+    <!--<FluentTheme Mode="Dark"/>-->
+    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"/>
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
     <Style Selector="TextBlock">
       <Setter Property="Margin" Value="8" />
