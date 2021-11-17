@@ -1,3 +1,6 @@
 [submodule "SubModules/NP.Utilities"]
 	path = SubModules/NP.Utilities
 	url = https://github.com/npolyak/NP.Utilities.git
+[submodule "SubModules/NP.Concepts.Behaviors"]
+	path = SubModules/NP.Concepts.Behaviors
+	url = https://github.com/npolyak/NP.Concepts.Behaviors.git
