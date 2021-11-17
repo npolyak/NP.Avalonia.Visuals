@@ -171,10 +171,13 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
                 Themes.AddBehavior(OnThemeAdded, OnThemeRemoved);
         }
 
-        private void TryLoadTheme(ThemeInfo themeInfo)
+        /// <summary>
+        /// to be used when the ThemeLoader is not instantiated in XAML.
+        /// </summary>
+        /// <param name="baseUri"></param>
+        public ThemeLoader(Uri baseUri) : this()
         {
-
-
+            BaseUri = baseUri;
         }
 
         private void TryLoadAllThemes()
