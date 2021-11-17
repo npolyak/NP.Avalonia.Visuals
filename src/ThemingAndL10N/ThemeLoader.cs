@@ -38,6 +38,16 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
             return Loaded.TryGetResource(key, out value);
         }
 
+        public T GetResource<T>(object key, T defaultValue = default)
+        {
+            if (TryGetResource(key, out object result))
+            {
+                return (T) result;
+            }
+
+            return defaultValue;
+        }
+
         public event EventHandler OwnerChanged
         {
             add => Loaded.OwnerChanged += value;

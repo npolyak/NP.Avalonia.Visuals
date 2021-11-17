@@ -6,7 +6,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Layout;
 using System;
 using System.Linq;
-using Avalonia.Controls.Presenters;
 using NP.Avalonia.Visuals.ThemingAndL10N;
 
 namespace NP.LocalizationPrototype
@@ -35,10 +34,10 @@ namespace NP.LocalizationPrototype
             el2.Content = new Data("SecondDataTemplateText");
 
             Button errorButton = this.FindControl<Button>("ErrorButton");
-            errorButton.Click += ButtonError_Click;
+            errorButton.Click += ButtonError_Click!;
 
             Button closeButton = this.FindControl<Button>("CloseButton");
-            closeButton.Click += ButtonClose_Click;
+            closeButton.Click += ButtonClose_Click!;
 
             //Button changeUidButton = this.FindControl<Button>("ChangeUidButton");
             //changeUidButton.Click += ChangeUidButton_Click;
@@ -48,7 +47,7 @@ namespace NP.LocalizationPrototype
 
         private void OnSelectedLanguageChanged(Language language)
         {
-            _themeLoader.SelectedDictionaryId = language.ToString();
+            _themeLoader!.SelectedDictionaryId = language.ToString();
         }
 
         private void ChangeUidButton_Click(object? sender, RoutedEventArgs e)
@@ -92,23 +91,15 @@ namespace NP.LocalizationPrototype
 
         private void ButtonError_Click(object sender, RoutedEventArgs e)
         {
-            string message = null, closeWindowStr = null;
-            if (_themeLoader.TryGetResource("NotEnoughMemory", out object result))
-            {
-                message = result.ToString();
-            }
-
-            if (_themeLoader.TryGetResource("CloseWindowMessage", out result))
-            {
-                closeWindowStr = result.ToString();
-            }
+            string? message = _themeLoader?.GetResource<string>("NotEnoughMemory");
+            string? closeWindowStr = _themeLoader?.GetResource<string>("CloseWindowMessage"); ;
 
             var window = CreateSampleWindow(message, closeWindowStr);
 
             window.ShowDialog(this);
         }
 
-        private Window CreateSampleWindow(string msg, string closeWindowStr)
+        private Window CreateSampleWindow(string? msg, string? closeWindowStr)
         {
             Button button;
 
