@@ -1,9 +1,9 @@
-﻿using Avalonia.Collections;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using NP.Concepts.Behaviors;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace NP.Avalonia.Visuals.ThemingAndL10N
 {
@@ -19,10 +19,14 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
         void IResourceProvider.AddOwner(IResourceHost owner) => Loaded.AddOwner(owner);
         void IResourceProvider.RemoveOwner(IResourceHost owner) => Loaded.RemoveOwner(owner);
 
-        private Uri? _baseUri;
+        public Uri? BaseUri { get; private set; }
+
         public ThemeLoader ProvideValue(IServiceProvider serviceProvider)
         {
-            _baseUri = ((IUriContext)serviceProvider.GetService(typeof(IUriContext))).BaseUri;
+            BaseUri = ((IUriContext)serviceProvider.GetService(typeof(IUriContext))).BaseUri;
+
+            TryLoadAllThemes();
+
             return this;
         }
 
@@ -35,6 +39,10 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
 
         public bool TryGetResource(object key, out object? value)
         {
+            if (!key.ToString().Contains("Color"))
+            {
+
+            }
             return Loaded.TryGetResource(key, out value);
         }
 
@@ -54,95 +62,121 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
             remove => Loaded.OwnerChanged -= value;
         }
 
-        public AvaloniaDictionary<object, IResourceProvider> ThemeDictionaries { get; } =
-            new AvaloniaDictionary<object, IResourceProvider>();
+        public ObservableCollection<ThemeInfo> Themes { get; } =
+            new ObservableCollection<ThemeInfo>();
 
-        private IResourceProvider? _selectedDictionary;
-        public IResourceProvider? SelectedDictionary 
+        private ThemeInfo? _selectedTheme;
+        public ThemeInfo? SelectedTheme
         {
-            get => _selectedDictionary; 
+            get => _selectedTheme; 
             private set
             {
-                if (_selectedDictionary == value)
+                if (_selectedTheme == value)
                     return;
 
-                if (_selectedDictionary != null)
+                if (_selectedTheme?.Resource != null)
                 {
-                    _resourceDictionary.MergedDictionaries.Remove(_selectedDictionary);
+                    _resourceDictionary.MergedDictionaries.Remove(_selectedTheme.Resource);
                 }
 
-                _selectedDictionary = value;
+                _selectedTheme = value;
 
-                if (_selectedDictionary != null)
-                {
-                    _resourceDictionary.MergedDictionaries.Add(_selectedDictionary);
-                }
+                SetSelectedResourceAndStyle();
             }
         }
 
-        public Uri? BaseUri { get; set; }
-
-        public void AddDictionary(object dictionaryId, Uri uri)
+        private void SetSelectedResourceAndStyle()
         {
-            ResourceDictionary themeDictionary = 
-                (ResourceDictionary) AvaloniaXamlLoader.Load(uri, BaseUri);
-
-            ThemeDictionaries.Add(dictionaryId, themeDictionary);
+            if (_selectedTheme?.Resource != null)
+            {
+                _resourceDictionary.MergedDictionaries.Add(_selectedTheme.Resource);
+            }
         }
 
-        private object? _selectedDictionaryId;
-        public object? SelectedDictionaryId
+        public void AddDictionary(object themeId, Uri resourcesUri, Uri styleUri = null)
         {
-            get => _selectedDictionaryId;
+            ThemeInfo themeInfo = new ThemeInfo() { Id = themeId };
+
+            if (resourcesUri != null)
+            {
+                themeInfo.ResourceUrl = resourcesUri;
+            }
+
+            if (styleUri != null)
+            {
+                themeInfo.StyleUrl = styleUri;
+            }
+
+            Themes.Add(themeInfo);
+        }
+
+        private object? _selectedThemeId;
+        public object? SelectedThemeId
+        {
+            get => _selectedThemeId;
 
             set
             {
-                if (_selectedDictionaryId == value)
+                if (_selectedThemeId == value)
                 {
                     return;
                 }
 
-                _selectedDictionaryId = value;
+                _selectedThemeId = value;
 
-                SelectDictionaryImpl(_selectedDictionaryId!);
+                SelectThemeImpl(_selectedThemeId!);
             }
         }
 
-        private void SelectDictionaryImpl(object dictionaryId)
+        private void SelectThemeImpl(object themeId)
         {
-            if (dictionaryId == null)
-            {
-                SelectedDictionary = null;
-            }
-            else if (ThemeDictionaries.TryGetValue(dictionaryId, out IResourceProvider dictionary))
-            {
-                SelectedDictionary = dictionary;
-            }
+            SelectedTheme = Themes.FirstOrDefault(theme => theme.Id.Equals(themeId));
         }
 
         private IDisposable? _subscription;
         public ThemeLoader()
         {
             _subscription =
-                ThemeDictionaries.AddBehavior(OnThemeDictionaryAdded, OnThemeDictionaryRemoved);
+                Themes.AddBehavior(OnThemeAdded, OnThemeRemoved);
         }
 
-        private void OnThemeDictionaryRemoved(KeyValuePair<object, IResourceProvider> dictInfo)
+        private void TryLoadTheme(ThemeInfo themeInfo)
         {
-            
+
+
         }
 
-        private void OnThemeDictionaryAdded(KeyValuePair<object, IResourceProvider> dictInfo)
+        private void TryLoadAllThemes()
         {
-            if (dictInfo.Key == null)
+            foreach(var themeInfo in Themes)
             {
-                throw new Exception("ERROR: theme dictionary key cannot be null");
+                themeInfo.TryLoad(BaseUri);
+
+                if (themeInfo.Id == SelectedThemeId)
+                {
+                    SetSelectedResourceAndStyle();
+                }
+            }
+        }
+
+        private void OnThemeAdded(ThemeInfo themeInfo)
+        {
+            if (themeInfo.Id == null)
+            {
+                throw new Exception("ERROR: theme id cannot be null");
             }
 
-            if (SelectedDictionaryId != null && dictInfo.Key == SelectedDictionaryId)
+            themeInfo.TryLoad(BaseUri);
+
+            if (SelectedThemeId != null && themeInfo.Id == SelectedThemeId)
             {
-                SelectDictionaryImpl(SelectedDictionaryId);
+                SelectThemeImpl(SelectedThemeId);
             }
+        }
+
+        private void OnThemeRemoved(ThemeInfo themeInfo)
+        {
+
         }
     }
 }

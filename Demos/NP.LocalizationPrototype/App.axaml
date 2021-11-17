@@ -8,24 +8,24 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <np:ThemeLoader Name="ColorLoader"
-                        SelectedDictionaryId="Light">
-          <np:ThemeLoader.ThemeDictionaries>
-            <ResourceInclude Source="/ColorDictionaries/DarkResources.axaml"
-                             x:Key="Dark"/>
-            <ResourceInclude Source="/ColorDictionaries/LightResources.axaml"
-                             x:Key="Light"/>
-          </np:ThemeLoader.ThemeDictionaries>
+                        SelectedThemeId="Light">
+          <np:ThemeLoader.Themes>
+            <np:ThemeInfo Id="Dark" 
+                          ResourceUrl="/ColorDictionaries/DarkResources.axaml"/>
+            <np:ThemeInfo Id="Light" 
+                          ResourceUrl="/ColorDictionaries/LightResources.axaml"/>
+          </np:ThemeLoader.Themes>
         </np:ThemeLoader>
         <np:ThemeLoader Name="LanguageLoader"
-                        SelectedDictionaryId="English">
-          <np:ThemeLoader.ThemeDictionaries>
-            <ResourceInclude Source="/LanguageDictionaries/EnglishResources.axaml"
-                             x:Key="English"/>
-            <ResourceInclude Source="/LanguageDictionaries/HebrewResources.axaml"
-                             x:Key="Hebrew"/>
-            <ResourceInclude Source="/LanguageDictionaries/RussianResources.axaml"
-                             x:Key="Russian"/>
-          </np:ThemeLoader.ThemeDictionaries>
+                        SelectedThemeId="English">
+          <np:ThemeLoader.Themes>
+            <np:ThemeInfo Id="English"
+                             ResourceUrl="/LanguageDictionaries/EnglishResources.axaml"/>
+            <np:ThemeInfo Id="Hebrew"
+                             ResourceUrl="/LanguageDictionaries/HebrewResources.axaml"/>
+            <np:ThemeInfo Id="Russian"
+                             ResourceUrl="/LanguageDictionaries/RussianResources.axaml"/>
+          </np:ThemeLoader.Themes>
         </np:ThemeLoader>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
@@ -84,7 +84,7 @@
 
     <Style Selector="Button:pointerover">
       <Setter Property="Background"
-              Value="{StaticResource BorderBrush}"/>
+              Value="{DynamicResource BorderBrush}"/>
     </Style>
 
     <Style Selector="Button:pressed">

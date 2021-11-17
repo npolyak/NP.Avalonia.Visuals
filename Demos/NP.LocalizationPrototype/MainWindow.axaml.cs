@@ -53,12 +53,12 @@ namespace NP.LocalizationPrototype
 
         private void OnSelectedLanguageChanged(Language language)
         {
-            _languageThemeLoader!.SelectedDictionaryId = language.ToString();
+            _languageThemeLoader!.SelectedThemeId = language.ToString();
         }
 
         private void OnSelectedColorThemeChanged(ColorTheme colorTheme)
         {
-            _colorThemeLoader!.SelectedDictionaryId = colorTheme.ToString();
+            _colorThemeLoader!.SelectedThemeId = colorTheme.ToString();
         }
 
         private void ChangeUidButton_Click(object? sender, RoutedEventArgs e)
