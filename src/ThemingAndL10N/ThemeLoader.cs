@@ -49,17 +49,7 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
                 if (_styleResourceName.ObjEquals(value))
                     return;
 
-                if (_styleResourceName != null)
-                {
-                    _resourceDictionary.Remove(_styleResourceName);
-                }
-
                 _styleResourceName = value;
-
-                if (_styleResourceName != null)
-                {
-                    _resourceDictionary[_styleResourceName] = TheStyles;
-                }
             }
         }
 
@@ -67,10 +57,12 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
 
         public bool TryGetResource(object key, out object? value)
         {
-            if (!key.ToString().Contains("Color"))
+            if (key.ObjEquals(_styleResourceName))
             {
-
+                value = TheStyles;
+                return true;
             }
+
             return Loaded.TryGetResource(key, out value);
         }
 
