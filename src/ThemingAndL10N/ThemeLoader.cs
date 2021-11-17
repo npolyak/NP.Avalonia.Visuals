@@ -4,15 +4,18 @@ using Avalonia.Metadata;
 using Avalonia.Styling;
 using NP.Concepts.Behaviors;
 using NP.Utilities;
+using NP.ViewModelInterfaces.ThemingAndL10N;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace NP.Avalonia.Visuals.ThemingAndL10N
 {
-    public class ThemeLoader : IResourceProvider
+    public class ThemeLoader : IThemeLoader, IResourceProvider
     {
         public string? Name { get; set; }
+
+        public event Action<IThemeLoader> SelectedThemeChangedEvent;
 
         private ResourceDictionary _resourceDictionary = new ResourceDictionary();
 
@@ -86,6 +89,8 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
         public ObservableCollection<ThemeInfo> Themes { get; } =
             new ObservableCollection<ThemeInfo>();
 
+        public IThemeInfo? TheSelectedTheme => SelectedTheme;
+
         private ThemeInfo? _selectedTheme;
         public ThemeInfo? SelectedTheme
         {
@@ -108,6 +113,8 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
                 _selectedTheme = value;
 
                 SetSelectedResourceAndStyle();
+
+                SelectedThemeChangedEvent?.Invoke(this);
             }
         }
 

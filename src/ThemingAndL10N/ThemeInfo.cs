@@ -1,11 +1,12 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
+using NP.ViewModelInterfaces.ThemingAndL10N;
 using System;
 
 namespace NP.Avalonia.Visuals.ThemingAndL10N
 {
-    public class ThemeInfo
+    public class ThemeInfo: IThemeInfo
     {
         public object Id { get; set; }
 

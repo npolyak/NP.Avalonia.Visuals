@@ -4,3 +4,7 @@
 [submodule "SubModules/NP.Concepts.Behaviors"]
 	path = SubModules/NP.Concepts.Behaviors
 	url = https://github.com/npolyak/NP.Concepts.Behaviors.git
+[submodule "SubModules/NP.ViewModelInterfaces"]
+	path = SubModules/NP.ViewModelInterfaces
+	url = https://github.com/npolyak/NP.ViewModelInterfaces.git
+	branch = main
