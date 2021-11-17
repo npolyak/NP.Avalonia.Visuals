@@ -1,10 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.LogicalTree;
 using Avalonia.Media;
-using Avalonia.Media.Transformation;
-using Avalonia.VisualTree;
-using NP.Concepts.Behaviors;
 using System;
 
 namespace NP.Avalonia.Visuals.Behaviors
@@ -12,23 +8,25 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class VisualFlowBehavior
     {
 
-        #region Subscription Attached Avalonia Property
-        private static IDisposable GetSubscription(IControl obj)
+        #region ReadVisualFlow Attached Avalonia Property
+        public static VisualFlow GetReadVisualFlow(IControl obj)
         {
-            return obj.GetValue(SubscriptionProperty);
+            return obj.GetValue(ReadVisualFlowProperty);
         }
 
-        private static void SetSubscription(IControl obj, IDisposable value)
+        internal static void SetReadVisualFlow(IControl obj, VisualFlow value)
         {
-            obj.SetValue(SubscriptionProperty, value);
+            obj.SetValue(ReadVisualFlowProperty, value);
         }
 
-        private static readonly AttachedProperty<IDisposable> SubscriptionProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, IDisposable>
+        public static readonly AttachedProperty<VisualFlow> ReadVisualFlowProperty =
+            AvaloniaProperty.RegisterAttached<object, IControl, VisualFlow>
             (
-                "Subscription"
+                "ReadVisualFlow",
+                VisualFlow.Normal, 
+                true
             );
-        #endregion Subscription Attached Avalonia Property
+        #endregion ReadVisualFlow Attached Avalonia Property
 
 
         #region TheVisualFlow Attached Avalonia Property
@@ -89,51 +87,12 @@ namespace NP.Avalonia.Visuals.Behaviors
         {
             IControl control = (IControl) args.Sender;
 
-            bool isNormalFlow = (args.NewValue.Value == VisualFlow.Normal);
+            VisualFlow visualFlow = args.NewValue.Value;
+            bool isNormalFlow = (visualFlow == VisualFlow.Normal);
 
             control.SetTransform(isNormalFlow);
 
-            if (isNormalFlow)
-            {
-                IDisposable disposable = GetSubscription(control);
-
-                disposable?.Dispose();
-
-                control.ClearValue(SubscriptionProperty);
-            }
-            else
-            {
-                IDisposable subscription =
-                    control.LogicalChildren.AddBehavior(OnChildAdded, OnChildRemoved);
-
-                SetSubscription(control, subscription);
-            }
-        }
-
-        private static bool IsParentNormal(this IControl child)
-        {
-            IControl parent = (IControl)child.GetLogicalParent();
-
-            bool isNormalFlow = GetTheVisualFlow(parent) == VisualFlow.Normal;
-
-            return isNormalFlow;
-        }
-
-        private static void OnChildRemoved(ILogical child)
-        {
-            IControl childControl = (IControl)child;
-
-            // clear the transform
-            childControl.SetTransform(true);
-        }
-
-        private static void OnChildAdded(ILogical child)
-        {
-            IControl childControl = (IControl)child;
-
-            bool isNormalFlow = childControl.IsParentNormal();
-
-            childControl.SetTransform(isNormalFlow);
+            SetReadVisualFlow(control, visualFlow);
         }
     }
 }

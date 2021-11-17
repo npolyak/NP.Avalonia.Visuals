@@ -21,6 +21,11 @@ namespace NP.Avalonia.Visuals.Converters
             if (values.Count == 1)
                 return str;
 
+            object[] args = values.Skip(1).ToArray();
+
+            if (args.Any(a => a == null))
+                return null;
+
             return string.Format(str, values.Skip(1).ToArray());
         }
     }
