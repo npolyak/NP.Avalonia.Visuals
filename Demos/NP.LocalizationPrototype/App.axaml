@@ -8,31 +8,30 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <np:ThemeLoader Name="ColorLoader"
-                        SelectedThemeId="Light">
-          <np:ThemeLoader.Themes>
+                        SelectedThemeId="Light"
+                        StyleResourceName="ColorLoaderStyles">
             <np:ThemeInfo Id="Dark" 
-                          ResourceUrl="/ColorDictionaries/DarkResources.axaml"/>
+                          ResourceUrl="/ColorDictionaries/DarkResources.axaml"
+                          StyleUrl="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"/>
             <np:ThemeInfo Id="Light" 
-                          ResourceUrl="/ColorDictionaries/LightResources.axaml"/>
-          </np:ThemeLoader.Themes>
+                          ResourceUrl="/ColorDictionaries/LightResources.axaml"
+                          StyleUrl="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         </np:ThemeLoader>
         <np:ThemeLoader Name="LanguageLoader"
                         SelectedThemeId="English">
-          <np:ThemeLoader.Themes>
             <np:ThemeInfo Id="English"
                              ResourceUrl="/LanguageDictionaries/EnglishResources.axaml"/>
             <np:ThemeInfo Id="Hebrew"
                              ResourceUrl="/LanguageDictionaries/HebrewResources.axaml"/>
             <np:ThemeInfo Id="Russian"
                              ResourceUrl="/LanguageDictionaries/RussianResources.axaml"/>
-          </np:ThemeLoader.Themes>
         </np:ThemeLoader>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
     <!--<FluentTheme Mode="Dark"/>-->
-    
+    <np:StyleReference TheStyle="{StaticResource ColorLoaderStyles}"/>
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
     <Style Selector="TextBlock">
       <Setter Property="Margin" Value="8" />

@@ -1,6 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Metadata;
+using Avalonia.Styling;
 using NP.Concepts.Behaviors;
+using NP.Utilities;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,6 +24,8 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
 
         public Uri? BaseUri { get; private set; }
 
+        public Styles TheStyles { get; } = new Styles();
+
         public ThemeLoader ProvideValue(IServiceProvider serviceProvider)
         {
             BaseUri = ((IUriContext)serviceProvider.GetService(typeof(IUriContext))).BaseUri;
@@ -34,6 +39,29 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
         /// Gets or sets the source URL.
         /// </summary>
         public Uri? Source { get; set; }
+
+        object _styleResourceName;
+        public object StyleResourceName 
+        {
+            get => _styleResourceName; 
+            set
+            {
+                if (_styleResourceName.ObjEquals(value))
+                    return;
+
+                if (_styleResourceName != null)
+                {
+                    _resourceDictionary.Remove(_styleResourceName);
+                }
+
+                _styleResourceName = value;
+
+                if (_styleResourceName != null)
+                {
+                    _resourceDictionary[_styleResourceName] = TheStyles;
+                }
+            }
+        }
 
         public bool HasResources => Loaded.HasResources;
 
@@ -62,6 +90,7 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
             remove => Loaded.OwnerChanged -= value;
         }
 
+        [Content]
         public ObservableCollection<ThemeInfo> Themes { get; } =
             new ObservableCollection<ThemeInfo>();
 
@@ -79,6 +108,11 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
                     _resourceDictionary.MergedDictionaries.Remove(_selectedTheme.Resource);
                 }
 
+                if (_selectedTheme?.Style != null)
+                {
+                    this.TheStyles.Remove(_selectedTheme.Style);
+                }
+
                 _selectedTheme = value;
 
                 SetSelectedResourceAndStyle();
@@ -90,6 +124,11 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
             if (_selectedTheme?.Resource != null)
             {
                 _resourceDictionary.MergedDictionaries.Add(_selectedTheme.Resource);
+            }
+
+            if (_selectedTheme?.Style != null)
+            {
+                this.TheStyles.Add(_selectedTheme.Style);
             }
         }
 
