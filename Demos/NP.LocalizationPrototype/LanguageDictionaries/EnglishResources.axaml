@@ -11,9 +11,9 @@
   <x:Double x:Key="ControlHeight">50</x:Double>
   <SolidColorBrush x:Key="ControlBackground" Color="DarkGray"/>
   <x:String x:Key="ControlText">This control takes width, height, color and flow direction from the dictionary</x:String>
-  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="Silver"/>
+  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="{DynamicResource SilverColor}"/>
   <x:String x:Key="FirstDataTemplateText">Text and color within a Data Template for instance {0}</x:String>
-  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="Gold"/>
+  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="{DynamicResource GoldColor}"/>
   <x:String x:Key="SecondDataTemplateText">Different text and different color within a Data Template for instance {0}</x:String>
   <x:String x:Key="Flag">avares://NP.LocalizationPrototype/Images/USA.png</x:String>
   <x:String x:Key="CloseWindowMessage">Exit</x:String>

@@ -11,9 +11,9 @@
   <x:Double x:Key="ControlHeight">100</x:Double>
   <SolidColorBrush x:Key="ControlBackground" Color="Gray"/>
   <x:String x:Key="ControlText">פקד זה לוקח רוחב, גובה, צבע וכיוון שפה מהמילון</x:String>
-  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="Gold"/>
+  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="{DynamicResource GoldColor}"/>
   <x:String x:Key="FirstDataTemplateText">טקסט וצבע מתוך תבנית-נתונים עבור אובייקט מספר {0}</x:String>
-  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="DarkGray"/>
+  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="{DynamicResource SilverColor}"/>
   <x:String x:Key="SecondDataTemplateText">טקסט וצבע נוסף מתוך תבנית-נתונים עבור אובייקט מספר {0}</x:String>
   <x:String x:Key="Flag">avares://NP.LocalizationPrototype/Images/Hebrew.jpg</x:String>
   <x:String x:Key="CloseWindowMessage">צא</x:String>

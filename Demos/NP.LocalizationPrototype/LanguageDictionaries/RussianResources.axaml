@@ -11,9 +11,9 @@
   <x:Double x:Key="ControlHeight">70</x:Double>
   <SolidColorBrush x:Key="ControlBackground" Color="DarkGray"/>
   <x:String x:Key="ControlText">Этот контроль берет ширину, высоту, цвет и направление из словаря</x:String>
-  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="Silver"/>
+  <SolidColorBrush x:Key="FirstDataTemplateForeground" Color="{DynamicResource SilverColor}"/>
   <x:String x:Key="FirstDataTemplateText">Текст и цвет внутри дата темплэйта для экземпляра {0}</x:String>
-  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="Gold"/>
+  <SolidColorBrush x:Key="SecondDataTemplateForeground" Color="{DynamicResource GoldColor}"/>
   <x:String x:Key="SecondDataTemplateText">Другой текст и другой цвет внутри дата темплэйта для экземпляра {0}</x:String>
   <x:String x:Key="Flag">avares://NP.LocalizationPrototype/Images/Russian.jpg</x:String>
   <x:String x:Key="CloseWindowMessage">Закрыть Окно</x:String>

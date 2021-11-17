@@ -7,7 +7,7 @@
         TransparencyLevelHint="Transparent"
         SystemDecorations="None"
          Background="Transparent"
-        Foreground="{StaticResource ForegroundBrush}"
+        Foreground="{DynamicResource ForegroundBrush}"
         x:Name="Root"
         Width="{DynamicResource WindowWidth}"
         Height="{DynamicResource WindowHeight}">
@@ -39,24 +39,28 @@
     <Grid x:Name="_panel"
           RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
       <Grid HorizontalAlignment="Stretch">
-        <ComboBox x:Name="LanguageChoosingCombo"
-                   RenderTransform="{StaticResource TheScale}"
-                  np:HandleEventBehavior.TheEvent="{x:Static InputElement.PointerPressedEvent}"
-                  Items="{Binding Source={x:Static local:LanguageHelper.Languages}}"
-                  SelectedItem="{Binding Path=SelectedLanguage, 
-                                         Mode=TwoWay, 
-                                         RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
-                  Margin="8"
-                  HorizontalAlignment="Right"
-                  Background="Transparent">
-          <ComboBox.ItemTemplate>
-            <DataTemplate>
-              <Grid>
-                <TextBlock Text="{Binding}"/>
-              </Grid>
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
-        </ComboBox>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="8,8,0,8">
+          <ComboBox x:Name="LanguageChoosingCombo"
+                     RenderTransform="{StaticResource TheScale}"
+                    np:HandleEventBehavior.TheEvent="{x:Static InputElement.PointerPressedEvent}"
+                    Items="{Binding Source={x:Static local:LanguageHelper.Languages}}"
+                    SelectedItem="{Binding Path=SelectedLanguage, 
+                                           Mode=TwoWay, 
+                                           RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
+                    Margin="0,0,8,0"
+                    Background="Transparent"/>
+          <ComboBox x:Name="ColorThemeChoosingCombo"
+                    RenderTransform="{StaticResource TheScale}"
+                    np:HandleEventBehavior.TheEvent="{x:Static InputElement.PointerPressedEvent}"
+                    Items="{Binding Source={x:Static local:ColorThemesHelper.ColorThemes}}"
+                    SelectedItem="{Binding Path=SelectedColorTheme, 
+                                           Mode=TwoWay, 
+                                           RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
+                    Margin="0,0,8,0"
+                    Background="Transparent"/>
+        </StackPanel>
         <Image np:AttachedProperties.UriString="{DynamicResource Flag}"
                Source="{Binding Path=(np:AttachedProperties.UriString), 
                                 Converter={x:Static np:BitmapConverter.Instance},

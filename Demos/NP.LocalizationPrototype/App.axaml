@@ -7,6 +7,15 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <np:ThemeLoader Name="ColorLoader"
+                        SelectedDictionaryId="Light">
+          <np:ThemeLoader.ThemeDictionaries>
+            <ResourceInclude Source="/ColorDictionaries/DarkResources.axaml"
+                             x:Key="Dark"/>
+            <ResourceInclude Source="/ColorDictionaries/LightResources.axaml"
+                             x:Key="Light"/>
+          </np:ThemeLoader.ThemeDictionaries>
+        </np:ThemeLoader>
         <np:ThemeLoader Name="LanguageLoader"
                         SelectedDictionaryId="English">
           <np:ThemeLoader.ThemeDictionaries>
@@ -19,23 +28,11 @@
           </np:ThemeLoader.ThemeDictionaries>
         </np:ThemeLoader>
       </ResourceDictionary.MergedDictionaries>
-      <SolidColorBrush x:Key="ForegroundBrush" Color="#FFEDEDED" />
-
-      <LinearGradientBrush x:Key="BorderBrush" EndPoint="6.6%,5.2%" StartPoint="95.6%,66.3%">
-        <GradientStop Color="#FF353535" Offset="0"/>
-        <GradientStop Color="#FF585858" Offset="1"/>
-      </LinearGradientBrush>
-
-      <LinearGradientBrush x:Key="BackgroundBrush" EndPoint="45.7%,36.1%" StartPoint="40.3%,6.5%">
-        <GradientStop Color="#FF313131" Offset="0"/>
-        <GradientStop Color="#FF434343" Offset="0.522"/>
-        <GradientStop Color="#FF262626" Offset="1"/>
-      </LinearGradientBrush>
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
     <!--<FluentTheme Mode="Dark"/>-->
-    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"/>
+    
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
     <Style Selector="TextBlock">
       <Setter Property="Margin" Value="8" />
