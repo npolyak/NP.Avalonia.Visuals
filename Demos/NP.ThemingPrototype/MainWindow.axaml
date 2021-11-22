@@ -4,11 +4,24 @@
         xmlns:np="https://np.com/visuals"
         x:Class="NP.ThemingPrototype.MainWindow"
         Title="NP.ThemingPrototype"
-        TransparencyLevelHint="Transparent"
-        SystemDecorations="None"
-         Background="Transparent"
-        Foreground="{DynamicResource ForegroundBrush}"
         x:Name="Root"
-		Width="400"
-		Height="300">
+		Width="500"
+		Height="400">
+	<!--<Button Background="Blue"
+			Foreground="White"
+			CornerRadius="5"
+			Content="A Button"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Padding="10,5"
+			BorderThickness="5"
+			BorderBrush="Red"/>-->
+	
+	<np:PieSegment StartAngle="0" 
+				   EndAngle="90"
+				   InnerRadius="80"
+				   OuterRadius="160"
+				   Background="Red"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"/>
 </Window>
