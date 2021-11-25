@@ -17,11 +17,20 @@
 			BorderThickness="5"
 			BorderBrush="Red"/>-->
 	
-	<np:PieSegment StartAngle="0" 
+	<!--<np:PieSegment StartAngle="0" 
 				   EndAngle="90"
 				   InnerRadius="80"
 				   OuterRadius="160"
 				   Background="Red"
 				   HorizontalAlignment="Center"
-				   VerticalAlignment="Center"/>
+				   VerticalAlignment="Center"/>-->
+
+	<Button Background="Black"
+			BorderBrush="Red"
+			Foreground="White"
+			BorderThickness="2"
+			CornerRadius="3"
+			Content="Hello"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"></Button>
 </Window>
