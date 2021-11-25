@@ -150,23 +150,6 @@ namespace NP.Avalonia.Visuals.Controls
 
             AddColumns(extraColumns);
             MinColumn = currentMinColumn;
-
-            //int childRow = AGrid.GetRow(childControl);
-
-            //int maxRow = childRow + Grid.GetRowSpan(childControl) - 1;
-
-            //int numberExtraRows = maxRow + 1 - _grid.RowDefinitions.Count;
-            //for (int i = 0; i < numberExtraRows; i++)
-            //{
-            //    _grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
-            //}
-
-            //int maxColumn = AGrid.GetColumn(childControl) + Grid.GetColumnSpan(childControl) - 1;
-            //int numberExtraCols = maxColumn + 1 - _grid.ColumnDefinitions.Count;
-            //for (int i = 0; i < numberExtraCols; i++)
-            //{
-            //    _grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
-            //}
         }
 
         private void AddGridDefs<T>(int numberExtraDefs, IList<T> defs, Func<T> defCreator)

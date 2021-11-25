@@ -18,4 +18,9 @@
     <ProjectReference Include="..\..\SubModules\NP.Concepts.Behaviors\src\NP.Concepts.Behaviors.csproj" />
     <ProjectReference Include="..\..\SubModules\NP.Utilities\src\NP.Utilities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\AccentColorThemes\" />
+    <Folder Include="Themes\CurveThemes\" />
+    <Folder Include="Themes\TextThemes\" />
+  </ItemGroup>
 </Project>
