@@ -219,5 +219,20 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
         {
 
         }
+
+        // good for testing of switching when there are only two options
+        public void SwitchTheme()
+        {
+            ThemeInfo? currentTheme = this.SelectedTheme;
+            int currentThemeIdx = currentTheme == null ? -1 : this.Themes.IndexOf(currentTheme);
+            if(currentThemeIdx == this.Themes.Count - 1)
+            {
+                currentThemeIdx = -1;
+            }
+
+            int nextThemeIdx = currentThemeIdx + 1;
+
+            this.SelectedThemeId = Themes.ElementAt(nextThemeIdx).Id;
+        }
     }
 }

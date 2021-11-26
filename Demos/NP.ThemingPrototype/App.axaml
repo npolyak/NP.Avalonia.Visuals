@@ -3,10 +3,24 @@
              x:Class="NP.ThemingPrototype.App"
              xmlns:np="https://np.com/visuals"
              xmlns:local="clr-namespace:NP.ThemingPrototype">
-  <Application.Styles>
-    <!--<FluentTheme Mode="Dark"/>-->
-	  <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-	  <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-	  <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/PieSegmentStyles.axaml"/>
-  </Application.Styles>
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<np:ThemeLoader Name="LightDarkThemeLoader"
+								SelectedThemeId="Dark">
+					<np:ThemeInfo Id="Light"
+								  ResourceUrl="/Themes/MainColorThemes/LightColorsTheme.axaml"/>
+					<np:ThemeInfo Id="Dark"
+								  ResourceUrl="/Themes/MainColorThemes/DarkColorsTheme.axaml"/>
+				</np:ThemeLoader>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+	<Application.Styles>
+		<!--<FluentTheme Mode="Dark"/>-->
+		<!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
+		<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+		<StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/PieSegmentStyles.axaml"/>-->
+		<StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/CustomWindowStyles.axaml"/>
+	</Application.Styles>
 </Application>

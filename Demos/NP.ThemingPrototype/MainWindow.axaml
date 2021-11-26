@@ -1,19 +1,123 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:NP.ThemingPrototype"
-        xmlns:np="https://np.com/visuals"
-        x:Class="NP.ThemingPrototype.MainWindow"
-        Title="NP.ThemingPrototype"
-        x:Name="Root"
-		Width="500"
-		Height="400">
+<np:CustomWindow xmlns="https://github.com/avaloniaui"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:local="clr-namespace:NP.ThemingPrototype"
+				 xmlns:np="https://np.com/visuals"
+				 x:Class="NP.ThemingPrototype.MainWindow"
+				 Classes="PlainCustomWindow"
+				 Title="Theming Prototype"
+				 HeaderHeight="40"
+				 HeaderBackground="Transparent"
+				 Background="{DynamicResource WindowBackgroundBrush}"
+				 x:Name="Root"
+				 Width="500"
+				 Height="400">
+	<Window.Resources>
+		<SolidColorBrush x:Key="WindowBackgroundBrush"
+						 Color="{DynamicResource WindowBgColor}"/>
+		<SolidColorBrush x:Key="SectionBackgroundBrush"
+						 Color="{DynamicResource SectionBgColor}"/>
+		<SolidColorBrush x:Key="SectionBorderBrush"
+						 Color="{DynamicResource SectionBorderColor}"/>
+		<SolidColorBrush x:Key="PrimaryForegroundBrush"
+						 Color="{DynamicResource PrimaryForegroundColor}"/>
+		<SolidColorBrush x:Key="SecondaryForegroundColor"
+						 Color="{DynamicResource SecondaryForegroundColor}"/>
+		<LinearGradientBrush x:Key="ControlBackground"
+							 StartPoint="50%,0%"
+							 EndPoint="50%, 100%">
+			<GradientStop Offset="0"
+						  Color="{DynamicResource ControlBackgroundHighColor}"/>
+			<GradientStop Offset="1"
+						  Color="{DynamicResource ControlBackgroundLowColor}"/>
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="ControlBorderBrush"
+					 StartPoint="50%,0%"
+					 EndPoint="50%, 100%">
+			<GradientStop Offset="0"
+						  Color="{DynamicResource ControlBorderHighColor}"/>
+			<GradientStop Offset="1"
+						  Color="{DynamicResource ControlBorderLowColor}"/>
+		</LinearGradientBrush>
+		<np:BoolToDoubleConverter x:Key="PointerOverOpacityConverter" 
+								  TrueValue="0.1"
+								  FalseValue="0"/>
+		<np:BoolToDoubleConverter x:Key="IsPressedOpacityConverter"
+						  TrueValue="0.05"
+						  FalseValue="0"/>
 
-	<Button Background="Black"
-			BorderBrush="Red"
-			Foreground="White"
-			BorderThickness="2"
-			CornerRadius="3"
-			Content="Hello"
-			HorizontalAlignment="Center"
-			VerticalAlignment="Center"></Button>
-</Window>
+		<np:BoolToDoubleConverter x:Key="IsEnabledOpacityConverter"
+								  TrueValue="1"
+								  FalseValue="0.3"/>
+
+		<np:LastNonDefaultDoubleConverter x:Key="TheOpacityConverter"/>
+	</Window.Resources>
+
+	<Grid x:Name="RootPanel"
+		  Margin="3">
+		<Grid RowDefinitions="*, Auto"
+			  Margin="10">
+			<Button x:Name="TestButton"
+					Content="Test"
+					Padding="10,5"
+					Background="{StaticResource ControlBackground}"
+					Foreground="White"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					BorderBrush="{StaticResource ControlBorderBrush}"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					CornerRadius="4"
+					BorderThickness="2"
+					Height="40"
+					Width="150"
+					Opacity="{Binding Path=IsEnabled,
+									 Converter={StaticResource IsEnabledOpacityConverter},
+									 RelativeSource={RelativeSource Self}}">
+				<Button.Template>	 
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<Border x:Name="BackgroundBorder"
+									Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"/>
+
+							<ContentPresenter Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  Margin="{TemplateBinding Padding}"
+											  IsHitTestVisible="False"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							<Border x:Name="OpacityBorder"
+									Background="White"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Stretch"
+									CornerRadius="{TemplateBinding CornerRadius}">
+								<Border.Opacity>
+									<MultiBinding Converter="{StaticResource TheOpacityConverter}">
+										<Binding Path="IsPointerOver"
+												 Converter="{StaticResource PointerOverOpacityConverter}"
+												 RelativeSource="{RelativeSource TemplatedParent}"/>
+										<Binding Path="IsPressed"
+												 FallbackValue="0.05"
+												 Converter="{StaticResource IsPressedOpacityConverter}"
+												 RelativeSource="{RelativeSource TemplatedParent}"/>
+									</MultiBinding>
+								</Border.Opacity>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+
+			<StackPanel x:Name="ButtonPanel"
+						Grid.Row="1"
+						Orientation="Horizontal"
+						HorizontalAlignment="Right">
+				<Button x:Name="ChangeThemeButton"
+						Content="Change Theme"
+						Padding="10,5"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</np:CustomWindow>
