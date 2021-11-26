@@ -13,7 +13,7 @@ namespace NP.Avalonia.Visuals.ColorUtils
         /// <returns></returns>
         public static HslColor ToHSL(this Color color)
         {
-            int a = color.A;
+            byte a = color.A;
 
             double r = color.R / 255d;
             double g = color.G / 255d;
@@ -58,10 +58,71 @@ namespace NP.Avalonia.Visuals.ColorUtils
             }
 
             double sum = max + min;
-            double lightness = sum / 2d * 100d;
-            double saturation = delta / (1 - Math.Abs(1 - sum)) * 100d;
+            double lightness = sum / 2d;
+            double saturation = delta / (1 - Math.Abs(1 - sum));
 
             return new HslColor(a, (float) hue, (float) saturation, (float) lightness);
+        }
+
+        private static double HueToRGB(this double v1, double v2, double hue)
+        {
+            if (hue < 0)
+                hue += 1;
+
+            if (hue > 1)
+                hue -= 1;
+
+            if ((6 * hue) < 1)
+                return (v1 + (v2 - v1) * 6 * hue);
+
+            if ((2 * hue) < 1)
+                return v2;
+
+            if ((3 * hue) < 2)
+                return (v1 + (v2 - v1) * ((2.0f / 3) - hue) * 6);
+
+            return v1;
+        }
+
+        // borrowed from https://www.programmingalgorithms.com/algorithm/hsl-to-rgb/
+        public static Color ToColor(this HslColor hslColor)
+        {
+            (byte a, double h, double s, double l) = hslColor;
+
+
+            if (s.AlmostEquals(0))
+            {
+                byte result = (byte)(l * 255d);
+
+                return new Color(a, result, result, result);
+            }
+
+            double hue = h / 360d;
+
+            double v2 = (l < 0.5) ? (l * (1 + s)) : ((l + s) - (l * s));
+            double v1 = 2 * l - v2;
+
+            byte r = (byte)(v1.HueToRGB(v2, hue + (1d / 3d)) * 255d);
+            byte g = (byte)(v1.HueToRGB(v2, hue) * 255d);
+            byte b = (byte)(v1.HueToRGB(v2, hue - (1d / 3d)) * 255d);
+
+            return new Color(a, r, g, b);
+        }
+
+        public static Color ToColor(int r, int g, int b, int a = 255)
+        {
+            return new Color((byte)a, (byte)r, (byte)g, (byte)b);
+        }
+
+        public static string ToStr(this Color c)
+        {
+            return c.ToString().ToUpper();
+        }
+
+        public static string ToIntStr(this Color c)
+        {
+            (int a, int r, int g, int b) = (c.A, c.R, c.G, c.B);
+            return $"{a}, {r}, {g}, {b}";
         }
     }
 }
