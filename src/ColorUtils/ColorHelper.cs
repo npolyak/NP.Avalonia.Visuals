@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Layout;
+using Avalonia.Media;
 using NP.Utilities;
 using System;
 
@@ -123,6 +124,29 @@ namespace NP.Avalonia.Visuals.ColorUtils
         {
             (int a, int r, int g, int b) = (c.A, c.R, c.G, c.B);
             return $"{a}, {r}, {g}, {b}";
+        }
+
+        // inverts light to dark and vice versa
+        public static HslColor Invert(this HslColor hslColor)
+        {
+            (byte a, float h, float s, float l) = hslColor;
+
+            return new HslColor(a, h, s, 1 - l);
+        }
+
+        // inverts light to dark and vice versa
+        public static Color Invert(this Color color)
+        {
+            HslColor invertedHslColor = color.ToHSL().Invert();
+
+            return invertedHslColor.ToColor();
+        }
+
+        public static Func<Color, Color> InvertColor { get; } = Invert;
+
+        public static SolidColorBrush ToBrush(this Color color)
+        {
+            return new SolidColorBrush(color);
         }
     }
 }

@@ -5,8 +5,6 @@
 	<Color x:Key="SectionBorderColor">#666666</Color>
 	<Color x:Key="ControlBackgroundHighColor">#666666</Color>
 	<Color x:Key="ControlBackgroundLowColor">#3B3B3B</Color>
-	<!--<Color x:Key="ControlBackgroundHighColor">#4B4B4B</Color>
-	<Color x:Key="ControlBackgroundLowColor">#292929</Color>-->
 	<Color x:Key="ControlBorderHighColor">#4E4E4E</Color>
 	<Color x:Key="ControlBorderLowColor">#292929</Color>
 	<Color x:Key="PrimaryForegroundColor">#FAFAFA</Color>
