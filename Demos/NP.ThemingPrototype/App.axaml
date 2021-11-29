@@ -13,6 +13,13 @@
 					<np:ThemeInfo Id="Dark"
 								  ResourceUrl="/Themes/MainColorThemes/DarkColorsTheme.axaml"/>
 				</np:ThemeLoader>
+				<np:ThemeLoader Name="AccentThemeLoader"
+								SelectedThemeId="DarkBlue">
+					<np:ThemeInfo Id="DarkBlue"
+								  ResourceUrl="/Themes/MainColorThemes/AccentColorThemes/DarkBlueAccent.axaml"/>
+					<np:ThemeInfo Id="LightBlue"
+								  ResourceUrl="/Themes/MainColorThemes/AccentColorThemes/DarkBlueAccent.axaml"/>
+				</np:ThemeLoader>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

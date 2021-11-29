@@ -11,6 +11,7 @@ namespace NP.ThemingPrototype
     public partial class MainWindow : CustomWindow
     {
         ThemeLoader _lightDarkThemeLoader;
+        ThemeLoader _accentThemeLoader;
 
         public MainWindow()
         {
@@ -21,6 +22,9 @@ namespace NP.ThemingPrototype
             _lightDarkThemeLoader = 
                 Application.Current.Resources.GetThemeLoader("LightDarkThemeLoader")!;
 
+            _accentThemeLoader =
+                Application.Current.Resources.GetThemeLoader("AccentThemeLoader")!;
+
             Button button = this.FindControl<Button>("ChangeThemeButton");
             
             button.Click += Button_Click;
@@ -29,6 +33,15 @@ namespace NP.ThemingPrototype
         private void Button_Click(object? sender, RoutedEventArgs e)
         {
             _lightDarkThemeLoader.SwitchTheme();
+
+            if (_lightDarkThemeLoader.SelectedThemeId == "Light")
+            {
+                _accentThemeLoader.SelectedThemeId = "DarkBlue";
+            }
+            else
+            {
+                _accentThemeLoader.SelectedThemeId = "LightBlue";
+            }
         }
 
         private void InitializeComponent()

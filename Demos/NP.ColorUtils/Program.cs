@@ -9,17 +9,9 @@ namespace NP.ThemingPrototype
     {
         public static void Main(string[] args)
         {
-            Color color = Color.Parse("#302F4A"); // Color.Parse("#E64343");
+            Color color = Color.Parse(args[0]);
 
-            Console.WriteLine(color.ToStr());
-
-            HslColor hslColor = color.ToHSL();
-
-            Console.WriteLine(hslColor.ToString());
-
-            Color restoredColor = hslColor.ToColor();
-
-            Console.WriteLine(restoredColor.ToStr());
+            Console.WriteLine(color.Invert().ToStr());
         }
     }
 }

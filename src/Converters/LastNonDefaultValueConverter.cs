@@ -1,4 +1,5 @@
 ﻿using Avalonia.Data.Converters;
+using Avalonia.Media;
 using NP.Utilities;
 using System;
 using System.Collections.Generic;
@@ -28,4 +29,9 @@ namespace NP.Avalonia.Visuals.Converters
     }
 
     public class LastNonDefaultDoubleConverter : LastNonDefaultValueConverter<double> { }
+
+
+    public class LastNonDefaultColorConverter : LastNonDefaultValueConverter<Color> { }
+
+    public class LastNonDefaultBrushConverter : LastNonDefaultValueConverter<IBrush> { }
 }
