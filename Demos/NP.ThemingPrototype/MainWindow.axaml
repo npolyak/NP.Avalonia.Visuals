@@ -12,157 +12,48 @@
 				 x:Name="Root"
 				 Width="500"
 				 Height="400">
-	<Window.Resources>
-		<SolidColorBrush x:Key="WindowBackgroundBrush"
-						 Color="{DynamicResource WindowBgColor}"/>
-		<SolidColorBrush x:Key="SectionBackgroundBrush"
-						 Color="{DynamicResource SectionBgColor}"/>
-		<SolidColorBrush x:Key="SectionBorderBrush"
-						 Color="{DynamicResource SectionBorderColor}"/>
-		<SolidColorBrush x:Key="PrimaryForegroundBrush"
-						 Color="{DynamicResource PrimaryForegroundColor}"/>
-		<SolidColorBrush x:Key="SecondaryForegroundColor"
-						 Color="{DynamicResource SecondaryForegroundColor}"/>
-		<SolidColorBrush x:Key="MostProminentInvertedBrush"
-						 Color="{DynamicResource MostProminentInvertedColor}"/>
-		<LinearGradientBrush x:Key="ControlBackground"
-							 StartPoint="50%,0%"
-							 EndPoint="50%, 100%">
-			<GradientStop Offset="0"
-						  Color="{DynamicResource ControlBackgroundHighColor}"/>
-			<GradientStop Offset="1"
-						  Color="{DynamicResource ControlBackgroundLowColor}"/>
-		</LinearGradientBrush>
-		<LinearGradientBrush x:Key="ControlBorderBrush"
-					 StartPoint="50%,0%"
-					 EndPoint="50%, 100%">
-			<GradientStop Offset="0"
-						  Color="{DynamicResource ControlBorderHighColor}"/>
-			<GradientStop Offset="1"
-						  Color="{DynamicResource ControlBorderLowColor}"/>
-		</LinearGradientBrush>
-		
-		<SolidColorBrush x:Key="AccentBrush"
-						 Color="{DynamicResource AccentColor}"/>
-
-		<SolidColorBrush x:Key="BorderAccentBrush"
-						 Color="{DynamicResource BorderAccentColor}"/>
-		
-		<np:BoolToDoubleConverter x:Key="PointerOverOpacityConverter" 
-								  TrueValue="0.1"
-								  FalseValue="0"/>
-		<np:BoolToDoubleConverter x:Key="IsPressedOpacityConverter"
-						  TrueValue="0.05"
-						  FalseValue="0"/>
-
-		<np:BoolToDoubleConverter x:Key="IsEnabledOpacityConverter"
-								  TrueValue="1"
-								  FalseValue="0.4"/>
-
-		<np:BoolToBrushConverter x:Key="FocusedBorderBrushConverter"
-								 FalseValue="{x:Null}"
-								 TrueValue="{StaticResource BorderAccentBrush}"/>
-
-		<np:LastNonDefaultDoubleConverter x:Key="TheOpacityConverter"/>
-		<np:LastNonDefaultBrushConverter x:Key="BorderBrushConverter"/>
-
-		<ControlTemplate x:Key="ButtonTemplate"
-						 TargetType="Button">
-			<Grid>
-				<Border x:Name="BackgroundBorder"
-						Background="{TemplateBinding Background}"
-						BorderThickness="{TemplateBinding BorderThickness}"
-						CornerRadius="{TemplateBinding CornerRadius}"
-						Focusable="False">
-					<Border.BorderBrush>
-						<MultiBinding Converter="{StaticResource BorderBrushConverter}">
-							<Binding Path="BorderBrush"
-									 RelativeSource="{RelativeSource TemplatedParent}"/>
-							<Binding Path="IsFocused"
-									 Converter="{StaticResource FocusedBorderBrushConverter}"
-									 RelativeSource="{RelativeSource TemplatedParent}"/>
-						</MultiBinding>
-					</Border.BorderBrush>
-				</Border>
-
-				<ContentPresenter Content="{TemplateBinding Content}"
-								  ContentTemplate="{TemplateBinding ContentTemplate}"
-								  Margin="{TemplateBinding Padding}"
-								  IsHitTestVisible="False"
-								  Focusable="False"
-								  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-				<Border x:Name="OpacityBorder"
-						Background="{StaticResource MostProminentInvertedBrush}"
-						Focusable="False"
-						HorizontalAlignment="Stretch"
-						VerticalAlignment="Stretch"
-						CornerRadius="{TemplateBinding CornerRadius}">
-					<Border.Opacity>
-						<MultiBinding Converter="{StaticResource TheOpacityConverter}">
-							<Binding Path="IsPointerOver"
-									 Converter="{StaticResource PointerOverOpacityConverter}"
-									 RelativeSource="{RelativeSource TemplatedParent}"/>
-							<Binding Path="IsPressed"
-									 FallbackValue="0.05"
-									 Converter="{StaticResource IsPressedOpacityConverter}"
-									 RelativeSource="{RelativeSource TemplatedParent}"/>
-						</MultiBinding>
-					</Border.Opacity>
-				</Border>
-			</Grid>
-		</ControlTemplate>
-	</Window.Resources>
-	<Window.Styles>
-		<Style Selector="Button">
-			<Setter Property="Template"
-					Value="{StaticResource ButtonTemplate}"/>
-			<Setter Property="Background"
-					Value="{StaticResource ControlBackground}"/>
-			<Setter Property="BorderBrush"
-					Value="{StaticResource ControlBorderBrush}"/>
-			<Setter Property="Foreground"
-					Value="{StaticResource PrimaryForegroundBrush}"/>
-			<Setter Property="HorizontalContentAlignment"
-					Value="Center"/>
-			<Setter Property="VerticalContentAlignment"
-					Value="Center"/>
-			<Setter Property="CornerRadius"
-					Value="4"/>
-			<Setter Property="BorderThickness"
-					Value="2"/>
-			<Setter Property="Opacity"
-					Value="{Binding Path=IsEnabled,
-									Converter={StaticResource IsEnabledOpacityConverter},
-								    RelativeSource={RelativeSource Self}}" />
-			<Setter Property="Padding"
-					Value="10,5" />
-		</Style>
-	</Window.Styles>
 
 	<Grid x:Name="RootPanel"
 		  Margin="3">
 		<Grid RowDefinitions="*, Auto"
 			  Margin="10">
-			<Grid RowDefinitions="*, *, *"
-				  ColumnDefinitions="*, *, *">
-			<Button x:Name="TestButton"
-					Content="Test"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"/>
-			<Button Grid.Column="1"
-					IsEnabled="False"
-					Content="Test"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"/>
-			</Grid>
+			<np:AutoGrid>
+				<np:LabeledControl Text="Button:"
+								   Margin="0,5,10,5">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<Button x:Name="TestButton"
+									Content="Test"
+									Classes="Theme"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"/>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+
+				<np:LabeledControl Text="Disabled Button:"
+								   np:AutoGrid.Column="1"
+								   Margin="10,5">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<Button x:Name="TestButton"
+									Content="Test"
+									Classes="Theme"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									IsEnabled="False"/>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+			</np:AutoGrid>
 			<StackPanel x:Name="ButtonPanel"
 						Grid.Row="1"
 						Orientation="Horizontal"
 						HorizontalAlignment="Right">
 				<Button x:Name="ChangeThemeButton"
 						Content="Change Theme"
-						Padding="10,5"/>
+						Padding="10,5"
+						Classes="Theme"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

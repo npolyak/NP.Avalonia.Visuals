@@ -26,7 +26,7 @@ namespace NP.ThemingPrototype
                 Application.Current.Resources.GetThemeLoader("AccentThemeLoader")!;
 
             Button button = this.FindControl<Button>("ChangeThemeButton");
-            
+
             button.Click += Button_Click;
         }
 
