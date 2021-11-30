@@ -44,9 +44,18 @@
 		  Margin="10">
 		<np:AutoGrid x:Name="MyAutoGrid" 
 					 HorizontalAlignment="Center"
-			         VerticalAlignment="Center">
+			         VerticalAlignment="Center"
+					 ShowGridLines="True">
+			<np:AutoGrid.RowsHeights>
+				<GridLength x:Key="1">50</GridLength>
+			</np:AutoGrid.RowsHeights>
+			<np:AutoGrid.ColumnWidths>
+				<GridLength x:Key="0">*</GridLength>
+			</np:AutoGrid.ColumnWidths>
 			<Border Width="100"
 					Height="100"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
 					Background="{StaticResource MouseOverBrush}"/>
 			<Button Content="Button 2"
 					np:AutoGrid.Row="1"

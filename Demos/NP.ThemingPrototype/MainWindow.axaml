@@ -12,7 +12,6 @@
 				 x:Name="Root"
 				 Width="500"
 				 Height="400">
-
 	<Grid x:Name="RootPanel"
 		  Margin="3">
 		<Grid RowDefinitions="*, Auto"
@@ -42,6 +41,26 @@
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
 									IsEnabled="False"/>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+				<np:LabeledControl Text="Button with Icon:"
+								   Margin="0,5,10,5"
+								   np:AutoGrid.Column="2">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<Button x:Name="TestButton"
+									Classes="Theme"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center">
+								<Button.ContentTemplate>
+									<DataTemplate>
+										<np:AutoGrid>
+											
+										</np:AutoGrid>
+									</DataTemplate>
+								</Button.ContentTemplate>
+							</Button>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>

@@ -24,6 +24,13 @@ namespace NP.Avalonia.Visuals.Controls
         private IBinding _minRowBinding;
         private IBinding _minColumnBinding;
 
+        public Dictionary<int, GridLength> RowsHeights { get; } = 
+            new Dictionary<int, GridLength>();
+
+        public Dictionary<int, GridLength> ColumnWidths { get; } =
+            new Dictionary<int, GridLength>();
+
+
         [Content]
         public global::Avalonia.Controls.Controls Children => _grid.Children;
 
@@ -50,6 +57,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         #endregion MinRow Direct Avalonia Property
 
+        private IDisposable _minRowSubscription;
+
 
         #region MinColumn Direct Avalonia Property
         private int _MinColumn = default;
@@ -73,6 +82,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         #endregion MinColumn Direct Avalonia Property
 
+        private IDisposable _minColumnSubscription;
+
         public RowDefinitions RowDefinitions => _grid.RowDefinitions;
 
         public ColumnDefinitions ColumnDefinitions => _grid.ColumnDefinitions;
@@ -83,8 +94,71 @@ namespace NP.Avalonia.Visuals.Controls
             this.LogicalChildren.Add(_grid);
             _behaviorSubscription = this.Children.AddBehavior(OnChildAdded, OnChildRemoved);
 
-            _minRowBinding = this.GetObservable(MinRowProperty).Select(r => -r).ToBinding();
-            _minColumnBinding = this.GetObservable(MinColumnProperty).Select(c => -c).ToBinding();
+            var minRowObservable = this.GetObservable(MinRowProperty);
+            _minRowSubscription = minRowObservable.Subscribe(SetRowHeights);
+            _minRowBinding = minRowObservable.Select(r => -r).ToBinding();
+
+
+            var minColObservable = this.GetObservable(MinColumnProperty);
+
+            _minColumnSubscription = minColObservable.Subscribe(OnMinColChanged);
+            _minColumnBinding = minColObservable.Select(c => -c).ToBinding();
+
+            this.Bind(ShowGridLinesProperty, new Binding("ShowGridLines") { Source = _grid, Mode = BindingMode.TwoWay });
+        }
+
+        private void SetRowHights(int minRow, int startRange)
+        {
+            for(int i = startRange; i < RowDefinitions.Count; i++)
+            {
+                int row = minRow + i;
+                RowDefinitions[i].Height = GetRowHeight(row);
+            }
+        }
+
+
+        private GridLength GetRowHeight(int row)
+        {
+            if (RowsHeights.TryGetValue(row, out GridLength height))
+            {
+                return height;
+            }
+            else
+            {
+                return GridLength.Auto;
+            }
+        }
+
+        private void SetRowHeights(int minRow)
+        {
+            SetRowHights(minRow, 0);
+        }
+
+
+        private void OnMinColChanged(int minCol, int startRange)
+        {
+            for (int i = startRange; i < ColumnDefinitions.Count; i++)
+            {
+                int col = minCol + i;
+                ColumnDefinitions[i].Width = GetColumnWidth(col);
+            }
+        }
+
+        private void OnMinColChanged(int minCol)
+        {
+            OnMinColChanged(minCol, 0);
+        }
+
+        private GridLength GetColumnWidth(int col)
+        {
+            if (ColumnWidths.TryGetValue(col, out GridLength width))
+            {
+                return width;
+            }
+            else
+            {
+                return GridLength.Auto;
+            }
         }
 
         private void OnChildRemoved(IControl child)
@@ -152,7 +226,7 @@ namespace NP.Avalonia.Visuals.Controls
             MinColumn = currentMinColumn;
         }
 
-        private void AddGridDefs<T>(int numberExtraDefs, IList<T> defs, Func<T> defCreator)
+        private void AddGridDefs<T>(int numberExtraDefs, IList<T> defs, int minItem, Func<int, T> defCreator)
             where T : DefinitionBase
         {
             int absNumberExtraItems = Math.Abs(numberExtraDefs);
@@ -160,11 +234,13 @@ namespace NP.Avalonia.Visuals.Controls
             if (absNumberExtraItems == 0)
                 return;
 
+            int currentNumberItems = defs.Count;
             for (int i = 0; i < absNumberExtraItems; i++)
             {
                 if (numberExtraDefs > 0)
                 {
-                    defs.Add(defCreator());
+                    int itemNumber = minItem + currentNumberItems + i;
+                    defs.Add(defCreator(itemNumber));
                 }
                 else
                 {
@@ -174,10 +250,10 @@ namespace NP.Avalonia.Visuals.Controls
         }
 
         private void AddRows(int numberExtraRows) =>
-            AddGridDefs(numberExtraRows, _grid.RowDefinitions, () => new RowDefinition(GridLength.Auto));
+            AddGridDefs(numberExtraRows, _grid.RowDefinitions, MinRow, (row) => new RowDefinition(GetRowHeight(row)));
 
         private void AddColumns(int numberExtraCols) =>
-            AddGridDefs(numberExtraCols, _grid.ColumnDefinitions, () => new ColumnDefinition(GridLength.Auto));
+            AddGridDefs(numberExtraCols, _grid.ColumnDefinitions, MinColumn, (col) => new ColumnDefinition(GetColumnWidth(col)));
 
         #region Row Attached Avalonia Property
         public static int GetRow(Control obj)
@@ -215,5 +291,18 @@ namespace NP.Avalonia.Visuals.Controls
                 "Column"
             );
         #endregion Column Attached Avalonia Property
+
+
+        #region ShowGridLines Styled Avalonia Property
+        public bool ShowGridLines
+        {
+            get { return GetValue(ShowGridLinesProperty); }
+            set { SetValue(ShowGridLinesProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> ShowGridLinesProperty =
+            Grid.ShowGridLinesProperty.AddOwner<AutoGrid>();
+        #endregion ShowGridLines Styled Avalonia Property
+
     }
 }
