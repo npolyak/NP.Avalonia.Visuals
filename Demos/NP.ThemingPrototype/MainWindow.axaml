@@ -12,55 +12,62 @@
 				 x:Name="Root"
 				 Width="500"
 				 Height="400">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/Geometries.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
 	<Grid x:Name="RootPanel"
 		  Margin="3">
 		<Grid RowDefinitions="*, Auto"
 			  Margin="10">
 			<np:AutoGrid>
 				<np:LabeledControl Text="Button:"
-								   Margin="0,5,10,5">
+								   Margin="0,5,15,5">
 					<np:LabeledControl.ContainedControlTemplate>
 						<ControlTemplate>
 							<Button x:Name="TestButton"
 									Content="Test"
-									Classes="Theme"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"/>
+									Classes="Theme"/>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
 
 				<np:LabeledControl Text="Disabled Button:"
 								   np:AutoGrid.Column="1"
-								   Margin="10,5">
+								   Margin="15,5">
 					<np:LabeledControl.ContainedControlTemplate>
 						<ControlTemplate>
 							<Button x:Name="TestButton"
 									Content="Test"
 									Classes="Theme"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
 									IsEnabled="False"/>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
 				<np:LabeledControl Text="Button with Icon:"
-								   Margin="0,5,10,5"
+								   Margin="15,5"
 								   np:AutoGrid.Column="2">
 					<np:LabeledControl.ContainedControlTemplate>
 						<ControlTemplate>
 							<Button x:Name="TestButton"
-									Classes="Theme"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center">
-								<Button.ContentTemplate>
-									<DataTemplate>
-										<np:AutoGrid>
-											
-										</np:AutoGrid>
-									</DataTemplate>
-								</Button.ContentTemplate>
-							</Button>
+									Classes="Theme_WithIconHorizontal"
+									np:AttachedProperties.Text="Hello"
+									np:AttachedProperties.IconData="{StaticResource LockOpen}"/>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+				<np:LabeledControl Text="Button with Icon Below:"
+				   Margin="15,5"
+				   np:AutoGrid.Column="3">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<Button x:Name="TestButton"
+									Classes="Theme_WithIconVertical"
+									np:AttachedProperties.Text="Hello"
+									np:AttachedProperties.IconData="{StaticResource LockOpen}"/>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>

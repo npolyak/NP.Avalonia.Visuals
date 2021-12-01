@@ -6,6 +6,26 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/ThemeResources.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
+			<DataTemplate x:Key="TextAndIconDataTemplate">
+				<np:AutoGrid>
+					<TextBlock Text="{Binding $parent[TemplatedControl].(np:AttachedProperties.Text)}"
+							   TextWrapping="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextWrapping)}"
+							   TextAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextAlignment)}"
+							   TextTrimming="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextTrimming)}"
+							   HorizontalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TextHorizontalAlignment)}"
+							   VerticalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TextVerticalAlignment)}"/>
+					<Path Data="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconData)}"
+						  Fill="{Binding $parent[TemplatedControl].Foreground}"
+						  Margin="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconMargin)}"
+						  Stretch="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconStretch)}"
+						  Width="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconWidth)}"
+						  Height="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconHeight)}"
+						  HorizontalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconHorizontalAlignment)}"
+						  VerticalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconVerticalAlignment)}"
+						  np:AutoGrid.Row="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconRow)}"
+						  np:AutoGrid.Column="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconColumn)}"/>
+				</np:AutoGrid>
+			</DataTemplate>
 		</ResourceDictionary>
 	</Styles.Resources>
 	<Style Selector="Button.Theme">
@@ -78,6 +98,41 @@
 								RelativeSource={RelativeSource Self}}" />
 		<Setter Property="Padding"
 				Value="10,5" />
+	</Style>
+
+	<Style Selector="Button.Theme_WithIcon">
+		<Setter Property="ContentTemplate"
+				Value="{StaticResource TextAndIconDataTemplate}"/>
+		<Setter Property="np:AttachedProperties.IconStretch"
+				Value="Uniform"/>
+		<Setter Property="np:AttachedProperties.IconHeight">
+			<Setter.Value>
+				<MultiBinding Converter="{x:Static np:SumConverter.Instance}">
+					<Binding Path="FontSize"
+							 RelativeSource="{RelativeSource Self}"/>
+					<np:ValueBinding x:TypeArguments="x:Double"
+									 Value="-1"/>
+				</MultiBinding>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style Selector="Button.Theme_WithIconHorizontal">
+		<Setter Property="np:ClassesBehavior.InsertClasses"
+				Value="Theme Theme_WithIcon"/>
+		<Setter Property="np:AttachedProperties.IconMargin"
+				Value="5,0,0,0"/>
+		<Setter Property="np:AttachedProperties.IconColumn"
+				Value="1"/>
+	</Style>
+
+	<Style Selector="Button.Theme_WithIconVertical">
+		<Setter Property="np:ClassesBehavior.InsertClasses"
+				Value="Theme Theme_WithIcon"/>
+		<Setter Property="np:AttachedProperties.IconMargin"
+				Value="0,3,0,2"/>
+		<Setter Property="np:AttachedProperties.IconRow"
+				Value="1"/>
 	</Style>
 
 	<Style Selector=":is(np|LabeledControl)">

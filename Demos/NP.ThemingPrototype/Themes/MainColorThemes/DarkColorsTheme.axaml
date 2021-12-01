@@ -7,7 +7,7 @@
 	<Color x:Key="ControlBackgroundHighColor">#666666</Color>
 	<Color x:Key="ControlBackgroundLowColor">#3B3B3B</Color>
 	<Color x:Key="ControlBorderHighColor">#4E4E4E</Color>
-	<Color x:Key="ControlBorderLowColor">#292929</Color>
+	<Color x:Key="ControlBorderLowColor">#3A3A3A</Color>
 	<Color x:Key="MostProminentInvertedColor">#FFFFFFFF</Color>
 	<Color x:Key="PrimaryForegroundColor">#D9D9D9</Color>
 	<Color x:Key="SecondaryForegroundColor">#888888</Color>
