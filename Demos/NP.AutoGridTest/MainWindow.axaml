@@ -47,11 +47,11 @@
 			         VerticalAlignment="Center"
 					 ShowGridLines="True">
 			<np:AutoGrid.RowsHeights>
-				<GridLength x:Key="1">50</GridLength>
+				<GridLength x:Key="1">100</GridLength>
 			</np:AutoGrid.RowsHeights>
-			<np:AutoGrid.ColumnWidths>
+			<np:AutoGrid.ColumnsWidths>
 				<GridLength x:Key="0">*</GridLength>
-			</np:AutoGrid.ColumnWidths>
+			</np:AutoGrid.ColumnsWidths>
 			<Border Width="100"
 					Height="100"
 					HorizontalAlignment="Left"

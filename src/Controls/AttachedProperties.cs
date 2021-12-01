@@ -16,11 +16,50 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 using NP.Utilities;
+using System.Collections.Generic;
 
 namespace NP.Avalonia.Visuals.Controls
 {
     public class AttachedProperties
     {
+        #region RowsHeights Attached Avalonia Property
+        public static Dictionary<int, GridLength> GetRowsHeights(IControl obj)
+        {
+            return obj.GetValue(RowsHeightsProperty);
+        }
+
+        public static void SetRowsHeights(IControl obj, Dictionary<int, GridLength> value)
+        {
+            obj.SetValue(RowsHeightsProperty, value);
+        }
+
+        public static readonly AttachedProperty<Dictionary<int, GridLength>> RowsHeightsProperty =
+            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Dictionary<int, GridLength>>
+            (
+                "RowsHeights"
+            );
+        #endregion RowsHeights Attached Avalonia Property
+
+
+        #region ColumnsWidths Attached Avalonia Property
+        public static Dictionary<int, GridLength> GetColumnsWidths(IControl obj)
+        {
+            return obj.GetValue(ColumnsWidthsProperty);
+        }
+
+        public static void SetColumnsWidths(IControl obj, Dictionary<int, GridLength> value)
+        {
+            obj.SetValue(ColumnsWidthsProperty, value);
+        }
+
+        public static readonly AttachedProperty<Dictionary<int, GridLength>> ColumnsWidthsProperty =
+            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Dictionary<int, GridLength>>
+            (
+                "ColumnsWidths"
+            );
+        #endregion ColumnsWidths Attached Avalonia Property
+
+
         #region MouseOverBrush Attached Avalonia Property
         public static IBrush GetMouseOverBrush(AvaloniaObject obj)
         {

@@ -7,7 +7,8 @@
 				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/ThemeResources.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<DataTemplate x:Key="TextAndIconDataTemplate">
-				<np:AutoGrid>
+				<np:AutoGrid RowsHeights="{Binding $parent[TemplatedControl].(np:AttachedProperties.RowsHeights)}"
+							 ColumnsWidths="{Binding $parent[TemplatedControl].(np:AttachedProperties.ColumnsWidths)}">
 					<TextBlock Text="{Binding $parent[TemplatedControl].(np:AttachedProperties.Text)}"
 							   TextWrapping="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextWrapping)}"
 							   TextAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextAlignment)}"

@@ -24,11 +24,30 @@ namespace NP.Avalonia.Visuals.Controls
         private IBinding _minRowBinding;
         private IBinding _minColumnBinding;
 
-        public Dictionary<int, GridLength> RowsHeights { get; } = 
-            new Dictionary<int, GridLength>();
 
-        public Dictionary<int, GridLength> ColumnWidths { get; } =
-            new Dictionary<int, GridLength>();
+        #region RowsHeights shared Styled Avalonia Property
+        public Dictionary<int, GridLength> RowsHeights
+        {
+            get { return GetValue(RowsHeightsProperty); }
+            set { SetValue(RowsHeightsProperty, value); }
+        }
+
+        public static readonly StyledProperty<Dictionary<int, GridLength>> RowsHeightsProperty =
+            AttachedProperties.RowsHeightsProperty.AddOwner<AutoGrid>();
+        #endregion RowsHeights shared Styled Avalonia Property
+
+
+
+        #region ColumnsWidths shared Styled Avalonia Property
+        public Dictionary<int, GridLength> ColumnsWidths
+        {
+            get { return GetValue(ColumnsWidthsProperty); }
+            set { SetValue(ColumnsWidthsProperty, value); }
+        }
+
+        public static readonly StyledProperty<Dictionary<int, GridLength>> ColumnsWidthsProperty =
+            AttachedProperties.ColumnsWidthsProperty.AddOwner<AutoGrid>();
+        #endregion ColumnsWidths shared Styled Avalonia Property
 
 
         [Content]
@@ -95,19 +114,34 @@ namespace NP.Avalonia.Visuals.Controls
             _behaviorSubscription = this.Children.AddBehavior(OnChildAdded, OnChildRemoved);
 
             var minRowObservable = this.GetObservable(MinRowProperty);
-            _minRowSubscription = minRowObservable.Subscribe(SetRowHeights);
+            _minRowSubscription = minRowObservable.Subscribe(SetRowsHeights);
             _minRowBinding = minRowObservable.Select(r => -r).ToBinding();
 
 
             var minColObservable = this.GetObservable(MinColumnProperty);
 
-            _minColumnSubscription = minColObservable.Subscribe(OnMinColChanged);
+            _minColumnSubscription = minColObservable.Subscribe(SetColumnsWidths);
             _minColumnBinding = minColObservable.Select(c => -c).ToBinding();
 
+            this.RowsHeights = new Dictionary<int, GridLength>();
+            this.ColumnsWidths = new Dictionary<int, GridLength>();
+
             this.Bind(ShowGridLinesProperty, new Binding("ShowGridLines") { Source = _grid, Mode = BindingMode.TwoWay });
+
+            this.GetObservable(AttachedProperties.RowsHeightsProperty).Subscribe(OnRowsHeightsChanged);
+            this.GetObservable(AttachedProperties.ColumnsWidthsProperty).Subscribe(OnColumnsWidthsChanged);
         }
 
-        private void SetRowHights(int minRow, int startRange)
+        private void OnRowsHeightsChanged(Dictionary<int, GridLength> rowHeights)
+        {
+            SetRowsHeights(MinRow);
+        }
+        private void OnColumnsWidthsChanged(Dictionary<int, GridLength> obj)
+        {
+            SetColumnsWidths(MinColumn);
+        }
+
+        private void SetRowsHeights(int minRow, int startRange)
         {
             for(int i = startRange; i < RowDefinitions.Count; i++)
             {
@@ -119,7 +153,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         private GridLength GetRowHeight(int row)
         {
-            if (RowsHeights.TryGetValue(row, out GridLength height))
+            GridLength height = GridLength.Auto;
+            if (RowsHeights?.TryGetValue(row, out height) == true)
             {
                 return height;
             }
@@ -129,13 +164,13 @@ namespace NP.Avalonia.Visuals.Controls
             }
         }
 
-        private void SetRowHeights(int minRow)
+        private void SetRowsHeights(int minRow)
         {
-            SetRowHights(minRow, 0);
+            SetRowsHeights(minRow, 0);
         }
 
 
-        private void OnMinColChanged(int minCol, int startRange)
+        private void SetColumnsWidths(int minCol, int startRange)
         {
             for (int i = startRange; i < ColumnDefinitions.Count; i++)
             {
@@ -144,14 +179,15 @@ namespace NP.Avalonia.Visuals.Controls
             }
         }
 
-        private void OnMinColChanged(int minCol)
+        private void SetColumnsWidths(int minCol)
         {
-            OnMinColChanged(minCol, 0);
+            SetColumnsWidths(minCol, 0);
         }
 
         private GridLength GetColumnWidth(int col)
         {
-            if (ColumnWidths.TryGetValue(col, out GridLength width))
+            GridLength width = GridLength.Auto;
+            if (ColumnsWidths?.TryGetValue(col, out width) == true)
             {
                 return width;
             }

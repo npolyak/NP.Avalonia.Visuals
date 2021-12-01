@@ -2,6 +2,7 @@
 				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				 xmlns:local="clr-namespace:NP.ThemingPrototype"
 				 xmlns:np="https://np.com/visuals"
+				 xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Collections"
 				 x:Class="NP.ThemingPrototype.MainWindow"
 				 Classes="PlainCustomWindow"
 				 Title="Theming Prototype"
@@ -17,6 +18,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/Geometries.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
+
 		</ResourceDictionary>
 	</Window.Resources>
 	<Grid x:Name="RootPanel"
@@ -67,7 +69,13 @@
 							<Button x:Name="TestButton"
 									Classes="Theme_WithIconVertical"
 									np:AttachedProperties.Text="Hello"
-									np:AttachedProperties.IconData="{StaticResource LockOpen}"/>
+									np:AttachedProperties.IconData="{StaticResource LockClosed}">
+								<np:AttachedProperties.RowsHeights>
+									<scg:Dictionary x:TypeArguments="x:Int32, GridLength">
+										<GridLength x:Key="0">100</GridLength>
+									</scg:Dictionary>
+								</np:AttachedProperties.RowsHeights>
+							</Button>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
