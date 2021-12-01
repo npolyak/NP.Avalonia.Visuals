@@ -27,6 +27,12 @@
                     <ToolTip>class that contains original property</ToolTip>
 					<Default>AttachedProperties</Default>
                 </Literal>
+				<Literal>
+					<ID>ownerclass</ID>
+					<ToolTip>The owning class of this Property.  Typically the class that it is declared in.</ToolTip>
+					<Function>ClassName()</Function>
+					<Default>ownerclass</Default>
+				</Literal>
             </Declarations>
             <Code Language="csharp">
                 <![CDATA[
@@ -38,10 +44,7 @@ public $type$ $property$
 }
 
 public static readonly StyledProperty<$type$> $property$Property =
-    $PropContainer$.AddOwner<ClassName()>
-    (
-        nameof($property$)
-    );
+    $PropContainer$.$property$Property.AddOwner<$ownerclass$>();
 #endregion $property$ shared Styled Avalonia Property
 $end$]]>
             </Code>
