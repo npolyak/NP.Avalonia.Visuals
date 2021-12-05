@@ -142,6 +142,8 @@
 				<ControlTemplate TargetType="np:LabeledControl">
 					<np:AutoGrid>
 						<TextBlock Text="{TemplateBinding Text}"
+								   Width="{TemplateBinding TextWidth}"
+								   TextWrapping="{TemplateBinding TheTextWrapping}"
 								   HorizontalAlignment="{TemplateBinding HorizontalTextAlignment}"
 								   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"/>
 						<TemplatedControl Template="{TemplateBinding ContainedControlTemplate}"

@@ -2,6 +2,7 @@
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.Templates;
+using Avalonia.Media;
 
 namespace NP.Avalonia.Visuals.Controls
 {
@@ -20,6 +21,38 @@ namespace NP.Avalonia.Visuals.Controls
                 nameof(Text)
             );
         #endregion Text Styled Avalonia Property
+
+
+        #region TheTextWrapping Styled Avalonia Property
+        public TextWrapping TheTextWrapping
+        {
+            get { return GetValue(TheTextWrappingProperty); }
+            set { SetValue(TheTextWrappingProperty, value); }
+        }
+
+        public static readonly StyledProperty<TextWrapping> TheTextWrappingProperty =
+            AvaloniaProperty.Register<LabeledControl, TextWrapping>
+            (
+                nameof(TheTextWrapping)
+            );
+        #endregion TheTextWrapping Styled Avalonia Property
+
+
+        #region TextWidth Styled Avalonia Property
+        public double TextWidth
+        {
+            get { return GetValue(TextWidthProperty); }
+            set { SetValue(TextWidthProperty, value); }
+        }
+
+        public static readonly StyledProperty<double> TextWidthProperty =
+            AvaloniaProperty.Register<LabeledControl, double>
+            (
+                nameof(TextWidth),
+                double.NaN
+            );
+        #endregion TextWidth Styled Avalonia Property
+
 
 
         #region ContainedControlTemplate Styled Avalonia Property

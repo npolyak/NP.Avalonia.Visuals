@@ -11,7 +11,7 @@
 				 HeaderBackground="Transparent"
 				 Background="{DynamicResource SectionBackgroundBrush}"
 				 x:Name="Root"
-				 Width="500"
+				 Width="1000"
 				 Height="400">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -23,6 +23,9 @@
 	</Window.Resources>
 	<Grid x:Name="RootPanel"
 		  Margin="3">
+		<Grid.Resources>
+			
+		</Grid.Resources>
 		<Grid RowDefinitions="*, Auto"
 			  Margin="10">
 			<np:AutoGrid>
@@ -70,9 +73,25 @@
 									Classes="Theme_WithIconVertical"
 									np:AttachedProperties.Text="Hello"
 									np:AttachedProperties.IconData="{StaticResource LockClosed}">
+							</Button>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+				<np:LabeledControl Text="Button with Icon Below (Predefined Height): "
+								   TheTextWrapping="WrapWithOverflow"
+								   TextWidth="170"
+								   Margin="15,5"
+								   np:AutoGrid.Column="4">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<Button x:Name="TestButton"
+									Classes="Theme_WithIconVertical"
+									np:AttachedProperties.Text="Hello"
+									np:AttachedProperties.TextVerticalAlignment="Top"
+									np:AttachedProperties.IconData="{StaticResource LockClosed}">
 								<np:AttachedProperties.RowsHeights>
 									<scg:Dictionary x:TypeArguments="x:Int32, GridLength">
-										<GridLength x:Key="0">100</GridLength>
+										<GridLength x:Key="0">30</GridLength>
 									</scg:Dictionary>
 								</np:AttachedProperties.RowsHeights>
 							</Button>
