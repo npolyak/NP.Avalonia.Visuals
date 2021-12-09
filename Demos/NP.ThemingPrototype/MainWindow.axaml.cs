@@ -1,10 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 using NP.Avalonia.Visuals.Behaviors;
 using NP.Avalonia.Visuals.Controls;
 using NP.Avalonia.Visuals.ThemingAndL10N;
+using NP.Concepts.Behaviors;
+using System.Linq;
 
 namespace NP.ThemingPrototype
 {
@@ -12,6 +16,8 @@ namespace NP.ThemingPrototype
     {
         ThemeLoader _lightDarkThemeLoader;
         ThemeLoader _accentThemeLoader;
+
+        ReactiveVisualDesendantsBehavior _flattenVisualTreeBehavior;
 
         public MainWindow()
         {
@@ -27,11 +33,19 @@ namespace NP.ThemingPrototype
 
             Button button = this.FindControl<Button>("ChangeThemeButton");
 
+            _flattenVisualTreeBehavior = 
+                new ReactiveVisualDesendantsBehavior(button);
             button.Click += Button_Click;
         }
 
         private void Button_Click(object? sender, RoutedEventArgs e)
         {
+            //Popup p = comboBox.TheNameScope.Get<Popup>("PART_Popup");
+
+            _flattenVisualTreeBehavior.DetachCollections();
+
+            _flattenVisualTreeBehavior.AttachCollections();
+
             _lightDarkThemeLoader.SwitchTheme();
 
             if (_lightDarkThemeLoader.SelectedThemeId == "Light")

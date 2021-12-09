@@ -14,6 +14,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
 using NP.Utilities;
 using System.Collections.Generic;
@@ -190,7 +191,8 @@ namespace NP.Avalonia.Visuals.Controls
         public static readonly AttachedProperty<Stretch> IconStretchProperty =
             AvaloniaProperty.RegisterAttached<AttachedProperties, Control, Stretch>
             (
-                "IconStretch"
+                "IconStretch",
+                Stretch.Uniform
             );
         #endregion IconStretch Attached Avalonia Property
 
@@ -480,5 +482,25 @@ namespace NP.Avalonia.Visuals.Controls
                 VerticalAlignment.Center
             );
         #endregion TextVerticalAlignment Attached Avalonia Property
+
+
+        #region MainPartTemplate Attached Avalonia Property
+        public static ControlTemplate GetMainPartTemplate(IControl obj)
+        {
+            return obj.GetValue(MainPartTemplateProperty);
+        }
+
+        public static void SetMainPartTemplate(IControl obj, ControlTemplate value)
+        {
+            obj.SetValue(MainPartTemplateProperty, value);
+        }
+
+        public static readonly AttachedProperty<ControlTemplate> MainPartTemplateProperty =
+            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, ControlTemplate>
+            (
+                "MainPartTemplate"
+            );
+        #endregion MainPartTemplate Attached Avalonia Property
+
     }
 }

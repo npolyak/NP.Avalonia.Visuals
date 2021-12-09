@@ -1,38 +1,74 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:np="https://np.com/visuals">
+	<Style Selector="TextBlock">
+		<Setter Property="IsHitTestVisible"
+				Value="False"/>
+	</Style>
+	<Style Selector="Path.IconInsideControl">
+		<Setter Property="Data"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconData)}"/>
+		<Setter Property="Fill"
+				Value="{Binding $parent[TemplatedControl;1].Foreground}"/>
+		<Setter Property="Margin"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconMargin)}"/>
+		<Setter Property="Stretch"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconStretch)}"/>
+		<Setter Property="Width"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconWidth)}"/>
+		<Setter Property="Height"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconHeight)}"/>
+		<Setter Property="HorizontalAlignment"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconHorizontalAlignment)}"/>
+		<Setter Property="VerticalAlignment"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconVerticalAlignment)}"/>
+		<Setter Property="np:AutoGrid.Row"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconRow)}"/>
+		<Setter Property="np:AutoGrid.Column"
+				Value="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.IconColumn)}"/>
+	</Style>
 	<Styles.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/ThemeResources.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
-			<DataTemplate x:Key="TextAndIconDataTemplate">
-				<np:AutoGrid RowsHeights="{Binding $parent[TemplatedControl].(np:AttachedProperties.RowsHeights)}"
-							 ColumnsWidths="{Binding $parent[TemplatedControl].(np:AttachedProperties.ColumnsWidths)}">
-					<TextBlock Text="{Binding $parent[TemplatedControl].(np:AttachedProperties.Text)}"
-							   TextWrapping="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextWrapping)}"
-							   TextAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextAlignment)}"
-							   TextTrimming="{Binding $parent[TemplatedControl].(np:AttachedProperties.TheTextTrimming)}"
-							   HorizontalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TextHorizontalAlignment)}"
-							   VerticalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.TextVerticalAlignment)}"/>
-					<Path Data="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconData)}"
-						  Fill="{Binding $parent[TemplatedControl].Foreground}"
-						  Margin="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconMargin)}"
-						  Stretch="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconStretch)}"
-						  Width="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconWidth)}"
-						  Height="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconHeight)}"
-						  HorizontalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconHorizontalAlignment)}"
-						  VerticalAlignment="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconVerticalAlignment)}"
-						  np:AutoGrid.Row="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconRow)}"
-						  np:AutoGrid.Column="{Binding $parent[TemplatedControl].(np:AttachedProperties.IconColumn)}"/>
+			<ControlTemplate x:Key="TextAndIconDataTemplate">
+				<np:AutoGrid RowsHeights="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.RowsHeights)}"
+							 ColumnsWidths="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.ColumnsWidths)}">
+					<TextBlock Text="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.Text)}"
+							   TextWrapping="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.TheTextWrapping)}"
+							   TextAlignment="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.TheTextAlignment)}"
+							   TextTrimming="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.TheTextTrimming)}"
+							   HorizontalAlignment="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.TextHorizontalAlignment)}"
+							   VerticalAlignment="{Binding $parent[TemplatedControl;1].(np:AttachedProperties.TextVerticalAlignment)}"/>
+					<Path Classes="IconInsideControl"/>
 				</np:AutoGrid>
-			</DataTemplate>
+			</ControlTemplate>
 		</ResourceDictionary>
 	</Styles.Resources>
-	<Style Selector="Button.Theme">
+	<Style Selector="PopupRoot">
+		<Setter Property="Background" Value="{x:Null}"/>
+		<Setter Property="TransparencyLevelHint" Value="Transparent" />
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Panel>
+					<Border Name="PART_TransparencyFallback"
+							IsHitTestVisible="False" />
+					<VisualLayerManager IsPopup="True">
+						<ContentPresenter Name="PART_ContentPresenter"
+										  Background="{TemplateBinding Background}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Content="{TemplateBinding Content}"
+										  Padding="{TemplateBinding Padding}"/>
+					</VisualLayerManager>
+				</Panel>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	<Style Selector=":is(TemplatedControl).Theme">
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="Button">
+				<ControlTemplate TargetType="TemplatedControl">
 					<Grid>
 						<Border x:Name="BackgroundBorder"
 								Background="{TemplateBinding Background}"
@@ -50,13 +86,11 @@
 							</Border.BorderBrush>
 						</Border>
 
-						<ContentPresenter Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
+						<TemplatedControl x:Name="PlaceHolder" 
+										  Template="{TemplateBinding (np:AttachedProperties.MainPartTemplate)}"
 										  Margin="{TemplateBinding Padding}"
-										  IsHitTestVisible="False"
-										  Focusable="False"
-										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+										  Focusable="False"/>
+						
 						<Border x:Name="OpacityBorder"
 								Background="{StaticResource MostProminentInvertedBrush}"
 								Focusable="False"
@@ -85,10 +119,6 @@
 				Value="{StaticResource ControlBorderBrush}"/>
 		<Setter Property="Foreground"
 				Value="{StaticResource PrimaryForegroundBrush}"/>
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center"/>
-		<Setter Property="VerticalContentAlignment"
-				Value="Center"/>
 		<Setter Property="CornerRadius"
 				Value="4"/>
 		<Setter Property="BorderThickness"
@@ -101,8 +131,25 @@
 				Value="10,5" />
 	</Style>
 
-	<Style Selector="Button.Theme_WithIcon">
-		<Setter Property="ContentTemplate"
+	<Style Selector=":is(ContentControl).Theme">
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center"/>
+		<Setter Property="VerticalContentAlignment"
+				Value="Center"/>
+		<Setter Property="np:AttachedProperties.MainPartTemplate">
+			<ControlTemplate>
+				<ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource AncestorType=ContentControl}}"
+								  ContentTemplate="{Binding Path=ContentTemplate, RelativeSource={RelativeSource AncestorType=ContentControl}}"
+								  IsHitTestVisible="False"
+								  Focusable="False"
+								  HorizontalAlignment="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ContentControl}}"
+								  VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ContentControl}}"/>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<Style Selector=":is(TemplatedControl).Theme_WithIcon">
+		<Setter Property="np:AttachedProperties.MainPartTemplate"
 				Value="{StaticResource TextAndIconDataTemplate}"/>
 		<Setter Property="np:AttachedProperties.IconStretch"
 				Value="Uniform"/>
@@ -118,7 +165,7 @@
 		</Setter>
 	</Style>
 
-	<Style Selector="Button.Theme_WithIconHorizontal">
+	<Style Selector=":is(TemplatedControl).Theme_WithIconHorizontal">
 		<Setter Property="np:ClassesBehavior.InsertClasses"
 				Value="Theme Theme_WithIcon"/>
 		<Setter Property="np:AttachedProperties.IconMargin"
@@ -127,7 +174,7 @@
 				Value="1"/>
 	</Style>
 
-	<Style Selector="Button.Theme_WithIconVertical">
+	<Style Selector=":is(TemplatedControl).Theme_WithIconVertical">
 		<Setter Property="np:ClassesBehavior.InsertClasses"
 				Value="Theme Theme_WithIcon"/>
 		<Setter Property="np:AttachedProperties.IconMargin"

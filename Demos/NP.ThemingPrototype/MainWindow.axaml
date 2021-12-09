@@ -65,8 +65,8 @@
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
 				<np:LabeledControl Text="Button with Icon Below:"
-				   Margin="15,5"
-				   np:AutoGrid.Column="3">
+								   Margin="15,5"
+								   np:AutoGrid.Column="3">
 					<np:LabeledControl.ContainedControlTemplate>
 						<ControlTemplate>
 							<Button x:Name="TestButton"
@@ -95,6 +95,75 @@
 									</scg:Dictionary>
 								</np:AttachedProperties.RowsHeights>
 							</Button>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+				<np:LabeledControl Text="ComboBox: "
+								   Margin="15,5"
+								   np:AutoGrid.Column="5">
+
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<np:NpComboBox>
+								<ComboBoxItem Content="Hello 1"/>
+								<ComboBoxItem Content="Hello 2"/>
+								<ComboBoxItem Content="Hello 3"/>
+							</np:NpComboBox>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
+				<np:LabeledControl Text="My ComboBox: "
+								   Margin="15,5"
+								   np:AutoGrid.Column="6">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<np:NpComboBox VerticalAlignment="Center"
+											  Classes="Theme"
+											  MaxDropDownHeight="200"
+											  HorizontalContentAlignment="Stretch"
+											  VerticalContentAlignment="Stretch"
+											  np:AttachedProperties.IconWidth="12"
+											  np:AttachedProperties.IconMargin="5,5,0,2"
+											  np:AttachedProperties.IconData="{StaticResource EmptyArrowDownIcon}"
+											  Height="26.4"
+											  Width="100">
+								<np:AttachedProperties.MainPartTemplate>
+									<ControlTemplate>
+										<Grid ColumnDefinitions="*, Auto">
+											<ContentPresenter Content="{Binding $parent[ComboBox].SelectionBoxItem}"
+															  ContentTemplate="{Binding $parent[ComboBox].ItemTemplate}"
+															  Focusable="False"/>
+											<Path Classes="IconInsideControl"
+												  Grid.Column="1"/>
+											<Popup Name="PART_Popup"
+												   IsOpen="{Binding $parent[ComboBox].IsDropDownOpen, Mode=TwoWay}"
+												   MinWidth="{Binding $parent[ComboBox].Bounds.Width}"
+												   MaxHeight="{Binding $parent[ComboBox].MaxDropDownHeight}"
+												   PlacementTarget="{Binding $parent[ComboBox]}"
+												   PlacementMode="Bottom"
+												   IsLightDismissEnabled="True">
+												<Grid>
+													<ScrollViewer HorizontalScrollBarVisibility="{Binding $parent[np:NpComboBox].HorizontalScrollBarVisibility}"
+																  VerticalScrollBarVisibility="{Binding $parent[np:NpComboBox].VerticalScrollBarVisibility}">
+														<np:NpItemsPresenter x:Name="ComboItemsPresenter"
+																			Items="{Binding $parent[ComboBox].Items, Mode=OneWay}"
+																			ItemsPanel="{Binding $parent[ComboBox].ItemsPanel}"
+																			ItemTemplate="{Binding $parent[ComboBox].ItemTemplate, Mode=OneWay}"
+																			VirtualizationMode="{Binding $parent[ComboBox].VirtualizationMode}">
+
+
+														</np:NpItemsPresenter>
+													</ScrollViewer>
+
+												</Grid>
+											</Popup>
+										</Grid>
+									</ControlTemplate>
+								</np:AttachedProperties.MainPartTemplate>
+								<ComboBoxItem Content="Hello 1"/>
+								<ComboBoxItem Content="Hello 2"/>
+								<ComboBoxItem Content="Hello 3"/>
+							</np:NpComboBox>
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
