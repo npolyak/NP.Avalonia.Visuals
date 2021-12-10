@@ -8,6 +8,7 @@ using NP.Avalonia.Visuals.Behaviors;
 using NP.Avalonia.Visuals.Controls;
 using NP.Avalonia.Visuals.ThemingAndL10N;
 using NP.Concepts.Behaviors;
+using NP.Utilities;
 using System.Linq;
 
 namespace NP.ThemingPrototype
@@ -18,6 +19,22 @@ namespace NP.ThemingPrototype
         ThemeLoader _accentThemeLoader;
 
         ReactiveVisualDesendantsBehavior _flattenVisualTreeBehavior;
+
+
+        #region ThePoint Styled Avalonia Property
+        public Point2D ThePoint
+        {
+            get { return GetValue(ThePointProperty); }
+            set { SetValue(ThePointProperty, value); }
+        }
+
+        public static readonly StyledProperty<Point2D> ThePointProperty =
+            AvaloniaProperty.Register<MainWindow, Point2D>
+            (
+                nameof(ThePoint)
+            );
+        #endregion ThePoint Styled Avalonia Property
+
 
         public MainWindow()
         {
