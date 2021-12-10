@@ -54,6 +54,22 @@ namespace NP.Avalonia.Visuals.Controls
         #endregion TextWidth Styled Avalonia Property
 
 
+        #region MaxTextWidth Styled Avalonia Property
+        public double MaxTextWidth
+        {
+            get { return GetValue(MaxTextWidthProperty); }
+            set { SetValue(MaxTextWidthProperty, value); }
+        }
+
+        public static readonly StyledProperty<double> MaxTextWidthProperty =
+            AvaloniaProperty.Register<LabeledControl, double>
+            (
+                nameof(MaxTextWidth),
+                double.PositiveInfinity
+            );
+        #endregion MaxTextWidth Styled Avalonia Property
+
+
 
         #region ContainedControlTemplate Styled Avalonia Property
         public ControlTemplate ContainedControlTemplate
@@ -88,7 +104,8 @@ namespace NP.Avalonia.Visuals.Controls
         public static readonly StyledProperty<HorizontalAlignment> HorizontalTextAlignmentProperty =
             AvaloniaProperty.Register<LabeledControl, HorizontalAlignment>
             (
-                nameof(HorizontalTextAlignment)
+                nameof(HorizontalTextAlignment),
+                HorizontalAlignment.Left
             );
         #endregion HorizontalTextAlignment Styled Avalonia Property
 

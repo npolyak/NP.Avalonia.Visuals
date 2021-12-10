@@ -30,6 +30,7 @@
 	<Styles.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/Geometries.axaml"/>
 				<ResourceInclude Source="avares://NP.Avalonia.Visuals/Themes/ThemeResources.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<ControlTemplate x:Key="TextAndIconDataTemplate">
@@ -190,6 +191,7 @@
 					<np:AutoGrid>
 						<TextBlock Text="{TemplateBinding Text}"
 								   Width="{TemplateBinding TextWidth}"
+								   MaxWidth="{TemplateBinding MaxTextWidth}"
 								   TextWrapping="{TemplateBinding TheTextWrapping}"
 								   HorizontalAlignment="{TemplateBinding HorizontalTextAlignment}"
 								   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"/>
@@ -211,5 +213,91 @@
 				Value="10,3,0,0"/>
 		<Setter Property="ControlRow"
 				Value="1"/>
+	</Style>
+
+	<StyleInclude Source="resm:Avalonia.Themes.Default.PopupRoot.xaml?assembly=Avalonia.Themes.Default"/>
+	<StyleInclude Source="resm:Avalonia.Themes.Default.ScrollViewer.xaml?assembly=Avalonia.Themes.Default"/>
+
+	<Style Selector="ComboBoxItem">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Padding" Value="2"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalContentAlignment" Value="Left"/>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<ContentPresenter Name="PART_ContentPresenter"
+								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  ContentTemplate="{TemplateBinding ContentTemplate}"
+								  Content="{TemplateBinding Content}"
+								  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+								  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								  Padding="{TemplateBinding Padding}"/>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<Style Selector="ComboBoxItem:pointerover">
+		<Setter Property="Background"
+				Value="{DynamicResource WindowBackgroundBrush}"/>
+	</Style>
+
+	<Style Selector="ComboBoxItem:selected">
+		<Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+	</Style>
+
+	<Style Selector="np|NpComboBox.Theme">
+		<Setter Property="MaxDropDownHeight"
+				Value="200"/>
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch"/>
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch"/>
+		<Setter Property="np:AttachedProperties.IconWidth"
+				Value="12"/>
+		<Setter Property="np:AttachedProperties.IconMargin"
+				Value="5,5,0,2"/>
+		<Setter Property="Height"
+				Value="26.4"/>
+		<Setter Property="np:AttachedProperties.IconData"
+				Value="{StaticResource EmptyArrowDownIcon}"/>
+		<Setter Property="np:AttachedProperties.MainPartTemplate">
+			<Setter.Value>
+				<ControlTemplate>
+					<Grid ColumnDefinitions="*, Auto">
+						<ContentPresenter Content="{Binding $parent[ComboBox].SelectionBoxItem}"
+										  ContentTemplate="{Binding $parent[ComboBox].ItemTemplate}"
+										  Focusable="False"/>
+						<Path Classes="IconInsideControl"
+							  Grid.Column="1"/>
+						<Popup Name="PART_Popup"
+							   IsOpen="{Binding $parent[ComboBox].IsDropDownOpen, Mode=TwoWay}"
+							   MinWidth="{Binding $parent[ComboBox].Bounds.Width}"
+							   MaxHeight="{Binding $parent[ComboBox].MaxDropDownHeight}"
+							   PlacementTarget="{Binding $parent[ComboBox]}"
+							   PlacementMode="Bottom"
+							   IsLightDismissEnabled="True">
+							<Border Background="{DynamicResource SectionBackgroundBrush}"
+									BorderBrush="{DynamicResource SectionBorderBrush}"
+									BorderThickness="1">
+								<ScrollViewer HorizontalScrollBarVisibility="{Binding $parent[ComboBox].HorizontalScrollBarVisibility}"
+											  VerticalScrollBarVisibility="{Binding $parent[ComboBox].VerticalScrollBarVisibility}">
+									<np:NpItemsPresenter x:Name="ComboItemsPresenter"
+														Items="{Binding $parent[ComboBox].Items, Mode=OneWay}"
+														ItemsPanel="{Binding $parent[ComboBox].ItemsPanel}"
+														ItemTemplate="{Binding $parent[ComboBox].ItemTemplate, Mode=OneWay}"
+														VirtualizationMode="{Binding $parent[ComboBox].VirtualizationMode}">
+
+
+									</np:NpItemsPresenter>
+								</ScrollViewer>
+							</Border>
+						</Popup>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 </Styles>
