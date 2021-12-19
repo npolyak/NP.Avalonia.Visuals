@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				    xmlns:np="https://np.com/visuals">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceInclude Source="/Themes/DefaultColors.axaml"/>
+	</ResourceDictionary.MergedDictionaries>
 	<SolidColorBrush x:Key="MostProminentBrush"
 					 Color="{DynamicResource MostProminentColor}"/>
 	<SolidColorBrush x:Key="WindowBackgroundBrush"
