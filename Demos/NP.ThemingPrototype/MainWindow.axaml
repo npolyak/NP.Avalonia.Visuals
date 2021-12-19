@@ -114,6 +114,15 @@
 						</ControlTemplate>
 					</np:LabeledControl.ContainedControlTemplate>
 				</np:LabeledControl>
+				<np:LabeledControl Text="My TextBox: "
+								   Margin="15,5"
+								   np:AutoGrid.Column="6">
+					<np:LabeledControl.ContainedControlTemplate>
+						<ControlTemplate>
+							<TextBox Width="100"/>
+						</ControlTemplate>
+					</np:LabeledControl.ContainedControlTemplate>
+				</np:LabeledControl>
 			</np:AutoGrid>
 			<StackPanel x:Name="ButtonPanel"
 						Grid.Row="1"
