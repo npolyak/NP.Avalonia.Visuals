@@ -7,10 +7,4 @@
 					Title="NP.CustomWindowSample"
 					Width="600"
 					Height="400">
-	<StackPanel TextBlock.FontSize="24"
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center">
-		<TextBlock Text="{Binding $parent[Window].WindowPosition, StringFormat='Position=\{0\}'}"/>
-		<TextBlock Text="{Binding $parent[Window].ClientSize, StringFormat='Size=\{0\}'}"/>
-	</StackPanel>
 </local:CustomWindow>
