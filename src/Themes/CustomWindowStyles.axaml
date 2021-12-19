@@ -217,7 +217,8 @@
                                                 FallbackValue=''}"
                                 ContentTemplate="{Binding Path=HeaderContentTemplate, RelativeSource={RelativeSource AncestorType=controls:CustomWindow}}"/>
 
-              <TemplatedControl Grid.Column="2"
+              <TemplatedControl x:Name="TheButtonsAreaTemplate" 
+								Grid.Column="2"
 								Focusable="False"
                                 HorizontalAlignment="Right"
                                 behaviors:HandleEventBehavior.TheEvent="{x:Static InputElement.DoubleTappedEvent}"
@@ -323,27 +324,24 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(controls|CustomWindow).PlainCustomWindow">
-    <Setter Property="Title"
-            Value="My Test Window"/>
-    <Setter Property="HeaderBackground"
-            Value="Transparent"/>
-    <Setter Property="HeaderHeight"
-            Value="30"/>
-    <Setter Property="HeaderSeparatorHeight"
-            Value="2"/>
-    <Setter Property="HeaderSeparatorBrush"
-            Value="Black"/>
-    <Setter Property="CustomHeaderIcon"
-            Value="/Assets/avalonia-32.png"/>
-    <Setter Property="CustomHeaderIconMargin"
-            Value="5,5,0,5"/>
-    <Setter Property="TitleMargin"
-            Value="5"/>
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
-    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
-    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-  </Style>
+	<Style Selector=":is(controls|CustomWindow).PlainCustomWindow">
+		<Setter Property="Title"
+				Value="My Test Window"/>
+		<Setter Property="HeaderBackground"
+				Value="Transparent"/>
+		<Setter Property="HeaderHeight"
+				Value="30"/>
+		<Setter Property="HeaderSeparatorHeight"
+				Value="2"/>
+		<Setter Property="HeaderSeparatorBrush"
+				Value="Black"/>
+		<Setter Property="CustomHeaderIcon"
+				Value="/Assets/avalonia-32.png"/>
+		<Setter Property="CustomHeaderIconMargin"
+				Value="5,5,0,5"/>
+		<Setter Property="TitleMargin"
+				Value="5"/>
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="Foreground" Value="Black"/>
+	</Style>
 </Styles>
