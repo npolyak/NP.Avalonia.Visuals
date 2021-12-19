@@ -12,3 +12,9 @@
 /src/NP.Avalonia.Visuals.1.0.3.nupkg
 /src/bin/Release/net5.0
 /src/NP.Avalonia.Visuals.1.0.4.nupkg
+/Demos/MultiPlatformWindowDemo/.vs/MultiPlatformWindowDemo/v17
+/Demos/MultiPlatformWindowDemo/bin/Debug
+/Demos/NP.Demos.CustomWindowSample/.vs
+/Demos/NP.Demos.CustomWindowSample/bin/Debug/net5.0
+/Demos/NP.Demos.CustomWindowSample/obj/Debug/net5.0
+/Demos/NP.Demos.CustomWindowSample/obj
