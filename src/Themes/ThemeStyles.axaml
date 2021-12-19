@@ -1,9 +1,24 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:np="https://np.com/visuals">
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Themes/DefaultColors.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
 	<Style Selector="TextBlock">
 		<Setter Property="IsHitTestVisible"
 				Value="False"/>
+		<Setter Property="Foreground"
+				Value="{StaticResource PrimaryForegroundBrush}"/>
+	</Style>
+	<Style Selector="TextBox">
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+				Value="Hidden"/>
+		<Setter Property="Foreground"
+				Value="{StaticResource PrimaryForegroundBrush}"/>
 	</Style>
 	<Style Selector="Path.IconInsideControl">
 		<Setter Property="Data"
