@@ -209,7 +209,8 @@
 								   MaxWidth="{TemplateBinding MaxTextWidth}"
 								   TextWrapping="{TemplateBinding TheTextWrapping}"
 								   HorizontalAlignment="{TemplateBinding HorizontalTextAlignment}"
-								   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"/>
+								   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"
+								   np:ClassesBehavior.TheClasses="{TemplateBinding TextClasses}"/>
 						<TemplatedControl Template="{TemplateBinding ContainedControlTemplate}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContainedControlAlignment}"

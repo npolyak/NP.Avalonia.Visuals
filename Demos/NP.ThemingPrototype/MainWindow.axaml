@@ -14,6 +14,12 @@
 				 x:Name="Root"
 				 Width="1000"
 				 Height="400">
+	<Window.Styles>
+		<Style Selector="TextBlock.MyLabelTitle">
+			<Setter Property="FontWeight"
+					Value="Bold"/>
+		</Style>
+	</Window.Styles>
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -31,6 +37,7 @@
 			  Margin="10">
 			<np:AutoGrid>
 				<np:LabeledControl Text="Button:"
+								   TextClasses="MyLabelTitle"
 								   Margin="0,5,15,5">
 					<np:LabeledControl.ContainedControlTemplate>
 						<ControlTemplate>

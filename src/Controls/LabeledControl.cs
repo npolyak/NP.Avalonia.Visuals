@@ -38,6 +38,21 @@ namespace NP.Avalonia.Visuals.Controls
         #endregion TheTextWrapping Styled Avalonia Property
 
 
+        #region TextClasses Styled Avalonia Property
+        public string TextClasses
+        {
+            get { return GetValue(TextClassesProperty); }
+            set { SetValue(TextClassesProperty, value); }
+        }
+
+        public static readonly StyledProperty<string> TextClassesProperty =
+            AvaloniaProperty.Register<LabeledControl, string>
+            (
+                nameof(TextClasses)
+            );
+        #endregion TextClasses Styled Avalonia Property
+
+
         #region TextWidth Styled Avalonia Property
         public double TextWidth
         {
