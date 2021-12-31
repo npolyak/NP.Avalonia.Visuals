@@ -10,16 +10,16 @@
 	<Grid RowDefinitions="*, Auto"
 		  Margin="10">
 		<Grid x:Name="GridWithOverlay"
-			  local:OverlayWindowBehavior.OverlayedControl="{Binding RelativeSource={RelativeSource Self}}">
-			<local:OverlayWindowBehavior.ContentTemplate>
+			  np:OverlayWindowBehavior.OverlayedControl="{Binding RelativeSource={RelativeSource Self}}">
+			<np:OverlayWindowBehavior.ContentTemplate>
 				<DataTemplate>
 					<Grid Width="100"
 						  Height="100"
 						  Background="Red"/>
 				</DataTemplate>
-			</local:OverlayWindowBehavior.ContentTemplate>
+			</np:OverlayWindowBehavior.ContentTemplate>
 		</Grid>
-		<ToggleButton IsChecked="{Binding Path=#GridWithOverlay.(local:OverlayWindowBehavior.IsOpen)}"
+		<ToggleButton IsChecked="{Binding Path=#GridWithOverlay.(np:OverlayWindowBehavior.IsOpen)}"
 					  Grid.Row="1"
 					  HorizontalAlignment="Right"
 					  VerticalAlignment="Center"/>

@@ -1,13 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Layout;
 using Avalonia.Markup.Xaml.Templates;
-using Avalonia.Media;
 using NP.Avalonia.Visuals;
 using NP.Utilities;
 using System;
 
-namespace NP.OverlayingWindowDemo
+namespace NP.Avalonia.Visuals.Behaviors
 {
     public class OverlayWindowBehavior
     {
