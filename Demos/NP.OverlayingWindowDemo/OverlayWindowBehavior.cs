@@ -125,6 +125,25 @@ namespace NP.OverlayingWindowDemo
         #endregion IsTopmost Attached Avalonia Property
 
 
+        #region OverlayedControl Attached Avalonia Property
+        public static IControl GetOverlayedControl(IControl obj)
+        {
+            return obj.GetValue(OverlayedControlProperty);
+        }
+
+        public static void SetOverlayedControl(IControl obj, IControl value)
+        {
+            obj.SetValue(OverlayedControlProperty, value);
+        }
+
+        public static readonly AttachedProperty<IControl> OverlayedControlProperty =
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, IControl>
+            (
+                "OverlayedControl"
+            );
+        #endregion OverlayedControl Attached Avalonia Property
+
+
         static OverlayWindowBehavior()
         {
             IsOpenProperty.Changed.Subscribe(OnIsOpenChanged);
@@ -155,7 +174,9 @@ namespace NP.OverlayingWindowDemo
                     SetOverlayWindow(control, overlayWindow);
                 }
 
-                Rect2D screenBounds = control.GetScreenBounds();
+                IControl overlayedControl = GetOverlayedControl(control);
+
+                Rect2D screenBounds = overlayedControl.GetScreenBounds();
 
                 double scale = 1d / overlayWindow.PlatformImpl.RenderScaling;
                 overlayWindow.Position = screenBounds.StartPoint.ToPixelPoint();

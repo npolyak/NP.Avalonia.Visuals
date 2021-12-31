@@ -9,7 +9,8 @@
 		Height="400">
 	<Grid RowDefinitions="*, Auto"
 		  Margin="10">
-		<Grid x:Name="GridWithOverlay">
+		<Grid x:Name="GridWithOverlay"
+			  local:OverlayWindowBehavior.OverlayedControl="{Binding RelativeSource={RelativeSource Self}}">
 			<local:OverlayWindowBehavior.ContentTemplate>
 				<DataTemplate>
 					<Grid Width="100"
