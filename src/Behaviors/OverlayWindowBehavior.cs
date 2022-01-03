@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml.Templates;
 using NP.Avalonia.Visuals;
 using NP.Utilities;
 using System;
+using System.Threading.Tasks;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -85,7 +86,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region OverlayWindow Attached Avalonia Property
-        private static Window GetOverlayWindow(IControl obj)
+        public static Window GetOverlayWindow(IControl obj)
         {
             return obj.GetValue(OverlayWindowProperty);
         }
@@ -147,7 +148,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             IsOpenProperty.Changed.Subscribe(OnIsOpenChanged);
         }
 
-        private static void OnIsOpenChanged(AvaloniaPropertyChangedEventArgs<bool> args)
+        private static async void OnIsOpenChanged(AvaloniaPropertyChangedEventArgs<bool> args)
         {
             IControl control = (IControl) args.Sender;
 
@@ -172,7 +173,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                     SetOverlayWindow(control, overlayWindow);
                 }
 
-                IControl overlayedControl = GetOverlayedControl(control);
+                IControl overlayedControl = GetOverlayedControl(control) ?? control;
 
                 Rect2D screenBounds = overlayedControl.GetScreenBounds();
 
