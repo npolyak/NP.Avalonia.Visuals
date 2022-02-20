@@ -4,5 +4,6 @@
 	<Color x:Key="SectionBgColor">#D4D4D4</Color>
 	<Color x:Key="SectionBorderColor">#979797</Color>
 	<Color x:Key="PrimaryForegroundColor">#FF000000</Color>
+	<!--<Color x:Key="SecondaryForegroundColor">#FF0000</Color>-->
 	<Color x:Key="SecondaryForegroundColor">#282828</Color>
 </ResourceDictionary>

@@ -41,6 +41,8 @@
 	<SolidColorBrush x:Key="BorderAccentBrush"
 					 Color="{DynamicResource BorderAccentColor}"/>
 
+	<SolidColorBrush x:Key="MyBrush"
+					 Color="Black"/>
 	<np:BoolToDoubleConverter x:Key="PointerOverOpacityConverter"
 							  TrueValue="0.1"
 							  FalseValue="0"/>

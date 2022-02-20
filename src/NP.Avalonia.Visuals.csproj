@@ -14,6 +14,7 @@
     <AvaloniaXaml Remove="Themes\ButtonStyles.axaml" />
     <AvaloniaXaml Remove="Themes\CustomWindowStyles.axaml" />
     <AvaloniaXaml Remove="Themes\Geometries.axaml" />
+    <AvaloniaXaml Remove="Themes\ThemeStyles.axaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     <AvaloniaResource Include="Themes\ButtonStyles.axaml" />
     <AvaloniaResource Include="Themes\CustomWindowStyles.axaml" />
     <AvaloniaResource Include="Themes\Geometries.axaml" />
+    <AvaloniaResource Include="Themes\ThemeStyles.axaml" />
   </ItemGroup>
 
   <ItemGroup>
