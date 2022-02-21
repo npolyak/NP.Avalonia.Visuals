@@ -3,6 +3,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
+using Avalonia.Metadata;
 
 namespace NP.Avalonia.Visuals.Controls
 {
@@ -87,6 +88,7 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region ContainedControlTemplate Styled Avalonia Property
+        [Content]
         public ControlTemplate ContainedControlTemplate
         {
             get { return GetValue(ContainedControlTemplateProperty); }
