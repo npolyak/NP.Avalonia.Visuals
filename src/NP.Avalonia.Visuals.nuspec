@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NP.Avalonia.Visuals</id>
-    <version>1.0.12</version>    <title>NP.Avalonia.Visuals</title>
+    <version>1.0.13</version>    <title>NP.Avalonia.Visuals</title>
     <authors>Nick Polyak, Ph. D.</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
@@ -13,11 +13,11 @@
     <summary>Multiplatform Avalonia UI Converters, Behaviors, Custom Controls</summary>
     <tags>Avalonia Converters, Behaviors, CustomWindow</tags>
     <dependencies>
-        <dependency id="Avalonia" version="0.10.12"/>
-        <dependency id="Avalonia.Desktop" version="0.10.12"/>
-        <dependency id="Avalonia.Diagnostics" version="0.10.12"/>
-        <dependency id="NP.Utilities" version="1.0.8"/>
-        <dependency id="NP.Concepts.Behaviors" version="1.0.4"/>
+        <dependency id="Avalonia" version="0.10.13"/>
+        <dependency id="Avalonia.Desktop" version="0.10.13"/>
+        <dependency id="Avalonia.Diagnostics" version="0.10.13"/>
+        <dependency id="NP.Utilities" version="1.0.9"/>
+        <dependency id="NP.Concepts.Behaviors" version="1.0.5"/>
         <dependency id="NP.ViewModelInterfaces" version="1.0.1"/>
     </dependencies>
   </metadata>
