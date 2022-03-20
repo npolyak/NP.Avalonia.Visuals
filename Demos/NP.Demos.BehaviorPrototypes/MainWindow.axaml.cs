@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using NP.Avalonia.Visuals.Controls;
+using System;
 
 namespace NP.Demos.BehaviorPrototypes
 {
@@ -30,6 +32,11 @@ namespace NP.Demos.BehaviorPrototypes
 #if DEBUG
             this.AttachDevTools();
 #endif
+            this.AddHandler(Events.MyEvent, OnMyEvent);
+        }
+
+        private void OnMyEvent(object? sender, RoutedEventArgs e)
+        {
 
         }
 

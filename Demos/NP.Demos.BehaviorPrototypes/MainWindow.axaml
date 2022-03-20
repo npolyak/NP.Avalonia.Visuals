@@ -7,15 +7,25 @@
 					Title="NP.BehaviorPrototypes"
 					Width="600"
 					Height="400">
-	<Grid>
+	<Grid RowDefinitions="*,*">
 		<Grid HorizontalAlignment="Center"
 			  VerticalAlignment="Center"
-			  Width="100"
-			  Height="100"
+			  Width="50"
+			  Height="50"
 			  Background="Red"
 			  np:CallAction.TheEvent="{x:Static InputElement.PointerPressedEvent}"
 			  np:CallAction.TheRoutingStrategy="Bubble"
 			  np:CallAction.TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 			  np:CallAction.MethodName="OnPressed"/>
+
+		<Grid HorizontalAlignment="Center"
+			  VerticalAlignment="Center"
+			  Grid.Row="1"
+			  Width="50"
+			  Height="50"
+			  Background="Red"
+			  np:EventBehavior.TheEvent="{x:Static InputElement.PointerPressedEvent}"
+			  np:EventBehavior.TheRoutingStrategy="Bubble"
+			  np:EventBehavior.EventToFire="{x:Static local:Events.MyEvent}"/>
 	</Grid>
 </local:CustomWindow>
