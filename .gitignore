@@ -22,3 +22,6 @@
 /Demos/NP.Demos.CustomWindowCustomizationSample/bin/Debug
 /Demos/NP.Demos.CustomWindowCustomizationSample/obj
 /src/*.nupkg
+/Demos/NP.Demos.BehaviorPrototypes/.vs/NP.Demos.BehaviorPrototypes
+/Demos/NP.Demos.BehaviorPrototypes/bin/Debug
+/Demos/NP.Demos.BehaviorPrototypes/obj
