@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:NP.ControlsDemo"
+        xmlns:np="https://np.com/visuals"
+        x:Class="NP.ControlsDemo.MainWindow"
+        Title="NP.ControlsDemo"
+        x:Name="Root"
+		Width="500"
+		Height="400"
+		Background="{StaticResource PrimaryBrush}">
+	<Window.Styles>
+		<Style Selector="local:ActionIndicator.RoundIndicator">
+			<Setter Property="IsVisible"
+					Value="{Binding Path=IsOn, RelativeSource={RelativeSource Self}}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="local:ActionIndicator">
+						<Arc Stroke="Red"
+							 StrokeThickness="{Binding Path=BorderThickness, 
+													   Converter={x:Static np:ThicknessToDoubleConverter.Instance}}"
+							 StartAngle="90"
+							 SweepAngle="270"
+							 HorizontalAlignment="Center"
+							 VerticalAlignment="Center">
+							<!--<Arc.RenderTransform>
+								<RotateTransform Angle="{Binding $parent[Window].Angle, Mode=OneWay}"/>
+							</Arc.RenderTransform>-->
+						</Arc>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Styles>
+	<Grid RowDefinitions="*,Auto">
+		<Arc Width="50"
+			 Height="50"
+			 Stroke="Red"
+			 StrokeThickness="5"
+			 StartAngle="90"
+			 SweepAngle="270"
+			 HorizontalAlignment="Center"
+			 VerticalAlignment="Center">
+			<Arc.RenderTransform>
+				<RotateTransform Angle="{Binding $parent[Window].Angle, Mode=OneWay}"/>
+			</Arc.RenderTransform>
+		</Arc>
+		
+		<Slider Orientation="Horizontal"
+				Minimum="0"
+				Maximum="360"
+				Width="300"
+				Value="{Binding $parent[Window].Angle, Mode=TwoWay}"/>
+	</Grid>
+</Window>

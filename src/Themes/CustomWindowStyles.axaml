@@ -18,6 +18,17 @@
 
   <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/ButtonStyles.axaml"/>
 
+	<Style Selector="Path.DefaultCustomWindowMenu">
+		<Setter Property="Fill"
+				Value="Black"/>
+		<Setter Property="Stretch"
+				Value="Uniform"/>
+		<Setter Property="Width"
+				Value="11"/>
+		<Setter Property="Height"
+				Value="11"/>
+	</Style>
+
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -36,6 +47,7 @@
                                       Converter={StaticResource TitleOpacityConverter}}">
           <StackPanel.ContextMenu>
             <ContextMenu IsEnabled="True"
+						 Foreground="{Binding $parent[Window].MenuForeground}"
                          DataContext="{Binding Path=Parent.Parent.DataContext, RelativeSource={RelativeSource Self}}">
               <MenuItem Header="Restore"
                         IsEnabled="{Binding Path=CanRestore}"
@@ -43,10 +55,7 @@
                         behaviors:CallAction.MethodName="Restore">
                 <MenuItem.Icon>
                   <Path Data="{StaticResource RestoreIcon}"
-                        Fill="Black"
-                        Stretch="Uniform"
-                        Width="11"
-                        Height="11"/>
+						behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].MenuPathClasses}"/>
                 </MenuItem.Icon>
               </MenuItem>
               <MenuItem Header="Maximize"
@@ -55,10 +64,7 @@
                         behaviors:CallAction.MethodName="Maximize">
                 <MenuItem.Icon>
                   <Path Data="{StaticResource MaximizeIcon}"
-                        Fill="Black"
-                        Stretch="Uniform"
-                        Width="11"
-                        Height="11"/>
+						behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].MenuPathClasses}"/>
                 </MenuItem.Icon>
               </MenuItem>
               <MenuItem Header="Minimize"
@@ -66,10 +72,8 @@
                         behaviors:CallAction.MethodName="Minimize">
                 <MenuItem.Icon>
                   <Path Data="{StaticResource MinimizeIcon}"
-                        Fill="Black"
-                        Stretch="Uniform"
+						behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].MenuPathClasses}"
                         VerticalAlignment="Center"
-                        Width="11"
                         Height="3"/>
                 </MenuItem.Icon>
               </MenuItem>
@@ -80,10 +84,7 @@
                         IsVisible="{Binding Path=CanClose}">
                 <MenuItem.Icon>
                   <Path Data="{StaticResource CloseIcon}"
-                        Fill="Black"
-                        Stretch="Uniform"
-                        Width="11"
-                        Height="11"/>
+						behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].MenuPathClasses}"/>
                 </MenuItem.Icon>
               </MenuItem>
             </ContextMenu>
@@ -112,27 +113,23 @@
         <StackPanel x:Name="WindowButtonsPanel"
                     Orientation="Horizontal">
           <Button x:Name="MinimizeButton"
-                  Classes="WindowIconButton IconButton"
-				  Focusable="False"
+				  behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].WindowButtonClasses}"
                   controls:AttachedProperties.IconData="{StaticResource MinimizeIcon}"
                   controls:AttachedProperties.IconHeight="2.1"
                   controls:AttachedProperties.IconStretch="Fill"
                   behaviors:CallAction.MethodName="Minimize"/>
           <Button x:Name="RestoreButton"
-                  Classes="WindowIconButton IconButton"
-                  Focusable="False"
+				  behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].WindowButtonClasses}"
                   IsVisible="{Binding Path=CanRestore}"
                   controls:AttachedProperties.IconData="{StaticResource RestoreIcon}"
                   behaviors:CallAction.MethodName="Restore"/>
           <Button x:Name="MaximizeButton"
-                  Classes="WindowIconButton IconButton"
-                  Focusable="False"
+				  behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].WindowButtonClasses}"
                   IsVisible="{Binding Path=CanMaximize}"
                   controls:AttachedProperties.IconData="{StaticResource MaximizeIcon}"
                   behaviors:CallAction.MethodName="Maximize"/>
           <Button x:Name="CloseButton"
-                  Focusable="False"
-                  Classes="WindowIconButton IconButton"
+				  behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].WindowButtonClasses}"
                   IsVisible="{Binding Path=CanClose}"
                   controls:AttachedProperties.IconData="{StaticResource CloseIcon}"
                   behaviors:CallAction.MethodName="Close"/>
@@ -153,10 +150,18 @@
     <Setter Property="HorizontalAlignment"
             Value="Left"/>
   </Style>
-  
+	
   <Style Selector=":is(controls|CustomWindow)">
+	  <Setter Property="MenuPathClasses"
+			  Value="DefaultCustomWindowMenu"/>
+	  <Setter Property="WindowButtonClasses"
+			  Value="WindowIconButton IconButton"/>
+	  <Setter Property="Focusable"
+			  Value="False"/>
     <Setter Property="ResizeMargin"
         Value="5"/>
+	  <Setter Property="MenuForeground"
+			  Value="Black"/>
     <Setter Property="BorderThickness"
             Value="1"/>
 	<Setter Property="Focusable"

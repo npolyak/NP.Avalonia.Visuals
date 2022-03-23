@@ -7,5 +7,13 @@
 		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
 		<StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/CustomWindowStyles.axaml"/>
+		<Style Selector="Button.MyWindowButton">
+			<Setter Property="Foreground"
+					Value="Red"/>
+		</Style>
+		<Style Selector="Path.MyMenuIcon">
+			<Setter Property="Fill"
+					Value="Red"/>
+		</Style>
 	</Application.Styles>
 </Application>

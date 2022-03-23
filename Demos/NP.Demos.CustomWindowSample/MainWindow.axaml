@@ -4,6 +4,9 @@
 					xmlns:local="clr-namespace:NP.Demos.CustomWindowSample"
 					x:Class="NP.Demos.CustomWindowSample.MainWindow"
 					Classes="PlainCustomWindow"
+					MenuForeground="Blue"
+				    WindowButtonClasses="WindowIconButton IconButton MyWindowButton"
+					MenuPathClasses="DefaultCustomWindowMenu MyMenuIcon"
 					Title="NP.CustomWindowSample"
 					Width="600"
 					Height="400">

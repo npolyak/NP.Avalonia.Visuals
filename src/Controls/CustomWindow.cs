@@ -675,5 +675,50 @@ namespace NP.Avalonia.Visuals.Controls
                 nameof(ButtonsAreaTemplate)
             );
         #endregion ButtonsAreaTemplate Styled Avalonia Property
+
+
+        #region MenuPathClasses Styled Avalonia Property
+        public string MenuPathClasses
+        {
+            get { return GetValue(MenuPathClassesProperty); }
+            set { SetValue(MenuPathClassesProperty, value); }
+        }
+
+        public static readonly StyledProperty<string> MenuPathClassesProperty =
+            AvaloniaProperty.Register<CustomWindow, string>
+            (
+                nameof(MenuPathClasses)
+            );
+        #endregion MenuPathClasses Styled Avalonia Property
+
+
+        #region WindowButtonClasses Styled Avalonia Property
+        public string WindowButtonClasses
+        {
+            get { return GetValue(WindowButtonClassesProperty); }
+            set { SetValue(WindowButtonClassesProperty, value); }
+        }
+
+        public static readonly StyledProperty<string> WindowButtonClassesProperty =
+            AvaloniaProperty.Register<CustomWindow, string>
+            (
+                nameof(WindowButtonClasses)
+            );
+        #endregion WindowButtonClasses Styled Avalonia Property
+
+
+        #region MenuForeground Styled Avalonia Property
+        public IBrush MenuForeground
+        {
+            get { return GetValue(MenuForegroundProperty); }
+            set { SetValue(MenuForegroundProperty, value); }
+        }
+
+        public static readonly StyledProperty<IBrush> MenuForegroundProperty =
+            AvaloniaProperty.Register<CustomWindow, IBrush>
+            (
+                nameof(MenuForeground)
+            );
+        #endregion MenuForeground Styled Avalonia Property
     }
 }
