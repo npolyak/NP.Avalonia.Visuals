@@ -5,7 +5,6 @@ namespace NP.ControlsDemo
 {
     public class ActionIndicator : TemplatedControl
     {
-
         #region IsOn Styled Avalonia Property
         public bool IsOn
         {

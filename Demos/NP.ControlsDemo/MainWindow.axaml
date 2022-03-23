@@ -9,7 +9,7 @@
 		Height="400"
 		Background="{StaticResource PrimaryBrush}">
 	<Window.Styles>
-		<Style Selector="local:ActionIndicator.RoundIndicator">
+		<Style Selector="local|ActionIndicator.RoundIndicator">
 			<Setter Property="IsVisible"
 					Value="{Binding Path=IsOn, RelativeSource={RelativeSource Self}}"/>
 			<Setter Property="Template">
