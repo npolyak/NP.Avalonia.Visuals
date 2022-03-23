@@ -204,13 +204,16 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="np:LabeledControl">
 					<np:AutoGrid>
-						<TextBlock Text="{TemplateBinding Text}"
-								   Width="{TemplateBinding TextWidth}"
-								   MaxWidth="{TemplateBinding MaxTextWidth}"
-								   TextWrapping="{TemplateBinding TheTextWrapping}"
-								   HorizontalAlignment="{TemplateBinding HorizontalTextAlignment}"
-								   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"
-								   np:ClassesBehavior.TheClasses="{TemplateBinding TextClasses}"/>
+						<Grid HorizontalAlignment="Left"
+							  VerticalAlignment="Center"
+							  Width="{TemplateBinding TextWidth}">
+							<TextBlock Text="{TemplateBinding Text}"
+									   MaxWidth="{TemplateBinding MaxTextWidth}"
+									   TextWrapping="{TemplateBinding TheTextWrapping}"
+									   HorizontalAlignment="{TemplateBinding HorizontalTextAlignment}"
+									   VerticalAlignment="{TemplateBinding VerticalTextAlignment}"
+									   np:ClassesBehavior.TheClasses="{TemplateBinding TextClasses}"/>
+						</Grid>
 						<TemplatedControl Template="{TemplateBinding ContainedControlTemplate}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContainedControlAlignment}"

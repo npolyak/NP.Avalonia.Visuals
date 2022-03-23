@@ -37,7 +37,6 @@ namespace NP.Avalonia.Visuals.Controls
         #endregion RowsHeights shared Styled Avalonia Property
 
 
-
         #region ColumnsWidths shared Styled Avalonia Property
         public Dictionary<int, GridLength> ColumnsWidths
         {
