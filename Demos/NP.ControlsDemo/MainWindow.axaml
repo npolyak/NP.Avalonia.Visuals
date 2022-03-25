@@ -9,69 +9,11 @@
 		Height="400"
 		Background="{StaticResource PrimaryBrush}">
 	<Window.Styles>
-		<Style Selector="np|ActionIndicator.RoundIndicator">
-			<Setter Property="IsVisible"
-					Value="{Binding Path=IsOn, RelativeSource={RelativeSource Self}}"/>
-			<Setter Property="BorderThickness"
-					Value="5"/>
-			<Setter Property="BorderBrush"
-					Value="Blue"/>
-			<Setter Property="HorizontalAlignment"
-					Value="Center"/>
-			<Setter Property="VerticalAlignment"
-					Value="Center"/>
-			<Setter Property="Width"
-					Value="50"/>
-			<Setter Property="Height"
-					Value="50"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="np:ActionIndicator">
-						<Arc Stroke="{TemplateBinding BorderBrush}"
-							 StrokeThickness="{Binding Path=BorderThickness, 
-													   Converter={x:Static np:ThicknessToDoubleConverter.Instance}, 
-													   RelativeSource={RelativeSource TemplatedParent}}"
-							 StartAngle="90"
-							 SweepAngle="270"
-							 HorizontalAlignment="Stretch"
-							 VerticalAlignment="Stretch"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style Selector="np|ActionIndicator.RoundIndicator[IsOn=True]">
-			<Style.Animations>
-				<Animation Duration="0:0:1.1"
-						   RepeatCount="INFINITE">
-					<KeyFrame Cue="100%">
-						<Setter Property="RotateTransform.Angle"
-								Value="360"/>
-					</KeyFrame>
-				</Animation>
-			</Style.Animations>
-		</Style>
+
 	</Window.Styles>
 	<Grid RowDefinitions="*,Auto">
 		<np:ActionIndicator x:Name="Indicator" 
 							IsOn="True"
 							Classes="RoundIndicator"/>
-		<!--<Arc Width="50"
-			 Height="50"
-			 Stroke="Red"
-			 StrokeThickness="5"
-			 StartAngle="90"
-			 SweepAngle="270"
-			 HorizontalAlignment="Center"
-			 VerticalAlignment="Center">
-			<Arc.RenderTransform>
-				<RotateTransform Angle="{Binding $parent[Window].Angle, Mode=OneWay}"/>
-			</Arc.RenderTransform>
-		</Arc>
-		
-		<Slider Orientation="Horizontal"
-				Minimum="0"
-				Maximum="360"
-				Width="300"
-				Value="{Binding $parent[Window].Angle, Mode=TwoWay}"/>-->
 	</Grid>
 </Window>
