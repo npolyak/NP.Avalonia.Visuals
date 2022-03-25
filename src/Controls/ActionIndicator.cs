@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.Primitives;
 
-namespace NP.ControlsDemo
+namespace NP.Avalonia.Visuals.Controls
 {
     public class ActionIndicator : TemplatedControl
     {
