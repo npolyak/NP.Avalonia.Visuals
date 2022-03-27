@@ -65,7 +65,6 @@ namespace NP.DataGridFilteringDemo
 
         public static void BuildFilter(DataGrid dataGrid)
         {
-            Expression.And()
         }
     }
 }
