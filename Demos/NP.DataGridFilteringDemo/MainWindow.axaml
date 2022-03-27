@@ -8,11 +8,54 @@
 		Width="500"
 		Height="400">
 	<Window.Styles>
+		<Style Selector="DataGridColumnHeader">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid ColumnDefinitions="*,Auto"
+						  RowDefinitions="Auto,Auto"
+						  Background="{TemplateBinding Background}">
 
+						<Grid ColumnDefinitions="*,Auto"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							  Margin="{TemplateBinding Padding}">
+							<ContentPresenter Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  VerticalAlignment="Center"/>
+
+							<Path Name="SortIcon"
+								  Grid.Column="1"
+								  Fill="{TemplateBinding Foreground}"
+								  HorizontalAlignment="Left"
+								  VerticalAlignment="Center"
+								  Stretch="Uniform"
+								  Width="8"
+								  Margin="4,0,0,0"
+								  Data="F1 M -5.215,6.099L 5.215,6.099L 0,0L -5.215,6.099 Z "/>
+						</Grid>
+						<TextBox x:Name="FilterTextBox"
+								 HorizontalAlignment="Stretch"
+								 Grid.Row="1"
+								 Margin="3,1"
+								 Padding="2,1"
+								 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"/>
+						<Rectangle Name="VerticalSeparator"
+								   Grid.Column="1" 
+								   Grid.RowSpan="2"
+								   Width="1"
+								   VerticalAlignment="Stretch"
+								   Fill="{TemplateBinding SeparatorBrush}"
+								   IsVisible="{TemplateBinding AreSeparatorsVisible}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
 	</Window.Styles>
 	<Grid RowDefinitions="*,Auto"
 		  Margin="15">
-		<DataGrid Items="{Binding $parent[Window].ThePeople}">
+		<DataGrid Items="{Binding $parent[Window].ThePeople}"
+				  CanUserReorderColumns="True"
+				  CanUserResizeColumns="True">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="FirstName"
 									Binding="{Binding Path=FirstName}"/>
