@@ -38,7 +38,10 @@
 								 Grid.Row="1"
 								 Margin="3,1"
 								 Padding="2,1"
-								 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"/>
+								 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"
+								 Text="{Binding Path=(local:AttachedProps.ColumnFilterText), 
+												RelativeSource={RelativeSource AncestorType=DataGridColumnHeader},
+												Mode=TwoWay}"/>
 						<Rectangle Name="VerticalSeparator"
 								   Grid.Column="1" 
 								   Grid.RowSpan="2"
@@ -51,15 +54,18 @@
 			</Setter>
 		</Style>
 	</Window.Styles>
-	<Grid RowDefinitions="*,Auto"
+	<Grid RowDefinitions="*,Auto"	
 		  Margin="15">
-		<DataGrid Items="{Binding $parent[Window].ThePeople}"
+		<DataGrid Items="{Binding $parent[Window].TheCollectionView}"
 				  CanUserReorderColumns="True"
-				  CanUserResizeColumns="True">
+				  CanUserResizeColumns="True"
+				  local:AttachedProps.RowDataType="{x:Type local:Person}">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="FirstName"
+									local:AttachedProps.FilterPropName="FirstName"
 									Binding="{Binding Path=FirstName}"/>
 				<DataGridTextColumn Header="LastName"
+									local:AttachedProps.FilterPropName="LastName"
 									Binding="{Binding Path=LastName}"/>
 			</DataGrid.Columns>
 		</DataGrid>

@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -8,8 +9,12 @@ namespace NP.DataGridFilteringDemo
     {
         public People ThePeople { get; } = new People();
 
+        public DataGridCollectionView TheCollectionView { get; }
+
         public MainWindow()
         {
+            TheCollectionView = new DataGridCollectionView(ThePeople);
+
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
