@@ -9,12 +9,8 @@ namespace NP.DataGridFilteringDemo
     {
         public People ThePeople { get; } = new People();
 
-        public DataGridCollectionView TheCollectionView { get; }
-
         public MainWindow()
         {
-            TheCollectionView = new DataGridCollectionView(ThePeople);
-
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();

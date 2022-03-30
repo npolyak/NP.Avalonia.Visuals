@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace NP.DataGridFilteringDemo
 {
-    public class AttachedProps
+    public class DataGridFilteringBehavior
     {
         #region ColumnFilterText Attached Avalonia Property
         public static string GetColumnFilterText(DataGridColumnHeader obj)
@@ -23,7 +23,7 @@ namespace NP.DataGridFilteringDemo
         }
 
         public static readonly AttachedProperty<string> ColumnFilterTextProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProps, DataGridColumnHeader, string>
+            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumnHeader, string>
             (
                 "ColumnFilterText"
             );
@@ -42,7 +42,7 @@ namespace NP.DataGridFilteringDemo
         }
 
         public static readonly AttachedProperty<string> FilterPropNameProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProps, DataGridColumn, string>
+            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumn, string>
             (
                 "FilterPropName"
             );
@@ -61,7 +61,7 @@ namespace NP.DataGridFilteringDemo
         }
 
         public static readonly AttachedProperty<Func<object, object>?> ColumnPropGetterProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProps, DataGridColumn, Func<object, object>?>
+            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumn, Func<object, object>?>
             (
                 "PropGetter"
             );
@@ -80,7 +80,7 @@ namespace NP.DataGridFilteringDemo
         }
 
         public static readonly AttachedProperty<Type> RowDataTypeProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProps, IControl, Type>
+            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, IControl, Type>
             (
                 "RowDataType"
             );
@@ -88,7 +88,7 @@ namespace NP.DataGridFilteringDemo
 
 
 
-        static AttachedProps()
+        static DataGridFilteringBehavior()
         {
             ColumnFilterTextProperty.Changed.Subscribe(OnColumnFilterTextChanged);
             FilterPropNameProperty.Changed.Subscribe(OnFilterPropNameChanged);

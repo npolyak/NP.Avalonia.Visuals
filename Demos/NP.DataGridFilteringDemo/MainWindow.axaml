@@ -39,7 +39,7 @@
 								 Margin="3,1"
 								 Padding="2,1"
 								 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"
-								 Text="{Binding Path=(local:AttachedProps.ColumnFilterText), 
+								 Text="{Binding Path=(local:DataGridFilteringBehavior.ColumnFilterText), 
 												RelativeSource={RelativeSource AncestorType=DataGridColumnHeader},
 												Mode=TwoWay}"/>
 						<Rectangle Name="VerticalSeparator"
@@ -59,13 +59,14 @@
 		<DataGrid Items="{Binding $parent[Window].TheCollectionView}"
 				  CanUserReorderColumns="True"
 				  CanUserResizeColumns="True"
-				  local:AttachedProps.RowDataType="{x:Type local:Person}">
+				  local:DataGridFilteringBehavior.RowDataType="{x:Type local:Person}"
+				  local:DataGridCollectionViewBehavior.ItemsSource="{Binding $parent[Window].ThePeople}">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="FirstName"
-									local:AttachedProps.FilterPropName="FirstName"
+									local:DataGridFilteringBehavior.FilterPropName="FirstName"
 									Binding="{Binding Path=FirstName}"/>
 				<DataGridTextColumn Header="LastName"
-									local:AttachedProps.FilterPropName="LastName"
+									local:DataGridFilteringBehavior.FilterPropName="LastName"
 									Binding="{Binding Path=LastName}"/>
 			</DataGrid.Columns>
 		</DataGrid>
