@@ -8,65 +8,28 @@
 		Width="500"
 		Height="400">
 	<Window.Styles>
-		<Style Selector="DataGridColumnHeader">
-			<Setter Property="Template">
-				<ControlTemplate>
-					<Grid ColumnDefinitions="*,Auto"
-						  RowDefinitions="Auto,Auto"
-						  Background="{TemplateBinding Background}">
-
-						<Grid ColumnDefinitions="*,Auto"
-							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							  Margin="{TemplateBinding Padding}">
-							<ContentPresenter Content="{TemplateBinding Content}"
-											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  VerticalAlignment="Center"/>
-
-							<Path Name="SortIcon"
-								  Grid.Column="1"
-								  Fill="{TemplateBinding Foreground}"
-								  HorizontalAlignment="Left"
-								  VerticalAlignment="Center"
-								  Stretch="Uniform"
-								  Width="8"
-								  Margin="4,0,0,0"
-								  Data="F1 M -5.215,6.099L 5.215,6.099L 0,0L -5.215,6.099 Z "/>
-						</Grid>
-						<TextBox x:Name="FilterTextBox"
-								 HorizontalAlignment="Stretch"
-								 Grid.Row="1"
-								 Margin="3,1"
-								 Padding="2,1"
-								 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"
-								 Text="{Binding Path=(local:DataGridFilteringBehavior.ColumnFilterText), 
-												RelativeSource={RelativeSource AncestorType=DataGridColumnHeader},
-												Mode=TwoWay}"/>
-						<Rectangle Name="VerticalSeparator"
-								   Grid.Column="1" 
-								   Grid.RowSpan="2"
-								   Width="1"
-								   VerticalAlignment="Stretch"
-								   Fill="{TemplateBinding SeparatorBrush}"
-								   IsVisible="{TemplateBinding AreSeparatorsVisible}" />
-					</Grid>
-				</ControlTemplate>
-			</Setter>
+		<Style Selector="TextBox.DataGridFilterTextBox">
+			<Setter Property="Background"
+					Value="Black"/>
+			<Setter Property="Foreground"
+					Value="White"/>
 		</Style>
 	</Window.Styles>
 	<Grid RowDefinitions="*,Auto"	
 		  Margin="15">
 		<DataGrid Items="{Binding $parent[Window].TheCollectionView}"
+				  Classes="WithColumnFilters"
 				  CanUserReorderColumns="True"
-				  CanUserResizeColumns="True"
-				  local:DataGridFilteringBehavior.RowDataType="{x:Type local:Person}"
-				  local:DataGridCollectionViewBehavior.ItemsSource="{Binding $parent[Window].ThePeople}">
+			      CanUserResizeColumns="True"
+				  np:AttachedProperties.DataGridFilterTextBoxClasses="DataGridFilterTextBox"
+				  np:DataGridFilteringBehavior.RowDataType="{x:Type local:Person}"
+				  np:DataGridCollectionViewBehavior.ItemsSource="{Binding $parent[Window].ThePeople}">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="FirstName"
-									local:DataGridFilteringBehavior.FilterPropName="FirstName"
+									np:DataGridFilteringBehavior.FilterPropName="FirstName"
 									Binding="{Binding Path=FirstName}"/>
 				<DataGridTextColumn Header="LastName"
-									local:DataGridFilteringBehavior.FilterPropName="LastName"
+									np:DataGridFilteringBehavior.FilterPropName="LastName"
 									Binding="{Binding Path=LastName}"/>
 			</DataGrid.Columns>
 		</DataGrid>

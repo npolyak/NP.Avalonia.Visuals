@@ -361,4 +361,56 @@
 			</Animation>
 		</Style.Animations>
 	</Style>
+
+	<Style Selector="DataGridColumnHeader.WithFilter">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="*,Auto"
+					  RowDefinitions="Auto,Auto"
+					  Background="{TemplateBinding Background}">
+
+					<Grid ColumnDefinitions="*,Auto"
+						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						  Margin="{TemplateBinding Padding}">
+						<ContentPresenter Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  VerticalAlignment="Center"/>
+
+						<Path Name="SortIcon"
+							  Grid.Column="1"
+							  Fill="{TemplateBinding Foreground}"
+							  HorizontalAlignment="Left"
+							  VerticalAlignment="Center"
+							  Stretch="Uniform"
+							  Width="8"
+							  Margin="4,0,0,0"
+							  Data="F1 M -5.215,6.099L 5.215,6.099L 0,0L -5.215,6.099 Z "/>
+					</Grid>
+					<TextBox x:Name="FilterTextBox"
+							 HorizontalAlignment="Stretch"
+							 Grid.Row="1"
+							 Margin="3,1"
+							 Padding="2,1"
+							 np:ClassesBehavior.TheClasses="{Binding $parent[DataGrid].(np:AttachedProperties.DataGridFilterTextBoxClasses)}"
+							 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"
+							 Text="{Binding Path=(np:DataGridFilteringBehavior.ColumnFilterText), 
+												RelativeSource={RelativeSource AncestorType=DataGridColumnHeader},
+												Mode=TwoWay}"/>
+					<Rectangle Name="VerticalSeparator"
+							   Grid.Column="1"
+							   Grid.RowSpan="2"
+							   Width="1"
+							   VerticalAlignment="Stretch"
+							   Fill="{TemplateBinding SeparatorBrush}"
+							   IsVisible="{TemplateBinding AreSeparatorsVisible}" />
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<Style Selector="DataGrid.WithColumnFilters">
+		<Setter Property="np:AddClassesToDataGridColumnHeaderBehavior.TheClassesToAdd"
+				Value="WithFilter"/>
+	</Style>
 </Styles>

@@ -7,7 +7,7 @@ using NP.Utilities.Expressions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NP.DataGridFilteringDemo
+namespace NP.Avalonia.Visuals.Behaviors
 {
     public class DataGridFilteringBehavior
     {

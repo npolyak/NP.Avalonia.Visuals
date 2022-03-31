@@ -502,5 +502,25 @@ namespace NP.Avalonia.Visuals.Controls
             );
         #endregion MainPartTemplate Attached Avalonia Property
 
+
+        #region DataGridFilterTextBoxClasses Attached Avalonia Property
+        public static string GetDataGridFilterTextBoxClasses(IControl obj)
+        {
+            return obj.GetValue(DataGridFilterTextBoxClassesProperty);
+        }
+
+        public static void SetDataGridFilterTextBoxClasses(IControl obj, string value)
+        {
+            obj.SetValue(DataGridFilterTextBoxClassesProperty, value);
+        }
+
+        public static readonly AttachedProperty<string> DataGridFilterTextBoxClassesProperty =
+            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, string>
+            (
+                "DataGridFilterTextBoxClasses"
+            );
+        #endregion DataGridFilterTextBoxClasses Attached Avalonia Property
+
+
     }
 }

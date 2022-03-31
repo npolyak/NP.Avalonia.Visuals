@@ -4,7 +4,7 @@ using System.Collections;
 using System;
 using Avalonia.Collections;
 
-namespace NP.DataGridFilteringDemo
+namespace NP.Avalonia.Visuals.Behaviors
 {
     public class DataGridCollectionViewBehavior
     {

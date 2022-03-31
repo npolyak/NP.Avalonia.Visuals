@@ -64,7 +64,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             InsertClassesProperty.Changed.Subscribe(OnInsertClassesChanged);
         }
 
-        private static string[] GetClasses(this string classesStr)
+        internal static string[] GetClasses(this string classesStr)
         {
             return classesStr.Split(StrUtils.WHITESPACE_CHARS, StringSplitOptions.RemoveEmptyEntries);
         }
