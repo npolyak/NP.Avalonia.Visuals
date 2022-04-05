@@ -30,6 +30,7 @@
         <Setter.Value>
           <ControlTemplate TargetType="Button">
             <Border x:Name="IconBorder"
+					CornerRadius="{TemplateBinding CornerRadius}"
                     Background="{TemplateBinding (controls:AttachedProperties.RealBackground)}">
               <Path Data="{TemplateBinding (controls:AttachedProperties.IconData)}"
                     Fill="{TemplateBinding Foreground}"
