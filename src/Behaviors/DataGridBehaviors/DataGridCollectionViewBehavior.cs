@@ -4,9 +4,9 @@ using System.Collections;
 using System;
 using Avalonia.Collections;
 
-namespace NP.Avalonia.Visuals.Behaviors
+namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 {
-    public class DataGridCollectionViewBehavior
+    public static class DataGridCollectionViewBehavior
     {
         #region ItemsSource Attached Avalonia Property
         public static IEnumerable GetItemsSource(DataGrid obj)
@@ -20,7 +20,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<IEnumerable> ItemsSourceProperty =
-            AvaloniaProperty.RegisterAttached<DataGridCollectionViewBehavior, DataGrid, IEnumerable>
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, IEnumerable>
             (
                 "ItemsSource"
             );

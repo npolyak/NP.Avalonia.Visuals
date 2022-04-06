@@ -7,7 +7,7 @@ using NP.Utilities.Expressions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NP.Avalonia.Visuals.Behaviors
+namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 {
     public class DataGridFilteringBehavior
     {
@@ -23,7 +23,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<string> ColumnFilterTextProperty =
-            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumnHeader, string>
+            AvaloniaProperty.RegisterAttached<DataGridColumnHeader, DataGridColumnHeader, string>
             (
                 "ColumnFilterText"
             );
@@ -42,7 +42,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<string> FilterPropNameProperty =
-            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumn, string>
+            AvaloniaProperty.RegisterAttached<DataGridColumn, DataGridColumn, string>
             (
                 "FilterPropName"
             );
@@ -61,7 +61,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<Func<object, object>?> ColumnPropGetterProperty =
-            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, DataGridColumn, Func<object, object>?>
+            AvaloniaProperty.RegisterAttached<DataGridColumn, DataGridColumn, Func<object, object>?>
             (
                 "PropGetter"
             );
@@ -69,18 +69,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region RowDataType Attached Avalonia Property
-        public static Type GetRowDataType(IControl obj)
+        public static Type GetRowDataType(DataGrid obj)
         {
             return obj.GetValue(RowDataTypeProperty);
         }
 
-        public static void SetRowDataType(IControl obj, Type value)
+        public static void SetRowDataType(DataGrid obj, Type value)
         {
             obj.SetValue(RowDataTypeProperty, value);
         }
 
         public static readonly AttachedProperty<Type> RowDataTypeProperty =
-            AvaloniaProperty.RegisterAttached<DataGridFilteringBehavior, IControl, Type>
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, Type>
             (
                 "RowDataType"
             );
@@ -176,8 +176,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
             foreach(DataGridColumn column in dataGrid.Columns)
             {
-                Func<object, object> columnPropGetter = 
-                    GetColumnPropGetter(column);
+                Func<object, object> columnPropGetter = GetColumnPropGetter(column);
 
                 if (columnPropGetter == null)
                     continue;
@@ -205,5 +204,23 @@ namespace NP.Avalonia.Visuals.Behaviors
                 collectionView.Filter = (obj) => colFilters.All(f => f(obj));
             }
         }
+
+        #region DataGridFilterTextBoxClasses Attached Avalonia Property
+        public static string GetDataGridFilterTextBoxClasses(DataGrid obj)
+        {
+            return obj.GetValue(DataGridFilterTextBoxClassesProperty);
+        }
+
+        public static void SetDataGridFilterTextBoxClasses(DataGrid obj, string value)
+        {
+            obj.SetValue(DataGridFilterTextBoxClassesProperty, value);
+        }
+
+        public static readonly AttachedProperty<string> DataGridFilterTextBoxClassesProperty =
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, string>
+            (
+                "DataGridFilterTextBoxClasses"
+            );
+        #endregion DataGridFilterTextBoxClasses Attached Avalonia Property
     }
 }

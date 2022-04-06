@@ -21,6 +21,11 @@ using System.Collections.Generic;
 
 namespace NP.Avalonia.Visuals.Controls
 {
+    public class DataGridAttachedProps
+    { 
+    
+    }
+
     public class AttachedProperties
     {
         #region RowsHeights Attached Avalonia Property
@@ -501,26 +506,5 @@ namespace NP.Avalonia.Visuals.Controls
                 "MainPartTemplate"
             );
         #endregion MainPartTemplate Attached Avalonia Property
-
-
-        #region DataGridFilterTextBoxClasses Attached Avalonia Property
-        public static string GetDataGridFilterTextBoxClasses(IControl obj)
-        {
-            return obj.GetValue(DataGridFilterTextBoxClassesProperty);
-        }
-
-        public static void SetDataGridFilterTextBoxClasses(IControl obj, string value)
-        {
-            obj.SetValue(DataGridFilterTextBoxClassesProperty, value);
-        }
-
-        public static readonly AttachedProperty<string> DataGridFilterTextBoxClassesProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, string>
-            (
-                "DataGridFilterTextBoxClasses"
-            );
-        #endregion DataGridFilterTextBoxClasses Attached Avalonia Property
-
-
     }
 }

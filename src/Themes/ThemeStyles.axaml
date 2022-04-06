@@ -392,11 +392,10 @@
 							 Grid.Row="1"
 							 Margin="3,1"
 							 Padding="2,1"
-							 np:ClassesBehavior.TheClasses="{Binding $parent[DataGrid].(np:AttachedProperties.DataGridFilterTextBoxClasses)}"
+							 np:ClassesBehavior.TheClasses="{Binding $parent[DataGrid].DataGridFilterTextBoxClasses}"
 							 IsVisible="{Binding $parent[DataGridColumnHeader].IsEnabled}"
-							 Text="{Binding Path=(np:DataGridFilteringBehavior.ColumnFilterText), 
-												RelativeSource={RelativeSource AncestorType=DataGridColumnHeader},
-												Mode=TwoWay}"/>
+							 Text="{Binding $parent[DataGridColumnHeader].ColumnFilterText, 
+											Mode=TwoWay}"/>
 					<Rectangle Name="VerticalSeparator"
 							   Grid.Column="1"
 							   Grid.RowSpan="2"

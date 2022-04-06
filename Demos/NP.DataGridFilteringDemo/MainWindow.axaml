@@ -13,15 +13,16 @@
 					Value="Black"/>
 			<Setter Property="Foreground"
 					Value="White"/>
+			<Setter Property="CaretBrush"
+					Value="White"/>
 		</Style>
 	</Window.Styles>
 	<Grid RowDefinitions="*,Auto"	
 		  Margin="15">
-		<DataGrid Items="{Binding $parent[Window].TheCollectionView}"
-				  Classes="WithColumnFilters"
+		<DataGrid Classes="WithColumnFilters"
 				  CanUserReorderColumns="True"
 			      CanUserResizeColumns="True"
-				  np:AttachedProperties.DataGridFilterTextBoxClasses="DataGridFilterTextBox"
+			      np:DataGridFilteringBehavior.DataGridFilterTextBoxClasses="DataGridFilterTextBox"
 				  np:DataGridFilteringBehavior.RowDataType="{x:Type local:Person}"
 				  np:DataGridCollectionViewBehavior.ItemsSource="{Binding $parent[Window].ThePeople}">
 			<DataGrid.Columns>

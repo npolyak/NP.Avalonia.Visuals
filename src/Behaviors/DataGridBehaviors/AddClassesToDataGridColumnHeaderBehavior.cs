@@ -5,9 +5,9 @@ using System;
 using NP.Concepts.Behaviors;
 using System.Collections.Generic;
 
-namespace NP.Avalonia.Visuals.Behaviors
+namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 {
-    public class AddClassesToDataGridColumnHeaderBehavior
+    public static class AddClassesToDataGridColumnHeaderBehavior
     {
 
         #region TheClassesToAdd Attached Avalonia Property
@@ -22,7 +22,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<string> TheClassesToAddProperty =
-            AvaloniaProperty.RegisterAttached<AddClassesToDataGridColumnHeaderBehavior, DataGrid, string>
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, string>
             (
                 "TheClassesToAdd"
             );
@@ -35,18 +35,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TheBehavior Attached Avalonia Property
-        private static BehaviorsDisposable<IEnumerable<DataGridColumn>> GetTheBehavior(IControl obj)
+        private static BehaviorsDisposable<IEnumerable<DataGridColumn>> GetTheBehavior(DataGrid obj)
         {
             return obj.GetValue(TheBehaviorProperty);
         }
 
-        private static void SetTheBehavior(IControl obj, BehaviorsDisposable<IEnumerable<DataGridColumn>> value)
+        private static void SetTheBehavior(DataGrid obj, BehaviorsDisposable<IEnumerable<DataGridColumn>> value)
         {
             obj.SetValue(TheBehaviorProperty, value);
         }
 
         private static readonly AttachedProperty<BehaviorsDisposable<IEnumerable<DataGridColumn>>> TheBehaviorProperty =
-            AvaloniaProperty.RegisterAttached<AddClassesToDataGridColumnHeaderBehavior, IControl, BehaviorsDisposable<IEnumerable<DataGridColumn>>>
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, BehaviorsDisposable<IEnumerable<DataGridColumn>>>
             (
                 "TheBehavior"
             );
