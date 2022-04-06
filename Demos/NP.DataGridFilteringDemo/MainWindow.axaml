@@ -29,6 +29,8 @@
 				<DataGridTextColumn Header="FirstName"
 									np:DataGridFilteringBehavior.FilterPropName="FirstName"
 									Binding="{Binding Path=FirstName}"/>
+				<DataGridTextColumn Header="FirstName (Disabled Filtering)"
+									Binding="{Binding Path=FirstName}"/>
 				<DataGridTextColumn Header="LastName"
 									np:DataGridFilteringBehavior.FilterPropName="LastName"
 									Binding="{Binding Path=LastName}"/>
