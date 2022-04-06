@@ -87,6 +87,25 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
         #endregion RowDataType Attached Avalonia Property
 
 
+        #region HasFilters Attached Avalonia Property
+        public static bool GetHasFilters(DataGrid obj)
+        {
+            return obj.GetValue(HasFiltersProperty);
+        }
+
+        public static void SetHasFilters(DataGrid obj, bool value)
+        {
+            obj.SetValue(HasFiltersProperty, value);
+        }
+
+        public static readonly AttachedProperty<bool> HasFiltersProperty =
+            AvaloniaProperty.RegisterAttached<DataGrid, DataGrid, bool>
+            (
+                "HasFilters",
+                true
+            );
+        #endregion HasFilters Attached Avalonia Property
+
 
         static DataGridFilteringBehavior()
         {

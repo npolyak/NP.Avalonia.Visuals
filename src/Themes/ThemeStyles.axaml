@@ -392,6 +392,7 @@
 							 Grid.Row="1"
 							 Margin="3,1"
 							 Padding="2,1"
+							 IsVisible="{Binding $parent[DataGrid].HasFilters}"
 							 np:ClassesBehavior.TheClasses="{Binding $parent[DataGrid].DataGridFilterTextBoxClasses}"
 							 IsEnabled="{Binding !!$parent[DataGridColumnHeader].Column.FilterPropName}"
 							 Text="{Binding $parent[DataGridColumnHeader].ColumnFilterText, 
