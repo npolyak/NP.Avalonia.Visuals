@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
+using Avalonia.Input;
 
 namespace NP.Avalonia.Visuals.Controls
 {
@@ -37,6 +38,27 @@ namespace NP.Avalonia.Visuals.Controls
         {
             PseudoClasses.Set(":checked", isChecked == true);
             PseudoClasses.Set(":unchecked", isChecked == false);
+        }
+
+        private void ToggleState()
+        {
+            IsChecked = !IsChecked;
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            if (e.Key== Key.Enter)
+            {
+                ToggleState();
+            }
+        }
+
+        protected override void OnPointerReleased(PointerReleasedEventArgs e)
+        {
+            base.OnPointerReleased(e);
+            ToggleState();
         }
     }
 }

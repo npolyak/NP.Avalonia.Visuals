@@ -58,7 +58,7 @@
       <Setter Property="np:AttachedProperties.MouseOverBrush"
           Value="LightGray"/>
       <Setter Property="Foreground"
-              Value="{StaticResource MostProminentBrush}"/>
+              Value="{DynamicResource MostProminentBrush}"/>
       <Setter Property="np:AttachedProperties.IconWidth"
               Value="12"/>
       <Setter Property="np:AttachedProperties.IconHeight"
@@ -108,6 +108,20 @@
 	<Style Selector="np|NpToggleButton">
 		<Setter Property="Background" 
 				Value="Transparent"/>
+		<Setter Property="BorderThickness"
+				Value="1"/>
+		<Setter Property="Padding"
+				Value="2.5"/>
+		<Setter Property="BorderBrush"
+				Value="#808080"/>
+		<Setter Property="Foreground"
+				Value="#FF119EDA"/>
+		<Setter Property="Width"
+				Value="20"/>
+		<Setter Property="Height"
+				Value="20"/>
+		<Setter Property="Focusable"
+				Value="True"/>
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border Name="border"
@@ -117,20 +131,19 @@
 						CornerRadius="{TemplateBinding CornerRadius}"
 						HorizontalAlignment="Stretch"
 						VerticalAlignment="Stretch">
-					<Panel>
-						<Path Name="checkMark"
-							  Fill="{TemplateBinding Foreground}"
-							  Stretch="Uniform"
-							  HorizontalAlignment="Center"
-							  VerticalAlignment="Center"
-							  Data="{StaticResource CheckMark}"/>
-					</Panel>
+					<Path Name="checkMark"
+						  Fill="{TemplateBinding Foreground}"
+						  Stretch="Uniform"
+						  HorizontalAlignment="Stretch"
+						  VerticalAlignment="Stretch"
+						  Data="{StaticResource CheckMark}"
+						  Margin="{TemplateBinding Padding}"/>
 				</Border>
 			</ControlTemplate>
 		</Setter>
 	</Style>
 	<Style Selector="np|NpToggleButton:pointerover /template/ Border#border">
-		<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}"/>
+		<Setter Property="BorderBrush" Value="#A0A0A0"/>
 	</Style>
 	<Style Selector="np|NpToggleButton /template/ Path#checkMark">
 		<Setter Property="IsVisible" Value="False"/>

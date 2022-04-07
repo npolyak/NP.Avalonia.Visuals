@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NP.DataGridFilteringDemo", "NP.DataGridFilteringDemo.csproj", "{A2246463-2A6C-48AF-B222-3119DFCCA002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NP.ToggleButtonDemo", "NP.ToggleButtonDemo.csproj", "{A2246463-2A6C-48AF-B222-3119DFCCA002}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C66664B-49F1-40D5-91B9-E6FF81D61A4B}"
 EndProject

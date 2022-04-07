@@ -15,8 +15,15 @@
         xmlns:behaviors="clr-namespace:NP.Avalonia.Visuals.Behaviors"
         xmlns:converters="clr-namespace:NP.Avalonia.Visuals.Converters"
         xmlns:controls="clr-namespace:NP.Avalonia.Visuals.Controls">
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Themes/Geometries.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
 
-  <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/ButtonStyles.axaml"/>
+    <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/ButtonStyles.axaml"/>
 
 	<Style Selector="Path.DefaultCustomWindowMenu">
 		<Setter Property="Fill"
