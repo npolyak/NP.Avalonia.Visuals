@@ -9,25 +9,6 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 {
     public static class AddClassesToDataGridColumnHeaderBehavior
     {
-        #region Column Attached Avalonia Property
-        public static DataGridColumn GetColumn(DataGridColumnHeader obj)
-        {
-            return obj.GetValue(ColumnProperty);
-        }
-
-        public static void SetColumn(DataGridColumnHeader obj, DataGridColumn value)
-        {
-            obj.SetValue(ColumnProperty, value);
-        }
-
-        public static readonly AttachedProperty<DataGridColumn> ColumnProperty =
-            AvaloniaProperty.RegisterAttached<DataGridColumnHeader, DataGridColumnHeader, DataGridColumn>
-            (
-                "Column"
-            );
-        #endregion Column Attached Avalonia Property
-
-
         #region TheClassesToAdd Attached Avalonia Property
         public static string GetTheClassesToAdd(DataGrid obj)
         {
@@ -82,8 +63,6 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
         {
             DataGrid dataGrid = col.GetPropValue<DataGrid>("OwningGrid", true);
             DataGridColumnHeader header = col.GetPropValue<DataGridColumnHeader>("HeaderCell", true);
-
-            SetColumn(header, col);
 
             string classesToAdd = GetTheClassesToAdd(dataGrid);
 
