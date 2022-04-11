@@ -17,11 +17,25 @@
 					Value="White"/>
 		</Style>
 	</Window.Styles>
-	<Grid RowDefinitions="*,Auto"	
+	<Grid RowDefinitions="Auto,*,Auto"	
 		  Margin="15">
-		<DataGrid Classes="WithColumnFilters"
+		<Button Content="Column Visibility Setter"
+				Margin="0,2"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center">
+			<Button.Flyout>
+				<Flyout Placement="Bottom">
+					<ContentPresenter Content="{Binding #TheDataGrid.Columns}"
+									  ContentTemplate="{StaticResource DataGridColumnsVisibilityDataTemplate}"/>
+				</Flyout>
+			</Button.Flyout>
+		</Button>
+		<DataGrid x:Name="TheDataGrid" 
+				  Classes="WithColumnFilters"
 				  CanUserReorderColumns="True"
 			      CanUserResizeColumns="True"
+				  HorizontalAlignment="Left"
+				  Grid.Row="1"
 			      np:DataGridFilteringBehavior.DataGridFilterTextBoxClasses="DataGridFilterTextBox"
 				  np:DataGridFilteringBehavior.RowDataType="{x:Type local:Person}"
 				  np:DataGridCollectionViewBehavior.ItemsSource="{Binding $parent[Window].ThePeople}">
