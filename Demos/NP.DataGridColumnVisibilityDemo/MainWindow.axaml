@@ -51,5 +51,25 @@
 									Binding="{Binding Path=LastName}"/>
 			</DataGrid.Columns>
 		</DataGrid>
+		<StackPanel HorizontalAlignment="Right"
+					Orientation="Horizontal"
+					Margin="0,10,0,0"
+					Grid.Row="2">
+			<Button Content="Save Grid Layout"
+					np:CallAction.TheEvent="{x:Static Button.ClickEvent}"
+					np:CallAction.TargetObject="{Binding #TheDataGrid}"
+					np:CallAction.StaticType="{x:Type np:DataGridColumnManipulationBehavior}"
+					np:CallAction.MethodName="SaveDataGridLayoutToFile"
+					np:CallAction.HasArg="True"
+					np:CallAction.Arg1="MyGridLayoutFile.xml"/>
+			<Button Content="Restore Grid Layout"
+					Margin="10,0,0,0"
+					np:CallAction.TheEvent="{x:Static Button.ClickEvent}"
+					np:CallAction.TargetObject="{Binding #TheDataGrid}"
+					np:CallAction.StaticType="{x:Type np:DataGridColumnManipulationBehavior}"
+					np:CallAction.MethodName="RestoreDataGridLayoutFromFile"
+					np:CallAction.HasArg="True"
+					np:CallAction.Arg1="MyGridLayoutFile.xml"/>
+		</StackPanel>
 	</Grid>
 </Window>

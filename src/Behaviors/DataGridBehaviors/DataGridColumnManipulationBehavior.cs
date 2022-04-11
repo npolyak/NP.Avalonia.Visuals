@@ -4,6 +4,7 @@ using NP.Concepts.Behaviors;
 using NP.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 {
@@ -112,6 +113,45 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
         public static void RemoveColumn(this DataGridColumn column)
         {
             column.IsVisible = false;
+        }
+
+        public static DataGridLengthConverter TheDataGridLengthConverter { get; } =
+            new DataGridLengthConverter();
+
+        public static void SaveDataGridLayoutToFile(this DataGrid dataGrid, string fileName)
+        {
+            var colSerializationData = 
+                dataGrid
+                    .Columns
+                        .OrderBy(col => col.DisplayIndex)
+                        .Select
+                        (col => new ColumnSerializationData 
+                                {
+                                    IsVisible = col.IsVisible, 
+                                    WidthStr = TheDataGridLengthConverter.ConvertToString(col.Width),
+                                    HeaderId = col.Header?.ToStr()
+                                }).ToArray();
+
+            XmlSerializationUtils.SerializeToFile(colSerializationData, fileName);
+        }
+
+        public static void RestoreDataGridLayoutFromFile(this DataGrid dataGrid, string fileName)
+        {
+            ColumnSerializationData[] colSerializationData = 
+                XmlSerializationUtils.DeserializeFromFile<ColumnSerializationData[]>(fileName);
+
+            colSerializationData
+                .DoForEach
+                (
+                    (col, idx) =>
+                    {
+                        DataGridColumn gridCol = 
+                            dataGrid.Columns.Single(dataGridCol => dataGridCol.Header?.ToString() == col.HeaderId);
+
+                        gridCol.IsVisible = col.IsVisible;
+                        gridCol.DisplayIndex = idx;
+                        gridCol.Width = (DataGridLength)TheDataGridLengthConverter.ConvertFromString(col.WidthStr);
+                    });
         }
     }
 }
