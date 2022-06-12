@@ -210,7 +210,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                 targetObject = staticType;
             }
 
-            targetObject.CallMethod(methodName, false, isStatic, args.ToArray());
+            targetObject.CallMethodExtras(methodName, false, isStatic, args.ToArray());
         }
 
 
