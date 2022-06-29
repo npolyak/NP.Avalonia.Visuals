@@ -17,7 +17,7 @@
         <dependency id="Avalonia" version="0.10.13"/>
         <dependency id="Avalonia.Desktop" version="0.10.13"/>
         <dependency id="Avalonia.Diagnostics" version="0.10.13"/>
-        <dependency id="NP.Concepts.Behaviors" version="1.0.6"/>
+        <dependency id="NP.Concepts.Behaviors" version="1.0.8"/>
         <dependency id="NP.ViewModelInterfaces" version="1.0.1"/>
     </dependencies>
   </metadata>
