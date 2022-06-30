@@ -19,7 +19,7 @@
 	</Window.Styles>
 	<Grid RowDefinitions="*,Auto"	
 		  Margin="15">
-		<DataGrid Classes="WithColumnFilters"
+		<DataGrid Classes="WithColumnFilters Removable"
 				  CanUserReorderColumns="True"
 			      CanUserResizeColumns="True"
 			      np:DataGridFilteringBehavior.DataGridFilterTextBoxClasses="DataGridFilterTextBox"

@@ -31,7 +31,7 @@
 			</Button.Flyout>
 		</Button>
 		<DataGrid x:Name="TheDataGrid" 
-				  Classes="WithColumnFilters"
+				  Classes="WithColumnFilters Removable"
 				  CanUserReorderColumns="True"
 			      CanUserResizeColumns="True"
 				  HorizontalAlignment="Left"
