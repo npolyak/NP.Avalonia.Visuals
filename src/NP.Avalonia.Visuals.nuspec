@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NP.Avalonia.Visuals</id>
-    <version>1.0.24</version>
+    <version>1.0.25</version>
     <title>NP.Avalonia.Visuals</title>
     <authors>Nick Polyak, Ph. D.</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,7 +17,7 @@
         <dependency id="Avalonia" version="0.10.13"/>
         <dependency id="Avalonia.Desktop" version="0.10.13"/>
         <dependency id="Avalonia.Diagnostics" version="0.10.13"/>
-        <dependency id="NP.Concepts.Behaviors" version="1.0.9"/>
+        <dependency id="NP.Concepts.Behaviors" version="1.0.10"/>
         <dependency id="NP.ViewModelInterfaces" version="1.0.1"/>
     </dependencies>
   </metadata>
