@@ -27,6 +27,10 @@ namespace NP.Avalonia.Visuals.Converters
             {
                 return new GridLength(d, GridUnitType.Pixel);
             }
+            else if (value is string s)
+            {
+                return GridLength.Parse(s);
+            }
 
             return new GridLength();
         }
