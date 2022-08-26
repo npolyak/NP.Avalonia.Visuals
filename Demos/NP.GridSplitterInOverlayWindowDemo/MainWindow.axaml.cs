@@ -20,46 +20,6 @@ namespace NP.GridSplitterInOverlayWindowDemo
 #if DEBUG
             this.AttachDevTools();
 #endif
-            _autoGrid = this.FindControl<AutoGrid>("MyAutoGrid");
-
-            _themeLoader = 
-                Application.Current.Resources.GetThemeLoader("ColorThemeLoader")!;
-
-            Button changeLocationButton = this.FindControl<Button>("ChangeLocationButton");
-
-            changeLocationButton.Click += ChangeLocationButton_Click;
-
-            Button changeThemeButton = this.FindControl<Button>("ChangeThemeButton");
-
-            changeThemeButton.Click += ChangeThemeButton_Click;
-        }
-
-        private void ChangeLocationButton_Click(object? sender, RoutedEventArgs e)
-        {
-            Button button3 = this.FindControl<Button>("Button3");
-
-            if (AutoGrid.GetRow(button3) == 2)
-            {
-                AutoGrid.SetRow(button3, -2);
-                AutoGrid.SetColumn(button3, -2);
-            }
-            else
-            {
-                AutoGrid.SetRow(button3, 2);
-                AutoGrid.SetColumn(button3, 1);
-            }
-        }
-
-        private void ChangeThemeButton_Click(object? sender, RoutedEventArgs e)
-        {
-            if (_themeLoader.SelectedThemeId == "Dark")
-            {
-                _themeLoader.SelectedThemeId = "Light";
-            }
-            else
-            {
-                _themeLoader.SelectedThemeId = "Dark";
-            }
         }
 
         private void InitializeComponent()
