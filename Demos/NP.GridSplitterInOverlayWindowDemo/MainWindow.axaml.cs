@@ -10,10 +10,6 @@ namespace NP.GridSplitterInOverlayWindowDemo
 {
     public partial class MainWindow : Window
     {
-        private ThemeLoader _themeLoader;
-
-        AutoGrid _autoGrid;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -26,5 +22,21 @@ namespace NP.GridSplitterInOverlayWindowDemo
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+
+        #region IsOverlayWindowOpen Styled Avalonia Property
+        public bool IsOverlayWindowOpen
+        {
+            get { return GetValue(IsOverlayWindowOpenProperty); }
+            set { SetValue(IsOverlayWindowOpenProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> IsOverlayWindowOpenProperty =
+            AvaloniaProperty.Register<MainWindow, bool>
+            (
+                nameof(IsOverlayWindowOpen)
+            );
+        #endregion IsOverlayWindowOpen Styled Avalonia Property
+
     }
 }

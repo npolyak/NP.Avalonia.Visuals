@@ -7,12 +7,28 @@
         x:Name="Root"
 		Width="500"
 		Height="400">
-	<Grid ColumnDefinitions="*, Auto, *"
-		  Margin="10">
-		<GridSplitter Width="4"
-					  Background="Black"
-					  ShowsPreview="True"
-					  Grid.Column="1"
-					  PreviewContent="{x:Null}"/>
+	<Grid Margin="10"
+		  RowDefinitions="*, Auto">
+		<Grid ColumnDefinitions="*, Auto, *"
+			  np:OverlayWindowBehavior.IsOpen="{Binding $parent[Window].IsOverlayWindowOpen}"
+			  np:OverlayWindowBehavior.IsTopmost="True">
+			<np:OverlayWindowBehavior.ContentTemplate>
+				<DataTemplate>
+					<Grid Background="Pink"
+						  Opacity="0.5"/>
+				</DataTemplate>
+			</np:OverlayWindowBehavior.ContentTemplate>
+			<GridSplitter Width="4"
+						  Background="Black"
+						  ShowsPreview="True"
+						  Grid.Column="1"
+						  PreviewContent="{x:Null}"/>
+		</Grid>
+		<CheckBox IsChecked="{Binding $parent[Window].IsOverlayWindowOpen, Mode=TwoWay}"
+				  Grid.Row="1"
+				  Margin="10,5"
+				  Content="Is Overlay Window Open"
+				  HorizontalAlignment="Center"
+				  VerticalAlignment="Center" />
 	</Grid>
 </Window>
