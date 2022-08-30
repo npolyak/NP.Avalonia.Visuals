@@ -7,7 +7,7 @@
         x:Name="Root"
 		Width="500"
 		Height="400">
-	<Grid ColumnDefinitions="*,Auto,*"
+	<Grid 
 		  Margin="10"
 		  np:GridResizeBehavior.IsOn="True"
 		  np:OverlayWindowBehavior.IsOpen="{Binding CurrentGridSplitter, 
@@ -16,6 +16,13 @@
 		  np:OverlayWindowBehavior.IsTopmost="True"
 		  np:OverlayWindowBehavior.Content="{Binding RelativeSource={RelativeSource Self}, 
 													 Converter={x:Static np:ToControlContainerConverter.Instance}}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"
+							  MinWidth="30"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"
+							  MinWidth="30"/>
+		</Grid.ColumnDefinitions>
 		<np:OverlayWindowBehavior.ContentTemplate>
 			<DataTemplate>
 				<Grid Background="#55880000"
