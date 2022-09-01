@@ -7,7 +7,7 @@ using NP.Utilities;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
-    public class GridResizeBehavior
+    public class GridPartsResizeBehavior
     {
 
         #region Target Attached Avalonia Property
@@ -40,7 +40,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<double?> CurrentSplitterPositionProperty =
-            AvaloniaProperty.RegisterAttached<GridResizeBehavior, IControl, double?>
+            AvaloniaProperty.RegisterAttached<GridPartsResizeBehavior, IControl, double?>
             (
                 "CurrentSplitterPosition"
             );
@@ -48,7 +48,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
 
-        static GridResizeBehavior()
+        static GridPartsResizeBehavior()
         {
             TargetProperty.Changed.Subscribe(OnTargetChanged);
         }

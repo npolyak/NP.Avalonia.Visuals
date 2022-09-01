@@ -9,8 +9,8 @@
 		Height="400">
 	<Grid 
 		  Margin="10"
-		  np:GridResizeBehavior.Target="{Binding RelativeSource={RelativeSource Self}}"
-		  np:OverlayWindowBehavior.IsOpen="{Binding Path=(np:GridResizeBehavior.CurrentSplitterPosition), 
+		  np:GridPartsResizeBehavior.Target="{Binding RelativeSource={RelativeSource Self}}"
+		  np:OverlayWindowBehavior.IsOpen="{Binding Path=(np:GridPartsResizeBehavior.CurrentSplitterPosition), 
 													Converter={x:Static ObjectConverters.IsNotNull}
 													RelativeSource={RelativeSource Self}}"
 		  np:OverlayWindowBehavior.IsTopmost="True"
@@ -33,7 +33,7 @@
 						  Background="Black"
 						  RenderTransformOrigin="0,0">
 						<Grid.RenderTransform>
-							<TranslateTransform X="{Binding Path=(np:GridResizeBehavior.CurrentSplitterPosition)}" Y="0"/>
+							<TranslateTransform X="{Binding Path=(np:GridPartsResizeBehavior.CurrentSplitterPosition)}" Y="0"/>
 						</Grid.RenderTransform>
 					</Grid>
 				</Grid>
