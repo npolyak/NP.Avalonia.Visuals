@@ -5,8 +5,10 @@ using System.Globalization;
 
 namespace NP.Avalonia.Visuals.Converters
 {
-    internal class OrConverter : IMultiValueConverter
+    public class OrConverter : IMultiValueConverter
     {
+        public static OrConverter Instance { get; } = new OrConverter();
+
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
             foreach (object val in values)
