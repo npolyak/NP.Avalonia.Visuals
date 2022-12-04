@@ -200,7 +200,7 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
                 if (columnPropGetter == null)
                     continue;
 
-                DataGridColumnHeader columnHeader = 
+                DataGridColumnHeader columnHeader =
                     column.GetPropValue<DataGridColumnHeader>("HeaderCell", true);
 
                 string filterVal = GetColumnFilterText(columnHeader);
@@ -208,8 +208,8 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
                 if (string.IsNullOrEmpty(filterVal))
                     continue;
 
-                Func<object, bool> colFilter = 
-                    (object obj) => columnPropGetter(obj).ToStr().ToLower().Contains(filterVal);
+                Func<object, bool> colFilter =
+                    (object obj) => columnPropGetter(obj).ToStr().Contains(filterVal, StringComparison.CurrentCultureIgnoreCase);
 
                 colFilters.Add(colFilter);
             }
