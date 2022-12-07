@@ -63,6 +63,25 @@
 			</ControlTemplate>
 		</ResourceDictionary>
 	</Styles.Resources>
+	<Styles.Resources>
+		<MenuFlyout x:Key="DataGridRemoveColumnContextFlyout">
+			<MenuItem Header="Remove Column"
+					  IsEnabled="{Binding $parent[DataGridColumnHeader].Column.CanRemoveColumn}"
+					  np:CallAction.TheEvent="{x:Static MenuItem.ClickEvent}"
+					  np:CallAction.StaticType="{x:Type np:DataGridColumnManipulationBehavior}"
+					  np:CallAction.TargetObject="{Binding $parent[DataGridColumnHeader].Column}"
+					  np:CallAction.MethodName="RemoveColumn">
+				<MenuItem.Icon>
+					<Path Data="{StaticResource CloseIcon}"
+						  Stretch="Uniform"
+						  Fill="Red"
+						  Width="9"
+						  VerticalAlignment="Center"
+						  HorizontalAlignment="Center"/>
+				</MenuItem.Icon>
+			</MenuItem>
+		</MenuFlyout>
+	</Styles.Resources>
 	<Style Selector="PopupRoot">
 		<Setter Property="Background" Value="{x:Null}"/>
 		<Setter Property="TransparencyLevelHint" Value="Transparent" />
@@ -371,28 +390,11 @@
 					  Background="{TemplateBinding Background}">
 					<Grid ColumnDefinitions="*,Auto"
 						  Background="Transparent"
+						  Name="PART_HeaderColumn"
 						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 						  Margin="{TemplateBinding Padding}">
-						<Grid.ContextFlyout>
-							<MenuFlyout>
-								<MenuItem Header="Remove Column"
-										  IsEnabled="{Binding $parent[DataGridColumnHeader].Column.CanRemoveColumn}"
-										  np:CallAction.TheEvent="{x:Static MenuItem.ClickEvent}"
-										  np:CallAction.StaticType="{x:Type np:DataGridColumnManipulationBehavior}"
-										  np:CallAction.TargetObject="{Binding $parent[DataGridColumnHeader].Column}"
-										  np:CallAction.MethodName="RemoveColumn">
-									<MenuItem.Icon>
-										<Path Data="{StaticResource CloseIcon}"
-											  Stretch="Uniform"
-											  Fill="Red"
-											  Width="9"
-											  VerticalAlignment="Center"
-											  HorizontalAlignment="Center"/>
-									</MenuItem.Icon>
-								</MenuItem>
-							</MenuFlyout>
-						</Grid.ContextFlyout>
+						
 						<ContentPresenter Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  VerticalAlignment="Center"/>
@@ -428,6 +430,13 @@
 			</ControlTemplate>
 		</Setter>
 	</Style>
+	
+	<Style Selector="DataGrid.WithColumnFilters:not(.NonRemovable) DataGridColumnHeader /template/ Grid#PART_HeaderColumn:not(.NonRemovable)">
+		<Setter Property="ContextFlyout" Value="{StaticResource DataGridRemoveColumnContextFlyout}" />
+	</Style>
+	
+    <Style Selector="DataGrid.WithColumnFilters">
+    </Style>
 
 	<Style Selector="DataGrid.WithColumnFilters">
 		<Setter Property="np:AddClassesToDataGridColumnHeaderBehavior.TheClassesToAdd"
