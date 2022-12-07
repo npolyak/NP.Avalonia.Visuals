@@ -388,10 +388,9 @@
 				<Grid ColumnDefinitions="*,Auto"
 					  RowDefinitions="Auto,Auto"
 					  Background="{TemplateBinding Background}">
-					<Grid
-						Name="PART_HeaderColumn"
-						ColumnDefinitions="*,Auto"
+					<Grid ColumnDefinitions="*,Auto"
 						Background="Transparent"
+						Name="PART_HeaderColumn"
 						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 						VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 						Margin="{TemplateBinding Padding}">
