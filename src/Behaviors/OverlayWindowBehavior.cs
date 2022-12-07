@@ -163,6 +163,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                         {
                             TransparencyLevelHint = WindowTransparencyLevel.Transparent,
                             Background = null,
+                            CanResize = false,
                             SystemDecorations = SystemDecorations.None,
                             Topmost = GetIsTopmost(control),
                             Content = GetContent(control),
@@ -180,7 +181,6 @@ namespace NP.Avalonia.Visuals.Behaviors
                 double scale = 1d / overlayWindow.PlatformImpl.RenderScaling;
                 overlayWindow.Position = screenBounds.StartPoint.ToPixelPoint();
                 overlayWindow.PlatformImpl.Resize(screenBounds.GetSize(scale).ToSize());
-
                 overlayWindow.Show();
             }
             else

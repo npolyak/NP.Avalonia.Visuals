@@ -209,7 +209,7 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
                     continue;
 
                 Func<object, bool> colFilter = 
-                    (object obj) => columnPropGetter(obj).ToStr().ToLower().Contains(filterVal);
+                    (object obj) => columnPropGetter(obj).ToStr().Contains(filterVal, StringComparison.OrdinalIgnoreCase);
 
                 colFilters.Add(colFilter);
             }

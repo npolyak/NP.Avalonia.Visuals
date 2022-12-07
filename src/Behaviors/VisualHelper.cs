@@ -86,5 +86,28 @@ namespace NP.Avalonia.Visuals.Behaviors
                 window.Show();
             }
         }
+
+        public static GridResizeDirection GetRealResizeDirection(this GridSplitter gridSplitter)
+        {
+            if (gridSplitter.ResizeDirection != GridResizeDirection.Auto)
+                return gridSplitter.ResizeDirection;
+
+            if (gridSplitter.HorizontalAlignment != 0)
+            {
+                return GridResizeDirection.Columns;
+            }
+
+            if (gridSplitter.VerticalAlignment != 0)
+            {
+                return GridResizeDirection.Rows;
+            }
+
+            if (gridSplitter.Bounds.Width <= gridSplitter.Bounds.Height)
+            {
+                return GridResizeDirection.Columns;
+            }
+
+            return GridResizeDirection.Rows;
+        }
     }
 }
