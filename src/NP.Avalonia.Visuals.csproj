@@ -1,13 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <RootNamespace>NP.Avalonia.Visuals</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!--nuspec-->
+  <PropertyGroup>
+    <Title>NP.Avalonia.Visuals</Title>
+    <Description>Visual Controls, Utilities and Behaviors for AvaloniaUI</Description>
     <PackageId>NP.Avalonia.Visuals</PackageId>
     <Authors>Nick Polyak, Ph. D.</Authors>
     <Company>AWebPros</Company>
+    <Copyright>Nick Polyak 2021</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Nullable>enable</Nullable>
+    <PackageVersion>1.0.31</PackageVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/npolyak/NP.Avalonia.Visuals</PackageProjectUrl>
+    <PackageReleaseNotes>Contains Avalonia basic behaviors, converters and Custom Window.</PackageReleaseNotes>
+    <PackageTags>Avalonia Converters, Behaviors, CustomWindow</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +34,6 @@
     <None Remove="Assets\avalonia-32.png" />
     <None Remove="LICENSE" />
     <None Remove="*.nupkg" />
-    <None Remove="NP.Avalonia.Visuals.nuspec" />
     <None Remove="README.md" />
   </ItemGroup>
 
@@ -42,8 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)..\..\SubModules\NP.Utilities\src\NP.Utilities.csproj" />
-    <ProjectReference Include="$(SolutionDir)..\..\SubModules\NP.Concepts.Behaviors\src\NP.Concepts.Behaviors.csproj" />
-    <ProjectReference Include="$(SolutionDir)..\..\SubModules\NP.ViewModelInterfaces\src\NP.ViewModelInterfaces.csproj" />
+    <ProjectReference Include="..\SubModules\NP.Utilities\src\NP.Utilities.csproj" />
+    <ProjectReference Include="..\SubModules\NP.Concepts.Behaviors\src\NP.Concepts.Behaviors.csproj" />
+    <ProjectReference Include="..\SubModules\NP.ViewModelInterfaces\src\NP.ViewModelInterfaces.csproj" />
   </ItemGroup>
 </Project>
