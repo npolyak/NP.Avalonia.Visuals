@@ -432,33 +432,27 @@
 		</Setter>
 	</Style>
 	
-	<Style Selector="DataGridColumnHeader.RemovableColumns /template/ Grid#PART_HeaderColumn">
+	<Style Selector="DataGrid.WithColumnFilters:not(.NonRemovable) DataGridColumnHeader /template/ Grid#PART_HeaderColumn:not(.NonRemovable)">
 		<Setter Property="ContextFlyout" Value="{StaticResource DataGridRemoveColumnContextFlyout}" />
 	</Style>
 	
-	<Style Selector="DataGrid.WithColumnFilters">
-		<Setter Property="np:AddClassesToDataGridColumnHeaderBehavior.TheClassesToAdd"
-				Value="WithFilter"/>
-	</Style>
-	
-	<Style Selector="DataGrid.WithColumnFilters.Removable">
-		<Setter Property="np:AddClassesToDataGridColumnHeaderBehavior.TheClassesToAdd"
-				Value="WithFilter RemovableColumns"/>
-	</Style>
+    <Style Selector="DataGrid.WithColumnFilters">
+    </Style>
 
 	<Style Selector="DataGrid.WithColumnFilters">
-		<Setter Property="np:DataGridColumnManipulationBehavior.IsOn"
-				Value="True"/>
+    <Setter Property="np:DataGridColumnManipulationBehavior.IsOn" Value="True"/>
+    <Setter Property="np:AddClassesToDataGridColumnHeaderBehavior.TheClassesToAdd" Value="WithFilter"/>
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Border Background="{TemplateBinding Background}"
+				<Border
+            Background="{TemplateBinding Background}"
 						BorderThickness="{TemplateBinding BorderThickness}"
 						BorderBrush="{TemplateBinding BorderBrush}">
 					<Grid RowDefinitions="Auto,*,Auto,Auto" 
 						  ColumnDefinitions="Auto,*,Auto">
 						<DataGridColumnHeader Name="PART_TopLeftCornerHeader" 
 											  Width="22" />
-						<DataGridColumnHeadersPresenter Name="PART_ColumnHeadersPresenter" 
+						<DataGridColumnHeadersPresenter Name="PART_ColumnHeadersPresenter"
 														Grid.Column="1"/>
 						<DataGridColumnHeader Name="PART_TopRightCornerHeader" 
 											  Grid.Column="2"/>
