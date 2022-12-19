@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>NP.Avalonia.Visuals</RootNamespace>
     <PackageId>NP.Avalonia.Visuals</PackageId>
     <Authors>Nick Polyak, Ph. D.</Authors>
