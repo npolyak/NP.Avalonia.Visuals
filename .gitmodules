@@ -11,3 +11,6 @@
 [submodule "SubModules/NP.NLogAdapter"]
 	path = SubModules/NP.NLogAdapter
 	url = https://github.com/npolyak/NP.NLogAdapter.git
+[submodule "SubModules/NP.DependencyInjection"]
+	path = SubModules/NP.DependencyInjection
+	url = https://github.com/npolyak/NP.DependencyInjection.git
