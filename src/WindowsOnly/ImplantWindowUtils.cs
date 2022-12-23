@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Styling;
 using System;
 using System.Runtime.InteropServices;
 
@@ -7,10 +6,14 @@ namespace NP.Avalonia.Visuals.WindowsOnly
 {
     public static class ImplantWindowUtils
     {
-        public static void ImplantWindow(Window parentWindow, IntPtr windowToImplantHandle)
+        public static void ImplantWindow(this Window parentWindow, IntPtr windowToImplantHandle)
         {
+            // set the parent of the ProcessWindowHandle to be the main window's handle
+            WinApi.SetParent(windowToImplantHandle, parentWindow.PlatformImpl.Handle.Handle);
+
             WindowStyles windowToImplantStyle =
                 (WindowStyles) WinApi.GetWindowLongPtr(windowToImplantHandle, (int) WindowLongFlags.GWL_STYLE);
+
 
             windowToImplantStyle &= ~WindowStyles.WS_BORDER;
             windowToImplantStyle &= ~WindowStyles.WS_HSCROLL;
@@ -31,9 +34,6 @@ namespace NP.Avalonia.Visuals.WindowsOnly
 
             // set the new style of the schild window
             WinApi.SetWindowLongPtr(handleRef, WindowLongFlags.GWL_STYLE, windowToImplantStyle);
-
-            // set the parent of the ProcessWindowHandle to be the main window's handle
-            WinApi.SetParent(windowToImplantHandle, parentWindow.PlatformImpl.Handle.Handle);
         }
     }
 }

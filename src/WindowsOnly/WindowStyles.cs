@@ -3,7 +3,6 @@
 // Borrowed from http://pinvoke.net/default.aspx/Enums/WindowStyles.html
 namespace NP.Avalonia.Visuals.WindowsOnly
 {
-
     [Flags]
     enum WindowStyles : uint
     {
