@@ -1,0 +1,14 @@
+<local:CustomWindow xmlns="https://github.com/avaloniaui"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:np="https://np.com/visuals"
+					xmlns:local="clr-namespace:NP.Demos.BehaviorPrototypes"
+					x:Class="NP.Demos.BehaviorPrototypes.MainWindow"
+					Classes="PlainCustomWindow"
+					Title="NP.BehaviorPrototypes"
+					Width="600"
+					Height="400">
+	<Grid RowDefinitions="*,*"
+		  Background="LightBlue"
+		  np:ProcessWindowBehavior.ProcessExePath="C:/Windows/system32/notepad.exe">
+	</Grid>
+</local:CustomWindow>
