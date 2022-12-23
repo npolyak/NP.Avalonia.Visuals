@@ -7,7 +7,9 @@
 					Title="NP.BehaviorPrototypes"
 					Width="600"
 					Height="400">
-	<Grid RowDefinitions="*,*">
+	<Grid RowDefinitions="*,*"
+		  Background="Aqua"
+		  np:ProcessWindowBehavior.ProcessExePath="C:/Windows/system32/notepad.exe">
 		<Grid HorizontalAlignment="Center"
 			  VerticalAlignment="Center"
 			  Width="50"
