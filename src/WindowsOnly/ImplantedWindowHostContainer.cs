@@ -27,20 +27,6 @@ namespace NP.Avalonia.Visuals.WindowsOnly
             );
         #endregion ImplantedWindowHandle Styled Avalonia Property
 
-        #region ProcessExePath Styled Avalonia Property
-        public string ProcessExePath
-        {
-            get { return GetValue(ProcessExePathProperty); }
-            set { SetValue(ProcessExePathProperty, value); }
-        }
-
-        public static readonly StyledProperty<string> ProcessExePathProperty =
-            AvaloniaProperty.Register<ImplantedWindowHostContainer, string>
-            (
-                nameof(ProcessExePath)
-            );
-        #endregion ProcessExePath Styled Avalonia Property
-
         #region ParentWindow Property
         private Window? _parentWindow;
         public Window? ParentWindow
@@ -79,16 +65,14 @@ namespace NP.Avalonia.Visuals.WindowsOnly
 
         public ImplantedWindowHostContainer()
         {
-            this.GetObservable(ProcessControllerBehavior.TheProcessProperty).Subscribe(OnProcessChanged);
+            this.GetObservable(ImplantedWindowHandleProperty).Subscribe(OnImplantedWindowHandleChanged);
         }
 
-        private async void OnProcessChanged(Process p)
+        private void OnImplantedWindowHandleChanged(IntPtr implantedWindowHandle)
         {
-            await Task.Delay(200);
-
-            if (p != null)
+            if (implantedWindowHandle != IntPtr.Zero)
             {
-                this.Child = new ImplantedWindowHost(p.MainWindowHandle);
+                this.Child = new ImplantedWindowHost(implantedWindowHandle);
             }
             else
             {

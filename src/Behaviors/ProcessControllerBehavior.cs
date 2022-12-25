@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data.Core.Plugins;
 using NP.Utilities;
 using System;
 using System.Diagnostics;
@@ -27,15 +28,13 @@ namespace NP.Avalonia.Visuals.Behaviors
             );
         #endregion ProcessExePath Attached Avalonia Property
 
-
-
         #region TheProcess Attached Avalonia Property
         public static Process? GetTheProcess(AvaloniaObject obj)
         {
             return obj.GetValue(TheProcessProperty);
         }
 
-        public static void SetTheProcess(AvaloniaObject obj, Process? value)
+        private static void SetTheProcess(AvaloniaObject obj, Process? value)
         {
             obj.SetValue(TheProcessProperty, value);
         }
@@ -46,6 +45,26 @@ namespace NP.Avalonia.Visuals.Behaviors
                 "TheProcess"
             );
         #endregion TheProcess Attached Avalonia Property
+
+
+        #region MainWindowHandle Attached Avalonia Property
+        public static IntPtr GetMainWindowHandle(AvaloniaObject obj)
+        {
+            return obj.GetValue(MainWindowHandleProperty);
+        }
+
+        public static void SetMainWindowHandle(AvaloniaObject obj, IntPtr value)
+        {
+            obj.SetValue(MainWindowHandleProperty, value);
+        }
+
+        public static readonly AttachedProperty<IntPtr> MainWindowHandleProperty =
+            AvaloniaProperty.RegisterAttached<AvaloniaObject, AvaloniaObject, IntPtr>
+            (
+                "MainWindowHandle",
+                IntPtr.Zero
+            );
+        #endregion MainWindowHandle Attached Avalonia Property
 
         static ProcessControllerBehavior()
         {
@@ -99,7 +118,9 @@ namespace NP.Avalonia.Visuals.Behaviors
 
             Process p = Process.Start(processStartInfo)!;
 
-            while(true)
+            SetTheProcess(sender, p);
+
+            while (true)
             {
                 await Task.Delay(200);
 
@@ -109,7 +130,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                 }
             }
 
-            SetTheProcess(sender, p);
+            SetMainWindowHandle(sender, p.MainWindowHandle);
         }
 
         public static void DestroyProcess(this Process? p)

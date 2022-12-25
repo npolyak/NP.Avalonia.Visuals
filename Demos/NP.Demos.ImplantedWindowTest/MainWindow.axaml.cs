@@ -37,7 +37,7 @@ namespace NP.Demos.BehaviorPrototypes
 
             //_control.ProcessExePath = path;
 
-            _control.GetObservable(ProcessControllerBehavior.TheProcessProperty).Subscribe(OnProcessChanged);
+            _control.GetObservable(ProcessControllerBehavior.MainWindowHandleProperty).Subscribe(OnWindowHandleChanged);
 
             ProcessControllerBehavior.SetProcessExePath(_control, path);
 
@@ -46,16 +46,9 @@ namespace NP.Demos.BehaviorPrototypes
             grid.Children.Add(_control);
         }
 
-        private void OnProcessChanged(Process? p)
+        private void OnWindowHandleChanged(IntPtr windowHandle)
         {
-            if (p == null)
-            {
-                _control.ImplantedWindowHandle = IntPtr.Zero;
-            }    
-            else
-            {
-                _control.ImplantedWindowHandle = p.MainWindowHandle;
-            }
+            _control.ImplantedWindowHandle = windowHandle;
         }
 
         private void InitializeComponent()
