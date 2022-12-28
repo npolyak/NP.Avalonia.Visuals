@@ -63,7 +63,7 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
         public static readonly AttachedProperty<Func<object, object>?> ColumnPropGetterProperty =
             AvaloniaProperty.RegisterAttached<DataGridColumn, DataGridColumn, Func<object, object>?>
             (
-                "PropGetter"
+                "ColumnPropGetter"
             );
         #endregion ColumnPropGetter Attached Avalonia Property
 
