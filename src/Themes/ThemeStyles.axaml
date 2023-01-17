@@ -414,7 +414,7 @@
 							 Padding="2,1"
 							 IsVisible="{Binding $parent[DataGrid].HasFilters}"
 							 np:ClassesBehavior.TheClasses="{Binding $parent[DataGrid].DataGridFilterTextBoxClasses}"
-							 IsEnabled="{Binding !!$parent[DataGridColumnHeader].Column.FilterPropName}"
+							 IsEnabled="{Binding !!$parent[DataGridColumnHeader].Column.ColumnPropGetter}"
 							 Text="{Binding $parent[DataGridColumnHeader].ColumnFilterText, 
 											Mode=TwoWay}"/>
 					<Rectangle Name="VerticalSeparator"
