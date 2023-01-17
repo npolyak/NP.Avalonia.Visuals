@@ -23,8 +23,6 @@ using System.Runtime.InteropServices;
 // components.  If you need to access a type in this assembly from COM, set the ComVisible
 // attribute to true on that type.
 
-[assembly: AssemblyDescription("Visual Controls, Utilities and Behaviors for AvaloniaUI")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
