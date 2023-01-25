@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,9 +7,10 @@
   <ItemGroup>
     <None Remove=".gitignore" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\..\src\NP.Avalonia.Visuals.csproj" />
-    <ProjectReference Include="..\..\SubModules\NP.Concepts.Behaviors\src\NP.Concepts.Behaviors.csproj" />
-    <ProjectReference Include="..\..\SubModules\NP.Utilities\src\NP.Utilities.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="NP.Avalonia.Visuals" Version="1.0.35"/>
   </ItemGroup>
 </Project>
