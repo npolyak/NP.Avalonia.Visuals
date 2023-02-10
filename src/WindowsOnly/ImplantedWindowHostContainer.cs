@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Platform;
 using Avalonia.Platform;
 using NP.Avalonia.Visuals.Behaviors;
 using System;
@@ -132,7 +133,7 @@ namespace NP.Avalonia.Visuals.WindowsOnly
 
             protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
                     return new PlatformHandle(_implantedWindowHandle, "CTRL");
                 }
@@ -140,7 +141,14 @@ namespace NP.Avalonia.Visuals.WindowsOnly
                 {
                     return base.CreateNativeControlCore(parent);
                 }
+            }
 
+            protected override void DestroyNativeControlCore(IPlatformHandle control)
+            {
+                if (control is INativeControlHostDestroyableControlHandle)
+                {
+                    base.DestroyNativeControlCore(control);
+                }
             }
         }
     }

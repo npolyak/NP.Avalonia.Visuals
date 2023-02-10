@@ -1,10 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data.Core.Plugins;
-using NP.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -27,6 +25,26 @@ namespace NP.Avalonia.Visuals.Behaviors
                 "ProcessExePath"
             );
         #endregion ProcessExePath Attached Avalonia Property
+
+
+        #region ProcInitInfo Attached Avalonia Property
+        public static ProcessInitInfo GetProcInitInfo(AvaloniaObject obj)
+        {
+            return obj.GetValue(ProcInitInfoProperty);
+        }
+
+        public static void SetProcInitInfo(AvaloniaObject obj, ProcessInitInfo value)
+        {
+            obj.SetValue(ProcInitInfoProperty, value);
+        }
+
+        public static readonly AttachedProperty<ProcessInitInfo> ProcInitInfoProperty =
+            AvaloniaProperty.RegisterAttached<Control, AvaloniaObject, ProcessInitInfo>
+            (
+                "ProcInitInfo"
+            );
+        #endregion ProcInitInfo Attached Avalonia Property
+
 
         #region TheProcess Attached Avalonia Property
         public static Process? GetTheProcess(AvaloniaObject obj)
@@ -70,7 +88,33 @@ namespace NP.Avalonia.Visuals.Behaviors
         {
             ProcessExePathProperty.Changed.Subscribe(OnStartProcesPathPropertyChanged);
 
+            ProcInitInfoProperty.Changed.Subscribe(OnProcInitInfoPropChanged);
+
             TheProcessProperty.Changed.Subscribe(OnProcessChanged);
+        }
+
+        private static void OnProcInitInfoPropChanged(AvaloniaPropertyChangedEventArgs<ProcessInitInfo> changeArgs)
+        {
+            var sender = (AvaloniaObject)changeArgs.Sender;
+
+            var procInitInfo = changeArgs.NewValue.Value;
+
+            sender.SetProcFromIniInfo(procInitInfo);
+        }
+
+        private static void SetProcFromIniInfo(this AvaloniaObject sender, ProcessInitInfo procInitInfo)
+        {
+            if (procInitInfo?.ExePath == null)
+            {
+                SetTheProcess(sender, null);
+                return;
+            }
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(procInitInfo.ExePath, string.Join(' ', procInitInfo.Args));
+
+            Process p = Process.Start(processStartInfo)!;
+
+            SetTheProcess(sender, p);
         }
 
         private static void OnProcessChanged(AvaloniaPropertyChangedEventArgs<Process?> obj)
@@ -102,24 +146,17 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        private static async void OnStartProcesPathPropertyChanged(AvaloniaPropertyChangedEventArgs<string> changeArgs)
+        private static void OnStartProcesPathPropertyChanged(AvaloniaPropertyChangedEventArgs<string> changeArgs)
         {
             var sender = (AvaloniaObject) changeArgs.Sender;
 
             string exePath = changeArgs.NewValue.Value;
 
-            if (exePath == null)
-            {
-                SetTheProcess(sender, null);
-                return;
-            }
+            ProcessInitInfo processInitInfo = new ProcessInitInfo { ExePath = exePath };
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(exePath);
+            sender.SetProcFromIniInfo(processInitInfo);
 
-            Process p = Process.Start(processStartInfo)!;
-
-            SetTheProcess(sender, p);
-
+            /*
             while (true)
             {
                 await Task.Delay(200);
@@ -131,6 +168,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
 
             SetMainWindowHandle(sender, p.MainWindowHandle);
+            */
         }
 
         public static void DestroyProcess(this Process? p)
@@ -152,5 +190,12 @@ namespace NP.Avalonia.Visuals.Behaviors
                 p.DestroyProcess();
             }
         }
+    }
+
+    public class ProcessInitInfo
+    {
+        public string? ExePath { get; set; }
+
+        public List<string> Args { get; } = new List<string>();
     }
 }
