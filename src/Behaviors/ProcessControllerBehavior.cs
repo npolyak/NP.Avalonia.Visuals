@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -44,6 +45,26 @@ namespace NP.Avalonia.Visuals.Behaviors
                 "ProcInitInfo"
             );
         #endregion ProcInitInfo Attached Avalonia Property
+
+
+        #region MultiPlatformProcInitInfo Attached Avalonia Property
+        public static MultiPlatformProcessInitInfo GetMultiPlatformProcInitInfo(AvaloniaObject obj)
+        {
+            return obj.GetValue(MultiPlatformProcInitInfoProperty);
+        }
+
+        public static void SetMultiPlatformProcInitInfo(AvaloniaObject obj, MultiPlatformProcessInitInfo value)
+        {
+            obj.SetValue(MultiPlatformProcInitInfoProperty, value);
+        }
+
+        public static readonly AttachedProperty<MultiPlatformProcessInitInfo> MultiPlatformProcInitInfoProperty =
+            AvaloniaProperty.RegisterAttached<Control, AvaloniaObject, MultiPlatformProcessInitInfo>
+            (
+                "MultiPlatformProcInitInfo"
+            );
+        #endregion MultiPlatformProcInitInfo Attached Avalonia Property
+
 
 
         #region TheProcess Attached Avalonia Property
@@ -90,7 +111,33 @@ namespace NP.Avalonia.Visuals.Behaviors
 
             ProcInitInfoProperty.Changed.Subscribe(OnProcInitInfoPropChanged);
 
+            MultiPlatformProcInitInfoProperty.Changed.Subscribe(OnMultiPlatformProcInitInfoChanged);
+
             TheProcessProperty.Changed.Subscribe(OnProcessChanged);
+        }
+
+        private static void OnMultiPlatformProcInitInfoChanged(AvaloniaPropertyChangedEventArgs<MultiPlatformProcessInitInfo> changeArgs)
+        {
+            var sender = (AvaloniaObject)changeArgs.Sender;
+
+            var mpProcInitInfo = changeArgs.NewValue.Value;
+
+            ProcessInitInfo? procInitInfo = null;
+
+            if (OperatingSystem.IsWindows())
+            {
+                procInitInfo = mpProcInitInfo.WindowsProcInitInfo;
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                procInitInfo = mpProcInitInfo.LinuxProcInitInfo;
+            }
+            else if (OperatingSystem.IsMacOS())
+            {
+                procInitInfo = mpProcInitInfo.MacProcInitInfo;
+            }
+
+            sender.SetProcFromIniInfo(procInitInfo);
         }
 
         private static void OnProcInitInfoPropChanged(AvaloniaPropertyChangedEventArgs<ProcessInitInfo> changeArgs)
@@ -102,7 +149,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             sender.SetProcFromIniInfo(procInitInfo);
         }
 
-        private static void SetProcFromIniInfo(this AvaloniaObject sender, ProcessInitInfo procInitInfo)
+        private static void SetProcFromIniInfo(this AvaloniaObject sender, ProcessInitInfo? procInitInfo)
         {
             if (procInitInfo?.ExePath == null)
             {
@@ -197,5 +244,31 @@ namespace NP.Avalonia.Visuals.Behaviors
         public string? ExePath { get; set; }
 
         public List<string> Args { get; } = new List<string>();
+    }
+
+    public class MultiPlatformProcessInitInfo
+    {
+        public ProcessInitInfo? DefaultInitInfo { get; set; }
+
+        private ProcessInitInfo? _windowsProcInitInfo;
+        public ProcessInitInfo? WindowsProcInitInfo
+        {
+            get => _windowsProcInitInfo ?? DefaultInitInfo;
+            set => _windowsProcInitInfo = value;
+        }
+
+        private ProcessInitInfo? _linuxProcInitInfo;
+        public ProcessInitInfo? LinuxProcInitInfo 
+        {
+            get => _linuxProcInitInfo ?? DefaultInitInfo;
+            set => _linuxProcInitInfo = value;
+        }
+
+        private ProcessInitInfo? _macProcInitInfo;
+        public ProcessInitInfo? MacProcInitInfo 
+        {
+            get => _macProcInitInfo ?? DefaultInitInfo;
+            set => _macProcInitInfo = value;
+        }
     }
 }
