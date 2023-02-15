@@ -31,7 +31,7 @@ namespace NP.Avalonia.Visuals.WindowsOnly
                 windowToImplantStyle &= ~WindowStyles.WS_DLGFRAME;
                 windowToImplantStyle &= ~WindowStyles.WS_MAXIMIZEBOX;
                 windowToImplantStyle &= ~WindowStyles.WS_CAPTION;
-                windowToImplantStyle |= WindowStyles.WS_CHILD;
+                //windowToImplantStyle |= WindowStyles.WS_CHILD;
 
                 HandleRef handleRef =
                     new HandleRef(null, windowToImplantHandle);

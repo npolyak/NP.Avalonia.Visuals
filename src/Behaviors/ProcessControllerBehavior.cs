@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
@@ -158,6 +159,11 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(procInitInfo.ExePath, string.Join(' ', procInitInfo.Args));
+            
+            if (procInitInfo.WorkingDir != null)
+            {
+                processStartInfo.WorkingDirectory = procInitInfo.WorkingDir;
+            }
 
             Process p = Process.Start(processStartInfo)!;
 
@@ -173,6 +179,8 @@ namespace NP.Avalonia.Visuals.Behaviors
             Control sender = (Control) obj.Sender;
 
             Process? p = obj.NewValue.Value;
+
+            //await Task.Delay(3000);
 
             if (p != null)
             {
@@ -202,20 +210,6 @@ namespace NP.Avalonia.Visuals.Behaviors
             ProcessInitInfo processInitInfo = new ProcessInitInfo { ExePath = exePath };
 
             sender.SetProcFromIniInfo(processInitInfo);
-
-            /*
-            while (true)
-            {
-                await Task.Delay(200);
-
-                if (p.MainWindowHandle != IntPtr.Zero)
-                {
-                    break;
-                }
-            }
-
-            SetMainWindowHandle(sender, p.MainWindowHandle);
-            */
         }
 
         public static void DestroyProcess(this Process? p)
@@ -242,6 +236,9 @@ namespace NP.Avalonia.Visuals.Behaviors
     public class ProcessInitInfo
     {
         public string? ExePath { get; set; }
+
+        // directory to start the executable in
+        public string? WorkingDir { get; set; }
 
         public List<string> Args { get; } = new List<string>();
     }
