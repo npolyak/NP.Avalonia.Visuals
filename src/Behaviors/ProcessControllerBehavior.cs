@@ -117,12 +117,22 @@ namespace NP.Avalonia.Visuals.Behaviors
             TheProcessProperty.Changed.Subscribe(OnProcessChanged);
         }
 
-        private static void OnMultiPlatformProcInitInfoChanged(AvaloniaPropertyChangedEventArgs<MultiPlatformProcessInitInfo> changeArgs)
+        private static void OnMultiPlatformProcInitInfoChanged(this AvaloniaPropertyChangedEventArgs<MultiPlatformProcessInitInfo> changeArgs)
         {
             var sender = (AvaloniaObject)changeArgs.Sender;
 
             var mpProcInitInfo = changeArgs.NewValue.Value;
 
+            sender.OnMultiPlatformProcInitInfoChangedWithExtraParams(mpProcInitInfo);
+        }
+
+        public static void OnMultiPlatformProcInitInfoChangedWithExtraParams
+        (
+            this AvaloniaObject sender, 
+            MultiPlatformProcessInitInfo? mpProcInitInfo,
+            params string[] extraParams
+        )
+        {
             ProcessInitInfo? procInitInfo = null;
 
             if (OperatingSystem.IsWindows())
@@ -136,6 +146,12 @@ namespace NP.Avalonia.Visuals.Behaviors
             else if (OperatingSystem.IsMacOS())
             {
                 procInitInfo = mpProcInitInfo.MacProcInitInfo;
+            }
+
+
+            if (extraParams != null && extraParams.Length > 0)
+            {
+                procInitInfo.Args.InsertRange(procInitInfo.InsertIdx.Value, extraParams);
             }
 
             sender.SetProcFromIniInfo(procInitInfo);
@@ -235,6 +251,11 @@ namespace NP.Avalonia.Visuals.Behaviors
 
     public class ProcessInitInfo
     {
+        // if there is an extra property or properties
+        // e.g. WindowHostId, InsertIdx specifies where
+        // to insert it/them. This is an optional property
+        public int? InsertIdx { get; set; }
+
         public string? ExePath { get; set; }
 
         // directory to start the executable in
