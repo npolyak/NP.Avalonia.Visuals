@@ -38,18 +38,19 @@
 	<Grid RowDefinitions="*, Auto"
 		  Margin="10">
 		<Grid x:Name="GridWithOverlay">
-			<local:OverlayingPopup IsOpen="{Binding Path=#GridWithOverlay.(np:OverlayWindowBehavior.IsOpen)}"
-								   Background="Yellow">
+			<local:OverlayingPopup x:Name="ThePopup"
+								   Background="Yellow"
+								   HorizontalContentAlignment="Stretch"
+								   VerticalContentAlignment="Stretch"
+								   Padding="10">
 				<local:OverlayingPopup.ContentTemplate>
 					<DataTemplate>
-						<Grid Width="100"
-							  Height="100"
-							  Background="Red"/>
+						<Grid Background="Red"/>
 					</DataTemplate>
 				</local:OverlayingPopup.ContentTemplate>
 			</local:OverlayingPopup>
 		</Grid>
-		<ToggleButton IsChecked="{Binding Path=#GridWithOverlay.(np:OverlayWindowBehavior.IsOpen)}"
+		<ToggleButton IsChecked="{Binding Path=#ThePopup.IsOpen}"
 					  Grid.Row="1"
 					  HorizontalAlignment="Right"
 					  VerticalAlignment="Center"/>

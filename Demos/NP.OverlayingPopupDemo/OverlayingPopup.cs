@@ -83,5 +83,19 @@ namespace NP.OverlayingPopupDemo
             );
         #endregion Background Styled Avalonia Property
 
+
+        #region Padding Styled Avalonia Property
+        public Thickness Padding
+        {
+            get { return GetValue(PaddingProperty); }
+            set { SetValue(PaddingProperty, value); }
+        }
+
+        public static readonly StyledProperty<Thickness> PaddingProperty =
+            AvaloniaProperty.Register<OverlayingPopup, Thickness>
+            (
+                nameof(Padding)
+            );
+        #endregion Padding Styled Avalonia Property
     }
 }
