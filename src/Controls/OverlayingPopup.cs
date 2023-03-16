@@ -5,7 +5,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Layout;
 using Avalonia.Media;
 
-namespace NP.OverlayingPopupDemo
+namespace NP.Avalonia.Visuals.Controls
 {
     public class OverlayingPopup : Popup, IContentControl
     {

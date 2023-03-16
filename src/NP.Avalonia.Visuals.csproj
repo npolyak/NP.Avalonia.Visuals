@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>NP.Avalonia.Visuals</RootNamespace>
 		<PackageId>NP.Avalonia.Visuals</PackageId>
-		<Version>1.0.37</Version>
+		<Version>1.0.38</Version>
 		<Authors>Nick Polyak, Ph. D.</Authors>
 		<Company>AWebPros</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -37,6 +37,7 @@
 		<AvaloniaXaml Remove="Themes\ButtonStyles.axaml" />
 		<AvaloniaXaml Remove="Themes\CustomWindowStyles.axaml" />
 		<AvaloniaXaml Remove="Themes\Geometries.axaml" />
+		<AvaloniaXaml Remove="Themes\OverlayingPopupStyles.axaml" />
 		<AvaloniaXaml Remove="Themes\ThemeStyles.axaml" />
 	</ItemGroup>
 
@@ -54,6 +55,7 @@
 		<AvaloniaResource Include="Themes\ButtonStyles.axaml" />
 		<AvaloniaResource Include="Themes\CustomWindowStyles.axaml" />
 		<AvaloniaResource Include="Themes\Geometries.axaml" />
+		<AvaloniaResource Include="Themes\OverlayingPopupStyles.axaml" />
 		<AvaloniaResource Include="Themes\ThemeStyles.axaml" />
 	</ItemGroup>
 
