@@ -20,11 +20,16 @@
 	<Grid RowDefinitions="*,*"	
 		  Margin="15">
 		<CheckBox HorizontalAlignment="Center"
-					  VerticalAlignment="Center"/>
+				  VerticalAlignment="Center"						   
+				  Width="40"
+				  Height="40"/>
 
 		<np:NpToggleButton Grid.Row="1"
 						   HorizontalAlignment="Center"
-						   VerticalAlignment="Center">
+						   VerticalAlignment="Center" 
+						   Width="40"
+						   Height="40"
+						   >
 			
 		</np:NpToggleButton>
 	</Grid>
