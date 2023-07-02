@@ -13,7 +13,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 {
     public class PropContainer : KeyedDisposable<AvaloniaProperty?>
     {
-        public void Subscribe(IAvaloniaObject avaloniaObject, Action<object> subscribeAction)
+        public void Subscribe(AvaloniaObject avaloniaObject, Action<object> subscribeAction)
         {
             Disposable = avaloniaObject.GetObservable(Key).Subscribe(subscribeAction);
         }
@@ -21,9 +21,9 @@ namespace NP.Avalonia.Visuals.Behaviors
 
     public class PropertiesChangeObserver : IDisposable
     {
-        ReplaySubject<IAvaloniaObject>? _resultObservable = new ReplaySubject<IAvaloniaObject>();
+        ReplaySubject<AvaloniaObject>? _resultObservable = new ReplaySubject<AvaloniaObject>();
 
-        public IObservable<IAvaloniaObject>? ResultObservable => _resultObservable;
+        public IObservable<AvaloniaObject>? ResultObservable => _resultObservable;
 
         private ObservableCollection<PropContainer> _props = new ObservableCollection<PropContainer>();
 
@@ -57,8 +57,8 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        private IAvaloniaObject? _avaloniaObject;
-        public IAvaloniaObject? TheAvaloniaObject
+        private AvaloniaObject? _avaloniaObject;
+        public AvaloniaObject? TheAvaloniaObject
         {
             get => _avaloniaObject;
             set
@@ -127,18 +127,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region PropChangeObserver Attached Avalonia Property
-        public static PropertiesChangeObserver? GetPropChangeObserver(IAvaloniaObject obj)
+        public static PropertiesChangeObserver? GetPropChangeObserver(AvaloniaObject obj)
         {
             return obj.GetValue(PropChangeObserverProperty);
         }
 
-        public static void SetPropChangeObserver(IAvaloniaObject obj, PropertiesChangeObserver? value)
+        public static void SetPropChangeObserver(AvaloniaObject obj, PropertiesChangeObserver? value)
         {
             obj.SetValue(PropChangeObserverProperty!, value);
         }
 
         public static readonly AttachedProperty<PropertiesChangeObserver> PropChangeObserverProperty =
-            AvaloniaProperty.RegisterAttached<object, IAvaloniaObject, PropertiesChangeObserver>
+            AvaloniaProperty.RegisterAttached<object, AvaloniaObject, PropertiesChangeObserver>
             (
                 "PropChangeObserver"
             );
@@ -151,7 +151,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnPropChangeObserverPropChanged(AvaloniaPropertyChangedEventArgs<PropertiesChangeObserver> args)
         {
-            IAvaloniaObject sender = args.Sender;
+            AvaloniaObject sender = args.Sender;
 
             var oldObserver = args.OldValue.Value;
 

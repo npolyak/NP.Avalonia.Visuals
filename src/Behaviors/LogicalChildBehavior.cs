@@ -7,10 +7,10 @@ namespace NP.Avalonia.Visuals.Behaviors
 {
     public abstract class LogicalChildBehavior : IDisposable
     {
-        private IDisposable _subscription = null;
-        IControl _control;
+        private IDisposable? _subscription = null;
+        Control? _control;
 
-        protected internal IControl TheControl 
+        protected internal Control? TheControl 
         {
             get => _control; 
             set
@@ -24,7 +24,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
                 if (_control != null)
                 {
-                    _subscription = _control.LogicalChildren.AddBehavior(OnChildAdded, OnChildRemoved);
+                    _subscription = _control.GetLogicalChildren().AddBehavior(OnChildAdded, OnChildRemoved);
                 }
             }
         }

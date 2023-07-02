@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Markup.Xaml.Styling;
 using NP.Avalonia.Visuals.ThemingAndL10N;
 using NP.Utilities;
 using System.Collections.Generic;

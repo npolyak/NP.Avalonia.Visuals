@@ -18,7 +18,7 @@ namespace NP.Avalonia.Visuals.Controls
     public class AutoGrid : Control
     {
         private Grid _grid = new Grid();
-        private KeyedDisposables<IControl> _keyedDisposables = new KeyedDisposables<IControl>();
+        private KeyedDisposables<Control> _keyedDisposables = new KeyedDisposables<Control>();
 
         private IDisposable _behaviorSubscription;
         private IBinding _minRowBinding;
@@ -196,13 +196,13 @@ namespace NP.Avalonia.Visuals.Controls
             }
         }
 
-        private void OnChildRemoved(IControl child)
+        private void OnChildRemoved(Control child)
         {
             PropertiesChangeObserver.SetPropChangeObserver(child, null);
             _keyedDisposables.Remove(child);
         }
 
-        private void OnChildAdded(IControl child)
+        private void OnChildAdded(Control child)
         {
             PropertiesChangeObserver propertiesChangeObserver = new PropertiesChangeObserver();
 
@@ -236,7 +236,7 @@ namespace NP.Avalonia.Visuals.Controls
             child.Bind(Grid.ColumnProperty, columnNumberBinding);
         }
 
-        private void OnChildChanged(IAvaloniaObject child)
+        private void OnChildChanged(AvaloniaObject child)
         {
             Control childControl = (Control)child;
 

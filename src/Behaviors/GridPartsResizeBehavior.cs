@@ -11,36 +11,36 @@ namespace NP.Avalonia.Visuals.Behaviors
     {
 
         #region Target Attached Avalonia Property
-        public static IControl GetTarget(Grid obj)
+        public static Control GetTarget(Grid obj)
         {
             return obj.GetValue(TargetProperty);
         }
 
-        public static void SetTarget(Grid obj, IControl value)
+        public static void SetTarget(Grid obj, Control value)
         {
             obj.SetValue(TargetProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl> TargetProperty =
-            AvaloniaProperty.RegisterAttached<Grid, Grid, IControl>
+        public static readonly AttachedProperty<Control> TargetProperty =
+            AvaloniaProperty.RegisterAttached<Grid, Grid, Control>
             (
                 "Target"
             );
         #endregion Target Attached Avalonia Property
 
         #region CurrentSplitterPosition Attached Avalonia Property
-        public static double? GetCurrentSplitterPosition(IControl obj)
+        public static double? GetCurrentSplitterPosition(Control obj)
         {
             return obj.GetValue(CurrentSplitterPositionProperty);
         }
 
-        public static void SetCurrentSplitterPosition(IControl obj, double? value)
+        public static void SetCurrentSplitterPosition(Control obj, double? value)
         {
             obj.SetValue(CurrentSplitterPositionProperty, value);
         }
 
         public static readonly AttachedProperty<double?> CurrentSplitterPositionProperty =
-            AvaloniaProperty.RegisterAttached<GridPartsResizeBehavior, IControl, double?>
+            AvaloniaProperty.RegisterAttached<GridPartsResizeBehavior, Control, double?>
             (
                 "CurrentSplitterPosition"
             );
@@ -53,7 +53,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             TargetProperty.Changed.Subscribe(OnTargetChanged);
         }
 
-        private static void OnTargetChanged(AvaloniaPropertyChangedEventArgs<IControl> changedArgs)
+        private static void OnTargetChanged(AvaloniaPropertyChangedEventArgs<Control> changedArgs)
         {
             Grid grid = (Grid) changedArgs.Sender;
 
@@ -63,7 +63,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             double initialShift = 0;
             double minChange = 0, maxChange = 0;
             GridSplitter? gridSplitter = null;
-            IControl targetControl = changedArgs.NewValue.Value;
+            Control targetControl = changedArgs.NewValue.Value;
 
             void OnDragStarted(object? sender, VectorEventArgs e)
             {
@@ -125,7 +125,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                 SetCurrentSplitterPosition(targetControl, null);
             }
 
-            void OnChildAdded(IControl child)
+            void OnChildAdded(Control child)
             {
                 if (child is GridSplitter gridSplitter)
                 {
@@ -134,7 +134,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                     gridSplitter.DragCompleted += OnDragCompleted;
                 }
             }
-            void OnChildRemoved(IControl child)
+            void OnChildRemoved(Control child)
             {
                 if (child is GridSplitter gridSplitter)
                 {

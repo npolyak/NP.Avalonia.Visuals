@@ -13,7 +13,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Input.Raw;
+using Avalonia.Platform;
 using Avalonia.VisualTree;
+using NP.Avalonia.Visuals.Controls;
 using NP.Utilities;
 using System;
 using System.Linq;
@@ -38,7 +40,8 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnInputReceived(RawInputEventArgs e)
         {
-            if (!e.Handled && e is RawPointerEventArgs margs)
+            bool handled = e.Handled;
+            if (!handled && e is RawPointerEventArgs margs)
                 ProcessRawEvent(margs);
         }
 
@@ -61,10 +64,21 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         public static Window? CapturedWindow => _capturedWindow;
         public static IInputElement CapturedControl =>
-            Mouse?.Captured;
+            Mouse?.TryGetPointer(null)?.Captured;
 
-        private static IMouseDevice Mouse =>
-            (_capturedWindow as IInputRoot)?.MouseDevice;
+
+        static IMouseDevice _mouseDevice = null;
+        private static IMouseDevice Mouse
+        {
+            get
+            {
+                if (_mouseDevice == null)
+                {
+                    _mouseDevice = _capturedWindow?.PlatformImpl?.GetPropValue<IMouseDevice>("MouseDevice", true);
+                }
+                return _mouseDevice;
+            }
+        }
 
         public static void Capture(Control control)
         { 
@@ -73,7 +87,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                        .OfType<Window>()
                        .FirstOrDefault()!;
 
-            Mouse?.Capture(control);
+            Mouse?.TryGetPointer(null)?.Capture(control);
 
             control.PointerReleased -= Control_PointerReleased;
             control.PointerReleased += Control_PointerReleased;
@@ -87,7 +101,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                 CapturedControl.PointerReleased -= Control_PointerReleased;
             }
 
-            Mouse?.Capture(null);
+            Mouse?.TryGetPointer(null)?.Capture(null);
             _capturedWindow = null;
         }
 

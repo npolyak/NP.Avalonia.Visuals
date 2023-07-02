@@ -4,9 +4,9 @@ namespace NP.Avalonia.Visuals
 {
     internal class ControlContainer
     {
-        public IControl Control { get; }
+        public Control Control { get; }
 
-        internal ControlContainer(IControl control)
+        internal ControlContainer(Control control)
         {
             Control = control;
         }

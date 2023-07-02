@@ -8,18 +8,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class SetDynamicResourceBehavior
     {
         #region ResourceKey Attached Avalonia Property
-        public static object GetResourceKey(IControl obj)
+        public static object GetResourceKey(Control obj)
         {
             return obj.GetValue(ResourceKeyProperty);
         }
 
-        public static void SetResourceKey(IControl obj, object value)
+        public static void SetResourceKey(Control obj, object value)
         {
             obj.SetValue(ResourceKeyProperty, value);
         }
 
         public static readonly AttachedProperty<object> ResourceKeyProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, object>
+            AvaloniaProperty.RegisterAttached<object, Control, object>
             (
                 "ResourceKey"
             );
@@ -27,18 +27,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region PropertyToSet Attached Avalonia Property
-        public static AvaloniaProperty GetPropertyToSet(IControl obj)
+        public static AvaloniaProperty GetPropertyToSet(Control obj)
         {
             return obj.GetValue(PropertyToSetProperty);
         }
 
-        public static void SetPropertyToSet(IControl obj, AvaloniaProperty value)
+        public static void SetPropertyToSet(Control obj, AvaloniaProperty value)
         {
             obj.SetValue(PropertyToSetProperty, value);
         }
 
         public static readonly AttachedProperty<AvaloniaProperty> PropertyToSetProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, AvaloniaProperty>
+            AvaloniaProperty.RegisterAttached<object, Control, AvaloniaProperty>
             (
                 "PropertyToSet"
             );
@@ -52,12 +52,12 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnPropChanged(AvaloniaPropertyChangedEventArgs args)
         {
-            IControl control = (IControl) args.Sender;
+            Control control = (Control) args.Sender;
 
             SetDynamicResource(control);
         }
 
-        private static void SetDynamicResource(IControl control)
+        private static void SetDynamicResource(Control control)
         {
             object resourceKey = GetResourceKey(control);
             if (resourceKey == null)

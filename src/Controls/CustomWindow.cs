@@ -19,6 +19,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using NP.Avalonia.Visuals.Behaviors;
@@ -199,7 +200,8 @@ namespace NP.Avalonia.Visuals.Controls
                 }
                 else
                 {
-                    PlatformImpl?.BeginResizeDrag(edge, e);
+                    this.BeginResizeDrag(edge, e);
+                    //PlatformImpl?.BeginResizeDrag(edge, e);
                 }
                 SetIsHitVisibleOnResizeControls(true);
 
@@ -359,7 +361,8 @@ namespace NP.Avalonia.Visuals.Controls
 
         internal void Resize(Size size)
         {
-            PlatformImpl?.Resize(size);
+            this.ArrangeSetBounds(size);
+            //PlatformImpl?.Resize(size);
         }
 
         #region DragOnBeginMove Styled Avalonia Property
@@ -469,14 +472,14 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region CustomHeaderIcon Avalonia Property
-        public IBitmap CustomHeaderIcon
+        public Bitmap CustomHeaderIcon
         {
             get { return GetValue(CustomHeaderIconProperty); }
             set { SetValue(CustomHeaderIconProperty, value); }
         }
 
-        public static readonly AttachedProperty<IBitmap> CustomHeaderIconProperty =
-            AvaloniaProperty.RegisterAttached<CustomWindow, Control, IBitmap>
+        public static readonly AttachedProperty<Bitmap> CustomHeaderIconProperty =
+            AvaloniaProperty.RegisterAttached<CustomWindow, Control, Bitmap>
             (
                 "CustomHeaderIcon"
             );

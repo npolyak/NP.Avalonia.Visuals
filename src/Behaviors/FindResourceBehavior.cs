@@ -8,18 +8,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class FindResourceBehavior
     {
         #region ResourceKey Attached Avalonia Property
-        public static string GetResourceKey(IAvaloniaObject obj)
+        public static string GetResourceKey(AvaloniaObject obj)
         {
             return obj.GetValue(ResourceKeyProperty);
         }
 
-        public static void SetResourceKey(IAvaloniaObject obj, string value)
+        public static void SetResourceKey(AvaloniaObject obj, string value)
         {
             obj.SetValue(ResourceKeyProperty, value);
         }
 
         public static readonly AttachedProperty<string> ResourceKeyProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, string>
+            AvaloniaProperty.RegisterAttached<object, Control, string>
             (
                 "ResourceKey"
             );
@@ -27,18 +27,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TheProp Attached Avalonia Property
-        public static AvaloniaProperty GetTheProp(IAvaloniaObject obj)
+        public static AvaloniaProperty GetTheProp(AvaloniaObject obj)
         {
             return obj.GetValue(ThePropProperty);
         }
 
-        public static void SetTheProp(IAvaloniaObject obj, AvaloniaProperty value)
+        public static void SetTheProp(AvaloniaObject obj, AvaloniaProperty value)
         {
             obj.SetValue(ThePropProperty, value);
         }
 
         public static readonly AttachedProperty<AvaloniaProperty> ThePropProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, AvaloniaProperty>
+            AvaloniaProperty.RegisterAttached<object, Control, AvaloniaProperty>
             (
                 "TheProp"
             );
@@ -54,19 +54,19 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnPropChanged(AvaloniaPropertyChangedEventArgs<AvaloniaProperty> eventArgs)
         {
-            IControl sender = (IControl)eventArgs.Sender;
+            Control sender = (Control)eventArgs.Sender;
 
             sender.SetResourceOnProp();
         }
 
         private static void OnResourceKeyChanged(AvaloniaPropertyChangedEventArgs<string> eventArgs)
         {
-            IControl sender = (IControl)eventArgs.Sender;
+            Control sender = (Control)eventArgs.Sender;
 
             sender.SetResourceOnProp();
         }
 
-        private static void SetResourceOnProp(this IControl sender)
+        private static void SetResourceOnProp(this Control sender)
         {
             string resourceKey = GetResourceKey(sender);
 

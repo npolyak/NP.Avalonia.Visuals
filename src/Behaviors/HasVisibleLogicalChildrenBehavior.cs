@@ -15,7 +15,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         protected override void OnChildAdded(ILogical childObj)
         {
-            IControl child = (IControl)childObj;
+            Control child = (Control)childObj;
 
             IDisposable subscriptionToken = 
                 child.GetObservable(Visual.IsVisibleProperty).Subscribe(OnIsChildVisibleChanged);
@@ -32,7 +32,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private void ResetHasVisibleChildren()
         {
-            bool hasVisibleLogicalChildren = TheControl.LogicalChildren.Any(c => (c as IControl).IsVisible);
+            bool hasVisibleLogicalChildren = TheControl.GetLogicalChildren().Any(c => (c as Control).IsVisible);
 
             AttachedProperties.SetHasVisibleLogicalChildren(TheControl, hasVisibleLogicalChildren);
         }

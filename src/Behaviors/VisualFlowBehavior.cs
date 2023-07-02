@@ -9,18 +9,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     {
 
         #region ReadVisualFlow Attached Avalonia Property
-        public static VisualFlow GetReadVisualFlow(IControl obj)
+        public static VisualFlow GetReadVisualFlow(Control obj)
         {
             return obj.GetValue(ReadVisualFlowProperty);
         }
 
-        internal static void SetReadVisualFlow(IControl obj, VisualFlow value)
+        internal static void SetReadVisualFlow(Control obj, VisualFlow value)
         {
             obj.SetValue(ReadVisualFlowProperty, value);
         }
 
         public static readonly AttachedProperty<VisualFlow> ReadVisualFlowProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, VisualFlow>
+            AvaloniaProperty.RegisterAttached<object, Control, VisualFlow>
             (
                 "ReadVisualFlow",
                 VisualFlow.Normal, 
@@ -30,18 +30,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TheVisualFlow Attached Avalonia Property
-        public static VisualFlow GetTheVisualFlow(IControl obj)
+        public static VisualFlow GetTheVisualFlow(Control obj)
         {
             return obj.GetValue(TheVisualFlowProperty);
         }
 
-        public static void SetTheVisualFlow(IControl obj, VisualFlow value)
+        public static void SetTheVisualFlow(Control obj, VisualFlow value)
         {
             obj.SetValue(TheVisualFlowProperty, value);
         }
 
         public static readonly AttachedProperty<VisualFlow> TheVisualFlowProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, VisualFlow>
+            AvaloniaProperty.RegisterAttached<object, Control, VisualFlow>
             (
                 "TheVisualFlow",
                 VisualFlow.Normal
@@ -53,7 +53,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             TheVisualFlowProperty.Changed.Subscribe(OnVisualFlowChanged);
         }
 
-        private static void CheckTransform(this IControl control, bool isNormalFlow)
+        private static void CheckTransform(this Control control, bool isNormalFlow)
         {
             if (!isNormalFlow && control.RenderTransform != null && !control.RenderTransform.Value.IsIdentity)
             {
@@ -61,7 +61,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        private static void SetTransform(this IControl control, bool isNormalFlow)
+        private static void SetTransform(this Control control, bool isNormalFlow)
         {
             control.CheckTransform(isNormalFlow);
 
@@ -85,7 +85,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnVisualFlowChanged(AvaloniaPropertyChangedEventArgs<VisualFlow> args)
         {
-            IControl control = (IControl) args.Sender;
+            Control control = (Control) args.Sender;
 
             VisualFlow visualFlow = args.NewValue.Value;
             bool isNormalFlow = (visualFlow == VisualFlow.Normal);

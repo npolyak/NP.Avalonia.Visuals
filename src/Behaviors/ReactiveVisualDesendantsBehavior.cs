@@ -1,13 +1,14 @@
-﻿using Avalonia.VisualTree;
+﻿using Avalonia;
+using Avalonia.VisualTree;
 using NP.Concepts.Behaviors;
 
 namespace NP.Avalonia.Visuals.Behaviors
 {
-    public class ReactiveVisualDesendantsBehavior : FlattenReactiveTreeBehavior<IVisual>
+    public class ReactiveVisualDesendantsBehavior : FlattenReactiveTreeBehavior<Visual>
     {
-        public ReactiveVisualDesendantsBehavior(IVisual root) 
+        public ReactiveVisualDesendantsBehavior(Visual root) 
             : 
-            base(root, visual => visual.VisualChildren)
+            base(root, visual => visual.GetVisualChildren())
         {
         }
     }

@@ -39,7 +39,7 @@ namespace NP.Avalonia.Visuals.MarkupExtensions
 		Dictionary<IDisposable, object> dict = new Dictionary<IDisposable, object>();
 
 		public new InstancedBinding Initiate(
-			IAvaloniaObject target,
+			AvaloniaObject target,
 			AvaloniaProperty targetProperty,
 			object? anchor = null,
 			bool enableDataValidation = false)

@@ -37,7 +37,7 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 
             IEnumerable itemsSource = args.NewValue.Value;
 
-            dataGrid.Items = itemsSource == null ? null : new DataGridCollectionView(itemsSource);
+            dataGrid.ItemsSource = itemsSource == null ? null : new DataGridCollectionView(itemsSource);
         }
     }
 }

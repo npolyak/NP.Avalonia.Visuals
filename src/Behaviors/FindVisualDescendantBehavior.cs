@@ -8,8 +8,8 @@ namespace NP.Avalonia.Visuals.Behaviors
 {
     public class FindVisualDescendantBehavior 
     {
-        IControl? _foundDescendant;
-        public IControl? FoundDescendant 
+        Control? _foundDescendant;
+        public Control? FoundDescendant 
         {
             get => _foundDescendant;
             private set
@@ -29,8 +29,8 @@ namespace NP.Avalonia.Visuals.Behaviors
         private IDisposable? _visualDescendantsBehavior;
         private ReactiveVisualDesendantsBehavior? _reactiveVisualDescendants;
 
-        IControl? _attachedToControl;
-        private IControl? AttachedToControl 
+        Control? _attachedToControl;
+        private Control? AttachedToControl 
         { 
             get => _attachedToControl; 
             set
@@ -70,9 +70,9 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        private void OnVisualDescendantAdded(IVisual childVisual)
+        private void OnVisualDescendantAdded(Visual childVisual)
         {
-            IControl childControl = (IControl)childVisual;
+            Control childControl = (Control)childVisual;
 
             if (childControl.Name == DescendantName)
             {
@@ -83,18 +83,18 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         #region Result Attached Avalonia Property
-        public static IControl? GetResult(IControl obj)
+        public static Control? GetResult(Control obj)
         {
             return obj.GetValue(ResultProperty);
         }
 
-        public static void SetResult(IControl obj, IControl? value)
+        public static void SetResult(Control obj, Control? value)
         {
             obj.SetValue(ResultProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl?> ResultProperty =
-            AvaloniaProperty.RegisterAttached<FindVisualDescendantBehavior, IControl, IControl?>
+        public static readonly AttachedProperty<Control?> ResultProperty =
+            AvaloniaProperty.RegisterAttached<FindVisualDescendantBehavior, Control, Control?>
             (
                 "Result"
             );
@@ -102,18 +102,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region BehaviorInstance Attached Avalonia Property
-        public static FindVisualDescendantBehavior GetBehaviorInstance(IControl obj)
+        public static FindVisualDescendantBehavior GetBehaviorInstance(Control obj)
         {
             return obj.GetValue(BehaviorInstanceProperty);
         }
 
-        public static void SetBehaviorInstance(IControl obj, FindVisualDescendantBehavior value)
+        public static void SetBehaviorInstance(Control obj, FindVisualDescendantBehavior value)
         {
             obj.SetValue(BehaviorInstanceProperty, value);
         }
 
         public static readonly AttachedProperty<FindVisualDescendantBehavior> BehaviorInstanceProperty =
-            AvaloniaProperty.RegisterAttached<FindVisualDescendantBehavior, IControl, FindVisualDescendantBehavior>
+            AvaloniaProperty.RegisterAttached<FindVisualDescendantBehavior, Control, FindVisualDescendantBehavior>
             (
                 "BehaviorInstance"
             );
@@ -137,7 +137,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
             if (newBehavior != null)
             {
-                newBehavior.AttachedToControl = (IControl)obj.Sender; 
+                newBehavior.AttachedToControl = (Control)obj.Sender; 
             }
         }
     }

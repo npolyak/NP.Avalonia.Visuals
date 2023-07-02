@@ -108,7 +108,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnEvent(object? sender, RoutedEventArgs e)
         {
-            IControl control = (Control)sender!;
+            Control control = (Control)sender!;
 
             RoutedEventArgs args = new RoutedEventArgs();
             args.Source = control;
@@ -127,18 +127,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region EventToFire Attached Avalonia Property
-        public static RoutedEvent GetEventToFire(IControl obj)
+        public static RoutedEvent GetEventToFire(Control obj)
         {
             return obj.GetValue(EventToFireProperty);
         }
 
-        public static void SetEventToFire(IControl obj, RoutedEvent value)
+        public static void SetEventToFire(Control obj, RoutedEvent value)
         {
             obj.SetValue(EventToFireProperty, value);
         }
 
         public static readonly AttachedProperty<RoutedEvent> EventToFireProperty =
-            AvaloniaProperty.RegisterAttached<EventBehavior, IControl, RoutedEvent>
+            AvaloniaProperty.RegisterAttached<EventBehavior, Control, RoutedEvent>
             (
                 "EventToFire"
             );

@@ -24,7 +24,7 @@ namespace NP.Avalonia.Visuals.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is IBitmap bitmap)
+            if (value is Bitmap bitmap)
             {
                 return new WindowIcon(bitmap);
             }

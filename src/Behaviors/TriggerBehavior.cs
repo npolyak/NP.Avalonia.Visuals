@@ -9,18 +9,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class TriggerBehavior
     {
         #region SourceProperty Attached Avalonia Property
-        public static AvaloniaProperty GetSourceProperty(IControl obj)
+        public static AvaloniaProperty GetSourceProperty(Control obj)
         {
             return obj.GetValue(SourcePropertyProperty);
         }
 
-        public static void SetSourceProperty(IControl obj, AvaloniaProperty value)
+        public static void SetSourceProperty(Control obj, AvaloniaProperty value)
         {
             obj.SetValue(SourcePropertyProperty, value);
         }
 
         public static readonly AttachedProperty<AvaloniaProperty> SourcePropertyProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, AvaloniaProperty>
+            AvaloniaProperty.RegisterAttached<object, Control, AvaloniaProperty>
             (
                 "SourceProperty"
             );
@@ -28,18 +28,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region SourceTriggerValue Attached Avalonia Property
-        public static object GetSourceTriggerValue(IControl obj)
+        public static object GetSourceTriggerValue(Control obj)
         {
             return obj.GetValue(SourceTriggerValueProperty);
         }
 
-        public static void SetSourceTriggerValue(IControl obj, object value)
+        public static void SetSourceTriggerValue(Control obj, object value)
         {
             obj.SetValue(SourceTriggerValueProperty, value);
         }
 
         public static readonly AttachedProperty<object> SourceTriggerValueProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, object>
+            AvaloniaProperty.RegisterAttached<object, Control, object>
             (
                 "SourceTriggerValue"
             );
@@ -47,18 +47,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TargetProperty Attached Avalonia Property
-        public static AvaloniaProperty GetTargetProperty(IControl obj)
+        public static AvaloniaProperty GetTargetProperty(Control obj)
         {
             return obj.GetValue(TargetPropertyProperty);
         }
 
-        public static void SetTargetProperty(IControl obj, AvaloniaProperty value)
+        public static void SetTargetProperty(Control obj, AvaloniaProperty value)
         {
             obj.SetValue(TargetPropertyProperty, value);
         }
 
         public static readonly AttachedProperty<AvaloniaProperty> TargetPropertyProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, AvaloniaProperty>
+            AvaloniaProperty.RegisterAttached<object, Control, AvaloniaProperty>
             (
                 "TargetProperty"
             );
@@ -66,24 +66,24 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TargetValue Attached Avalonia Property
-        public static object GetTargetValue(IControl obj)
+        public static object GetTargetValue(Control obj)
         {
             return obj.GetValue(TargetValueProperty);
         }
 
-        public static void SetTargetValue(IControl obj, object value)
+        public static void SetTargetValue(Control obj, object value)
         {
             obj.SetValue(TargetValueProperty, value);
         }
 
         public static readonly AttachedProperty<object> TargetValueProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, object>
+            AvaloniaProperty.RegisterAttached<object, Control, object>
             (
                 "TargetValue"
             );
         #endregion TargetValue Attached Avalonia Property
 
-        private static void SetTargetValueImpl(IControl control)
+        private static void SetTargetValueImpl(Control control)
         {
             AvaloniaProperty sourceProperty = GetSourceProperty(control);
             AvaloniaProperty targetProperty = GetTargetProperty(control);
@@ -115,18 +115,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region TheSubscription Attached Avalonia Property
-        private static IDisposable GetTheSubscription(IControl obj)
+        private static IDisposable GetTheSubscription(Control obj)
         {
             return obj.GetValue(TheSubscriptionProperty);
         }
 
-        private static void SetTheSubscription(IControl obj, IDisposable value)
+        private static void SetTheSubscription(Control obj, IDisposable value)
         {
             obj.SetValue(TheSubscriptionProperty, value);
         }
 
         private static readonly AttachedProperty<IDisposable> TheSubscriptionProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, IDisposable>
+            AvaloniaProperty.RegisterAttached<object, Control, IDisposable>
             (
                 "TheSubscription"
             );
@@ -144,7 +144,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnSourcePropChanged(AvaloniaPropertyChangedEventArgs<AvaloniaProperty> args)
         {
-            IControl control = args.Sender as IControl;
+            Control control = args.Sender as Control;
             SetTargetValueImpl(control);
 
             IDisposable oldSubscription = GetTheSubscription(control);
@@ -164,7 +164,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnSourcePropValueChanged(AvaloniaPropertyChangedEventArgs args)
         {
-            IControl control = args.Sender as IControl;
+            Control control = args.Sender as Control;
 
             AvaloniaProperty sourceProperty = GetSourceProperty(control);
 
@@ -176,12 +176,12 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnTargetPropChanged(AvaloniaPropertyChangedEventArgs<AvaloniaProperty> args)
         {
-            SetTargetValueImpl(args.Sender as IControl);
+            SetTargetValueImpl(args.Sender as Control);
         }
 
         private static void OnValChanged(AvaloniaPropertyChangedEventArgs<object> args)
         {
-            SetTargetValueImpl(args.Sender as IControl);
+            SetTargetValueImpl(args.Sender as Control);
         }
     }
 }

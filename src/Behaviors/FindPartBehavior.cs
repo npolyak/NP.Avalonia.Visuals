@@ -9,18 +9,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class FindPartBehavior
     {
         #region VisualPart Attached Avalonia Property
-        public static IControl GetVisualPart(AvaloniaObject obj)
+        public static Control GetVisualPart(AvaloniaObject obj)
         {
             return obj.GetValue(VisualPartProperty);
         }
 
-        public static void SetVisualPart(AvaloniaObject obj, IControl value)
+        public static void SetVisualPart(AvaloniaObject obj, Control value)
         {
             obj.SetValue(VisualPartProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl> VisualPartProperty =
-            AvaloniaProperty.RegisterAttached<object, Control, IControl>
+        public static readonly AttachedProperty<Control> VisualPartProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, Control>
             (
                 "VisualPart"
             );
@@ -28,18 +28,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region AncestorObject Attached Avalonia Property
-        public static IControl GetAncestorObject(AvaloniaObject obj)
+        public static Control GetAncestorObject(AvaloniaObject obj)
         {
             return obj.GetValue(AncestorObjectProperty);
         }
 
-        public static void SetAncestorObject(AvaloniaObject obj, IControl value)
+        public static void SetAncestorObject(AvaloniaObject obj, Control value)
         {
             obj.SetValue(AncestorObjectProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl> AncestorObjectProperty =
-            AvaloniaProperty.RegisterAttached<object, Control, IControl>
+        public static readonly AttachedProperty<Control> AncestorObjectProperty =
+            AvaloniaProperty.RegisterAttached<object, Control, Control>
             (
                 "AncestorObject"
             );
@@ -50,14 +50,14 @@ namespace NP.Avalonia.Visuals.Behaviors
             AncestorObjectProperty.Changed.Subscribe(OnAncestorObjectChanged);
         }
 
-        private static void OnAncestorObjectChanged(AvaloniaPropertyChangedEventArgs<IControl> args)
+        private static void OnAncestorObjectChanged(AvaloniaPropertyChangedEventArgs<Control> args)
         {
-            IControl? ancestor = args.NewValue.Value;
+            Control? ancestor = args.NewValue.Value;
 
             if (ancestor == null)
                 return;
 
-            IControl sender = (IControl) args.Sender;
+            Control sender = (Control) args.Sender;
 
             ancestor.SetValue(VisualPartProperty, sender);
         }

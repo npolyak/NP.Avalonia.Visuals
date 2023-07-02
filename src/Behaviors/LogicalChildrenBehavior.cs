@@ -18,7 +18,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         }
 
         public static readonly AttachedProperty<LogicalChildBehavior> TheLogicalChildBehaviorProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, LogicalChildBehavior>
+            AvaloniaProperty.RegisterAttached<object, Control, LogicalChildBehavior>
             (
                 "TheLogicalChildBehavior"
             );
@@ -31,7 +31,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnLogicalChildBehaviorChanged(AvaloniaPropertyChangedEventArgs<LogicalChildBehavior> change)
         {
-            IControl control = (IControl) change.Sender;
+            Control control = (Control) change.Sender;
 
             LogicalChildBehavior oldBehavior = change.OldValue.Value;
 

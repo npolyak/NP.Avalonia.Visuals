@@ -8,36 +8,36 @@ namespace NP.Avalonia.Visuals.Behaviors
     public static class HandleEventBehavior
     {
         #region TheEvent Attached Avalonia Property
-        public static RoutedEvent GetTheEvent(IControl obj)
+        public static RoutedEvent GetTheEvent(Control obj)
         {
             return obj.GetValue(TheEventProperty);
         }
 
-        public static void SetTheEvent(IControl obj, RoutedEvent value)
+        public static void SetTheEvent(Control obj, RoutedEvent value)
         {
             obj.SetValue(TheEventProperty, value);
         }
 
         public static readonly AttachedProperty<RoutedEvent> TheEventProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, RoutedEvent>
+            AvaloniaProperty.RegisterAttached<object, Control, RoutedEvent>
             (
                 "TheEvent"
             );
         #endregion TheEvent Attached Avalonia Property
 
         #region TheRoutingStrategies Attached Avalonia Property
-        public static RoutingStrategies GetTheRoutingStrategies(IControl obj)
+        public static RoutingStrategies GetTheRoutingStrategies(Control obj)
         {
             return obj.GetValue(TheRoutingStrategiesProperty);
         }
 
-        public static void SetTheRoutingStrategies(IControl obj, RoutingStrategies value)
+        public static void SetTheRoutingStrategies(Control obj, RoutingStrategies value)
         {
             obj.SetValue(TheRoutingStrategiesProperty, value);
         }
 
         public static readonly AttachedProperty<RoutingStrategies> TheRoutingStrategiesProperty =
-            AvaloniaProperty.RegisterAttached<object, IControl, RoutingStrategies>
+            AvaloniaProperty.RegisterAttached<object, Control, RoutingStrategies>
             (
                 "TheRoutingStrategies",
                 RoutingStrategies.Bubble
@@ -47,14 +47,14 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnEventChanged(AvaloniaPropertyChangedEventArgs<RoutedEvent> eventArgs)
         {
-            IControl sender = (IControl) eventArgs.Sender;
+            Control sender = (Control) eventArgs.Sender;
 
             var oldEvent = eventArgs.OldValue.Value;
 
             sender.ResetEvent(oldEvent);
         }
 
-        private static void ResetEvent(this IControl sender, RoutedEvent oldEvent)
+        private static void ResetEvent(this Control sender, RoutedEvent oldEvent)
         {
             if (oldEvent != null)
             {
@@ -77,7 +77,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnRoutingStrategiesChanged(AvaloniaPropertyChangedEventArgs<RoutingStrategies> eventArgs)
         {
-            IControl sender = (IControl)eventArgs.Sender;
+            Control sender = (Control)eventArgs.Sender;
 
             RoutedEvent oldEvent = GetTheEvent(sender);
 

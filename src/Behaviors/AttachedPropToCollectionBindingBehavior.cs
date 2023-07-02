@@ -9,7 +9,7 @@ namespace NP.Avalonia.Visuals.Behaviors
     {
         public AttachedPropToCollectionBindingBehavior
         (
-            IAvaloniaObject source, 
+            AvaloniaObject source, 
             AvaloniaProperty<TProp> attachedProp, 
             IEnumerable<TTarget> collection,
             Action<TTarget, TProp> setter) 

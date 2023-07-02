@@ -6,15 +6,15 @@ namespace NP.Avalonia.Visuals.Behaviors
 {
     public class AttachedPropValueGetter<TProp> : IValueGetter<TProp>
     {
-        public IAvaloniaObject Source { get; }
+        public AvaloniaObject Source { get; }
 
         private AvaloniaProperty<TProp> _attachedProperty;
 
-        public TProp GetValue() => Source.GetValue(_attachedProperty);
+        public TProp GetValue() => Source.GetValue<TProp>(_attachedProperty);
 
         public IObservable<TProp> ValueObservable { get; }
 
-        public AttachedPropValueGetter(IAvaloniaObject source, AvaloniaProperty<TProp> attachedProperty)
+        public AttachedPropValueGetter(AvaloniaObject source, AvaloniaProperty<TProp> attachedProperty)
         {
             Source = source;
             _attachedProperty = attachedProperty;

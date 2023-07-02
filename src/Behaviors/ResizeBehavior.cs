@@ -13,7 +13,7 @@ namespace NP.Avalonia.Visuals.Behaviors
         private Point? _startPointerPoint;
         private Point? _originalWindowPosition;
         private Size? _originalWindowSize;
-        public double RenderScaling => _window.PlatformImpl.RenderScaling;
+        public double RenderScaling => _window.PlatformImpl.GetPropValue<double>("RenderScaling", true);
 
         public ResizeBehavior(CustomWindow window)
         {
@@ -67,7 +67,9 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         public void StartDrag(WindowEdge edge, PointerPressedEventArgs e)
         {
-            if (e.MouseButton != MouseButton.Left)
+            PointerPointProperties pointerPointProperties = e.GetPropValue<PointerPointProperties>("Properties", true);
+
+            if (!pointerPointProperties.IsLeftButtonPressed)
                 return;
 
             _edge = edge;

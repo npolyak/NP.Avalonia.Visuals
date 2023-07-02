@@ -7,7 +7,7 @@ using Avalonia.Media;
 
 namespace NP.Avalonia.Visuals.Controls
 {
-    public class OverlayingPopup : Popup, IContentControl
+    public class OverlayingPopup : Popup
     {
         #region Content Styled Avalonia Property
         public object Content

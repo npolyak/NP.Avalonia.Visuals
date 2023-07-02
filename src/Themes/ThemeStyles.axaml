@@ -175,8 +175,8 @@
 				<MultiBinding Converter="{x:Static np:SumConverter.Instance}">
 					<Binding Path="FontSize"
 							 RelativeSource="{RelativeSource Self}"/>
-					<np:ValueBinding x:TypeArguments="x:Double"
-									 Value="-1"/>
+					<!--<np:ValueBinding x:TypeArguments="x:Double"
+									 Value="-1"/>-->
 				</MultiBinding>
 			</Setter.Value>
 		</Setter>
@@ -235,8 +235,8 @@
 				Value="1"/>
 	</Style>
 
-	<StyleInclude Source="resm:Avalonia.Themes.Default.PopupRoot.xaml?assembly=Avalonia.Themes.Default"/>
-	<StyleInclude Source="resm:Avalonia.Themes.Default.ScrollViewer.xaml?assembly=Avalonia.Themes.Default"/>
+	<!--<StyleInclude Source="resm:Avalonia.Themes.Default.PopupRoot.xaml?assembly=Avalonia.Themes.Default"/>
+	<StyleInclude Source="resm:Avalonia.Themes.Default.ScrollViewer.xaml?assembly=Avalonia.Themes.Default"/>-->
 
 	<Style Selector="ComboBoxItem">
 		<Setter Property="Background" Value="Transparent"/>
@@ -304,14 +304,9 @@
 									BorderThickness="1">
 								<ScrollViewer HorizontalScrollBarVisibility="{Binding $parent[ComboBox].HorizontalScrollBarVisibility}"
 											  VerticalScrollBarVisibility="{Binding $parent[ComboBox].VerticalScrollBarVisibility}">
-									<np:NpItemsPresenter x:Name="ComboItemsPresenter"
-														Items="{Binding $parent[ComboBox].Items, Mode=OneWay}"
-														ItemsPanel="{Binding $parent[ComboBox].ItemsPanel}"
-														ItemTemplate="{Binding $parent[ComboBox].ItemTemplate, Mode=OneWay}"
-														VirtualizationMode="{Binding $parent[ComboBox].VirtualizationMode}">
-
-
-									</np:NpItemsPresenter>
+									<ItemsPresenter x:Name="ComboItemsPresenter"
+														ItemsPanel="{Binding $parent[ComboBox].ItemsPanel}">
+									</ItemsPresenter>
 								</ScrollViewer>
 							</Border>
 						</Popup>
@@ -352,7 +347,7 @@
 		</Setter>
 	</Style>
 	<Style Selector="np|ActionIndicator.RoundIndicator[IsOn=True]">
-		<Style.Animations>
+		<!--<Style.Animations>
 			<Animation Duration="0:0:1.1"
 					   RepeatCount="INFINITE">
 				<KeyFrame Cue="100%">
@@ -360,7 +355,7 @@
 							Value="360"/>
 				</KeyFrame>
 			</Animation>
-		</Style.Animations>
+		</Style.Animations>-->
 	</Style>
 
 	<Style Selector="DataGridColumnHeader.WithFilter">

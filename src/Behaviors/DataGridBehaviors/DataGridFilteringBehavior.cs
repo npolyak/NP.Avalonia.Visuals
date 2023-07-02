@@ -189,7 +189,7 @@ namespace NP.Avalonia.Visuals.Behaviors.DataGridBehaviors
 
         public static void BuildFilter(DataGrid dataGrid)
         {
-            DataGridCollectionView collectionView = (DataGridCollectionView)dataGrid.Items;
+            DataGridCollectionView collectionView = (DataGridCollectionView)dataGrid.ItemsSource;
 
             List<Func<object, bool>> colFilters = new List<Func<object, bool>>();
 

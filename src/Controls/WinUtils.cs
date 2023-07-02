@@ -8,7 +8,7 @@ namespace NP.Avalonia.Visuals.Controls
     {
         public static IPlatformHandle GetPlatformHandle(this Window window)
         {
-            return window.PlatformImpl.Handle;
+            return window.TryGetPlatformHandle();
         }
 
         public static IntPtr GetWinHandle(this Window window)

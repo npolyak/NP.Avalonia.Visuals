@@ -9,18 +9,18 @@ namespace NP.Avalonia.Visuals.Behaviors
     public class FindLogicalAncestorBehavior
     {
         #region AncestorType Attached Avalonia Property
-        public static Type? GetAncestorType(IControl obj)
+        public static Type? GetAncestorType(Control obj)
         {
             return obj.GetValue(AncestorTypeProperty);
         }
 
-        public static void SetAncestorType(IControl obj, Type? value)
+        public static void SetAncestorType(Control obj, Type? value)
         {
             obj.SetValue(AncestorTypeProperty, value);
         }
 
         public static readonly AttachedProperty<Type?> AncestorTypeProperty =
-            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, IControl, Type?>
+            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, Control, Type?>
             (
                 "AncestorType"
             );
@@ -28,18 +28,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region AncestorName Attached Avalonia Property
-        public static string? GetAncestorName(IControl obj)
+        public static string? GetAncestorName(Control obj)
         {
             return obj.GetValue(AncestorNameProperty);
         }
 
-        public static void SetAncestorName(IControl obj, string? value)
+        public static void SetAncestorName(Control obj, string? value)
         {
             obj.SetValue(AncestorNameProperty, value);
         }
 
         public static readonly AttachedProperty<string?> AncestorNameProperty =
-            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, IControl, string?>
+            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, Control, string?>
             (
                 "AncestorName"
             );
@@ -47,18 +47,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region Ancestor Attached Avalonia Property
-        public static IControl? GetAncestor(IControl obj)
+        public static Control? GetAncestor(Control obj)
         {
             return obj.GetValue(AncestorProperty);
         }
 
-        private static void SetAncestor(IControl obj, IControl? value)
+        private static void SetAncestor(Control obj, Control? value)
         {
             obj.SetValue(AncestorProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl?> AncestorProperty =
-            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, IControl, IControl?>
+        public static readonly AttachedProperty<Control?> AncestorProperty =
+            AvaloniaProperty.RegisterAttached<FindLogicalAncestorBehavior, Control, Control?>
             (
                 "Ancestor"
             );
@@ -73,16 +73,16 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void OnTypeChanged(AvaloniaPropertyChangedEventArgs<Type> args)
         {
-            SetFinding((IControl)args.Sender);
+            SetFinding((Control)args.Sender);
         }
 
         private static void OnNameChanged(AvaloniaPropertyChangedEventArgs<string> args)
         {
 
-            SetFinding((IControl)args.Sender);
+            SetFinding((Control)args.Sender);
         }
 
-        private static void SetFinding(IControl control)
+        private static void SetFinding(Control control)
         {
             control.AttachedToLogicalTree -= Control_AttachedToLogicalTree;
 
@@ -94,14 +94,14 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static void Control_AttachedToLogicalTree(object? sender, LogicalTreeAttachmentEventArgs e)
         {
-            IControl control = (IControl)sender!;
+            Control control = (Control)sender!;
 
             SetAncestor(control);
         }
 
-        private static IControl? FindAncestor(IControl control)
+        private static Control? FindAncestor(Control control)
         {
-            if (!control.IsAttachedToLogicalTree)
+            if ((control as ILogical)?.IsAttachedToLogicalTree != true)
             {
                 return null;
             }
@@ -114,9 +114,9 @@ namespace NP.Avalonia.Visuals.Behaviors
                 return null;
             }
 
-            IControl? result = 
+            Control? result = 
                 control.GetLogicalAncestors()
-                   .OfType<IControl>()
+                   .OfType<Control>()
                    .FirstOrDefault
                    (
                     ancestor => 
@@ -126,7 +126,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             return result;
         }
 
-        public static bool SetAncestor(IControl control)
+        public static bool SetAncestor(Control control)
         {
             var ancestor = FindAncestor(control);
 

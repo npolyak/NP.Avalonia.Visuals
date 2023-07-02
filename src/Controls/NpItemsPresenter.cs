@@ -10,62 +10,57 @@ using System.Linq;
 
 namespace NP.Avalonia.Visuals.Controls
 {
-    public class NpItemsPresenter : ItemsPresenter, IItemsPresenter, IChildIndexProvider
-    {
-        private EventHandler<ChildIndexChangedEventArgs>? _childIndexChanged;
-        private IItemContainerGenerator? _itemContainerGenerator;
+    //public class NpItemsPresenter : ItemsPresenter, IChildIndexProvider
+    //{
+    //    private EventHandler<ChildIndexChangedEventArgs>? _childIndexChanged;
+    //    private ItemContainerGenerator? _itemContainerGenerator;
         
-        event EventHandler<ChildIndexChangedEventArgs>? IChildIndexProvider.ChildIndexChanged
-        {
-            add => _childIndexChanged += value;
-            remove => _childIndexChanged -= value;
-        }
+    //    event EventHandler<ChildIndexChangedEventArgs>? IChildIndexProvider.ChildIndexChanged
+    //    {
+    //        add => _childIndexChanged += value;
+    //        remove => _childIndexChanged -= value;
+    //    }
 
-        public NpItemsPresenter()
-        {
-            FindLogicalAncestorBehavior.SetAncestorType(this, typeof(NpComboBox));
+    //    public NpItemsPresenter()
+    //    {
+    //        FindLogicalAncestorBehavior.SetAncestorType(this, typeof(NpComboBox));
 
-            this.GetObservable(FindLogicalAncestorBehavior.AncestorProperty).Subscribe(OnAncestorChanged!);
-        }
+    //        this.GetObservable(FindLogicalAncestorBehavior.AncestorProperty).Subscribe(OnAncestorChanged!);
+    //    }
 
-        private void OnAncestorChanged(IControl ancestor)
-        {
-            (ancestor as IItemsPresenterHost)?.RegisterItemsPresenter(this);
-        }
+    //    protected override ItemContainerGenerator CreateItemContainerGenerator()
+    //    {
+    //        if (_itemContainerGenerator == null)
+    //        {
+    //            ItemsControl parent =
+    //                this.GetLogicalAncestors().OfType<ItemsControl>().First();
 
-        protected override IItemContainerGenerator CreateItemContainerGenerator()
-        {
-            if (_itemContainerGenerator == null)
-            {
-                ItemsControl parent =
-                    this.GetLogicalAncestors().OfType<ItemsControl>().First();
+    //            _itemContainerGenerator = parent.ItemContainerGenerator;
 
-                _itemContainerGenerator = parent.ItemContainerGenerator;
+    //            _itemContainerGenerator.Materialized += ContainerActionHandlerImpl;
+    //            _itemContainerGenerator.Dematerialized += ContainerActionHandlerImpl;
+    //            _itemContainerGenerator.Recycled += ContainerActionHandlerImpl;
+    //        }
 
-                _itemContainerGenerator.Materialized += ContainerActionHandlerImpl;
-                _itemContainerGenerator.Dematerialized += ContainerActionHandlerImpl;
-                _itemContainerGenerator.Recycled += ContainerActionHandlerImpl;
-            }
+    //        return _itemContainerGenerator;
+    //    }
 
-            return _itemContainerGenerator;
-        }
+    //    void IItemsPresenter.ItemsChanged(NotifyCollectionChangedEventArgs e)
+    //    {
+    //        if (Panel != null)
+    //        {
+    //            ItemsChanged(e);
 
-        void IItemsPresenter.ItemsChanged(NotifyCollectionChangedEventArgs e)
-        {
-            if (Panel != null)
-            {
-                ItemsChanged(e);
+    //            _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs());
+    //        }
+    //    }
 
-                _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs());
-            }
-        }
-
-        private void ContainerActionHandlerImpl(object? sender, ItemContainerEventArgs e)
-        {
-            for (var i = 0; i < e.Containers.Count; i++)
-            {
-                _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs(e.Containers[i].ContainerControl));
-            }
-        }
-    }
+    //    private void ContainerActionHandlerImpl(object? sender, ItemContainerEventArgs e)
+    //    {
+    //        for (var i = 0; i < e.Containers.Count; i++)
+    //        {
+    //            _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs(e.Containers[i].ContainerControl));
+    //        }
+    //    }
+    //}
 }

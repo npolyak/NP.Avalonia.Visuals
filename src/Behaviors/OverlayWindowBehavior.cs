@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml.Templates;
 using NP.Avalonia.Visuals;
 using NP.Utilities;
 using System;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 
 namespace NP.Avalonia.Visuals.Behaviors
@@ -11,36 +12,36 @@ namespace NP.Avalonia.Visuals.Behaviors
     public class OverlayWindowBehavior
     {
         #region IsOpen Attached Avalonia Property
-        public static bool GetIsOpen(IControl obj)
+        public static bool GetIsOpen(Control obj)
         {
             return obj.GetValue(IsOpenProperty);
         }
 
-        public static void SetIsOpen(IControl obj, bool value)
+        public static void SetIsOpen(Control obj, bool value)
         {
             obj.SetValue(IsOpenProperty, value);
         }
 
         public static readonly AttachedProperty<bool> IsOpenProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, bool>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, bool>
             (
                 "IsOpen"
             );
         #endregion IsOpen Attached Avalonia Property
 
         #region Padding Attached Avalonia Property
-        public static Thickness GetPadding(IControl obj)
+        public static Thickness GetPadding(Control obj)
         {
             return obj.GetValue(PaddingProperty);
         }
 
-        public static void SetPadding(IControl obj, Thickness value)
+        public static void SetPadding(Control obj, Thickness value)
         {
             obj.SetValue(PaddingProperty, value);
         }
 
         public static readonly AttachedProperty<Thickness> PaddingProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, Thickness>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, Thickness>
             (
                 "Padding"
             );
@@ -48,18 +49,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region Content Attached Avalonia Property
-        public static object GetContent(IControl obj)
+        public static object GetContent(Control obj)
         {
             return obj.GetValue(ContentProperty);
         }
 
-        public static void SetContent(IControl obj, object value)
+        public static void SetContent(Control obj, object value)
         {
             obj.SetValue(ContentProperty, value);
         }
 
         public static readonly AttachedProperty<object> ContentProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, object>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, object>
             (
                 "Content"
             );
@@ -67,18 +68,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region ContentTemplate Attached Avalonia Property
-        public static DataTemplate GetContentTemplate(IControl obj)
+        public static DataTemplate GetContentTemplate(Control obj)
         {
             return obj.GetValue(ContentTemplateProperty);
         }
 
-        public static void SetContentTemplate(IControl obj, DataTemplate value)
+        public static void SetContentTemplate(Control obj, DataTemplate value)
         {
             obj.SetValue(ContentTemplateProperty, value);
         }
 
         public static readonly AttachedProperty<DataTemplate> ContentTemplateProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, DataTemplate>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, DataTemplate>
             (
                 "ContentTemplate"
             );
@@ -86,18 +87,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region OverlayWindow Attached Avalonia Property
-        public static Window GetOverlayWindow(IControl obj)
+        public static Window GetOverlayWindow(Control obj)
         {
             return obj.GetValue(OverlayWindowProperty);
         }
 
-        private static void SetOverlayWindow(IControl obj, Window value)
+        private static void SetOverlayWindow(Control obj, Window value)
         {
             obj.SetValue(OverlayWindowProperty, value);
         }
 
         private static readonly AttachedProperty<Window> OverlayWindowProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, Window>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, Window>
             (
                 "OverlayWindow"
             );
@@ -105,18 +106,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region IsTopmost Attached Avalonia Property
-        public static bool GetIsTopmost(IControl obj)
+        public static bool GetIsTopmost(Control obj)
         {
             return obj.GetValue(IsTopmostProperty);
         }
 
-        public static void SetIsTopmost(IControl obj, bool value)
+        public static void SetIsTopmost(Control obj, bool value)
         {
             obj.SetValue(IsTopmostProperty, value);
         }
 
         public static readonly AttachedProperty<bool> IsTopmostProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, bool>
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, bool>
             (
                 "IsTopmost",
                 true
@@ -125,18 +126,18 @@ namespace NP.Avalonia.Visuals.Behaviors
 
 
         #region OverlayedControl Attached Avalonia Property
-        public static IControl GetOverlayedControl(IControl obj)
+        public static Control GetOverlayedControl(Control obj)
         {
             return obj.GetValue(OverlayedControlProperty);
         }
 
-        public static void SetOverlayedControl(IControl obj, IControl value)
+        public static void SetOverlayedControl(Control obj, Control value)
         {
             obj.SetValue(OverlayedControlProperty, value);
         }
 
-        public static readonly AttachedProperty<IControl> OverlayedControlProperty =
-            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, IControl, IControl>
+        public static readonly AttachedProperty<Control> OverlayedControlProperty =
+            AvaloniaProperty.RegisterAttached<OverlayWindowBehavior, Control, Control>
             (
                 "OverlayedControl"
             );
@@ -150,7 +151,7 @@ namespace NP.Avalonia.Visuals.Behaviors
 
         private static async void OnIsOpenChanged(AvaloniaPropertyChangedEventArgs<bool> args)
         {
-            IControl control = (IControl) args.Sender;
+            Control control = (Control) args.Sender;
 
             Window? overlayWindow = GetOverlayWindow(control);
 
@@ -161,7 +162,7 @@ namespace NP.Avalonia.Visuals.Behaviors
                     overlayWindow =
                         new Window()
                         {
-                            TransparencyLevelHint = WindowTransparencyLevel.Transparent,
+                            TransparencyLevelHint = WindowTransparencyLevel.Transparent.ToCollection().ToImmutableList(),
                             Background = null,
                             CanResize = false,
                             SystemDecorations = SystemDecorations.None,
@@ -174,13 +175,16 @@ namespace NP.Avalonia.Visuals.Behaviors
                     SetOverlayWindow(control, overlayWindow);
                 }
 
-                IControl overlayedControl = GetOverlayedControl(control) ?? control;
+                Control overlayedControl = GetOverlayedControl(control) ?? control;
 
                 Rect2D screenBounds = overlayedControl.GetScreenBounds();
 
-                double scale = 1d / overlayWindow.PlatformImpl.RenderScaling;
+                double renderScaling = overlayWindow.PlatformImpl.GetPropValue<double>("RenderScaling", true);
+
+                double scale = 1d / renderScaling;
                 overlayWindow.Position = screenBounds.StartPoint.ToPixelPoint();
-                overlayWindow.PlatformImpl.Resize(screenBounds.GetSize(scale).ToSize());
+
+                overlayWindow.PlatformImpl.CallMethod("Resize", screenBounds.GetSize(scale).ToSize(), WindowResizeReason.Application);
                 overlayWindow.Show();
             }
             else

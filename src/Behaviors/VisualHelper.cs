@@ -42,10 +42,10 @@ namespace NP.Avalonia.Visuals.Behaviors
             return tabMouseOver;
         }
 
-        public static void DisconnectVisualParentContentPresenter(this IControl control)
+        public static void DisconnectVisualParentContentPresenter(this Control control)
         {
-            IContentPresenter? parent =
-                control.GetVisualParent() as IContentPresenter;
+            ContentPresenter? parent =
+                control.GetVisualParent() as ContentPresenter;
 
             if (parent != null)
             {
@@ -53,7 +53,7 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        public static void RemoveFromParentPanel(this IControl control)
+        public static void RemoveFromParentPanel(this Control control)
         {
             if (control.Parent is Panel p)
             {
@@ -61,10 +61,10 @@ namespace NP.Avalonia.Visuals.Behaviors
             }
         }
 
-        public static TWindow GetControlsWindow<TWindow>(this IVisual visual)
+        public static TWindow? GetControlsWindow<TWindow>(this Visual visual)
             where TWindow : Window
         {
-            if (visual.IsAttachedToVisualTree)
+            if (visual.IsAttachedToVisualTree())
             {
                 return 
                     visual.GetSelfAndVisualAncestors()

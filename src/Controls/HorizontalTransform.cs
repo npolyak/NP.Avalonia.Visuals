@@ -5,7 +5,7 @@ using System;
 
 namespace NP.Avalonia.Visuals.Controls
 {
-    public class HorizontalTransform : ScaleTransform
+    public class HorizontalTransform : Transform
     {
         #region TheVisualFlow Styled Avalonia Property
         public VisualFlow TheVisualFlow
@@ -26,9 +26,11 @@ namespace NP.Avalonia.Visuals.Controls
             this.GetObservable(TheVisualFlowProperty).Subscribe(OnVisualFlowChanged);
         }
 
+        public override Matrix Value => Matrix.CreateScale(TheVisualFlow == VisualFlow.Normal ? 1d : -1d, 1d);
+
         private void OnVisualFlowChanged(VisualFlow visualFlow)
         {
-            this.ScaleX = visualFlow.ToScale();
+            RaiseChanged();
         }
     }
 }

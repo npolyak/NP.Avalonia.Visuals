@@ -163,8 +163,6 @@
 			  Value="DefaultCustomWindowMenu"/>
 	  <Setter Property="WindowButtonClasses"
 			  Value="WindowIconButton IconButton"/>
-	  <Setter Property="Focusable"
-			  Value="False"/>
     <Setter Property="ResizeMargin"
         Value="5"/>
 	  <Setter Property="MenuForeground"
@@ -183,8 +181,6 @@
             Value="DefaultWindowTitle"/>
     <Setter Property="BorderBrush"
             Value="LightGray"/>
-    <Setter Property="BorderThickness"
-            Value="1"/>
     <Setter Property="ButtonsAreaTemplate"
             Value="{StaticResource CustomWindowButtonsTemplate}"/>
     <!--<Setter Property="TitleAreaContent"

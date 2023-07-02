@@ -29,18 +29,18 @@ namespace NP.Avalonia.Visuals.Controls
     public class AttachedProperties
     {
         #region RowsHeights Attached Avalonia Property
-        public static Dictionary<int, GridLength> GetRowsHeights(IControl obj)
+        public static Dictionary<int, GridLength> GetRowsHeights(Control obj)
         {
             return obj.GetValue(RowsHeightsProperty);
         }
 
-        public static void SetRowsHeights(IControl obj, Dictionary<int, GridLength> value)
+        public static void SetRowsHeights(Control obj, Dictionary<int, GridLength> value)
         {
             obj.SetValue(RowsHeightsProperty, value);
         }
 
         public static readonly AttachedProperty<Dictionary<int, GridLength>> RowsHeightsProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Dictionary<int, GridLength>>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, Dictionary<int, GridLength>>
             (
                 "RowsHeights"
             );
@@ -48,18 +48,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region ColumnsWidths Attached Avalonia Property
-        public static Dictionary<int, GridLength> GetColumnsWidths(IControl obj)
+        public static Dictionary<int, GridLength> GetColumnsWidths(Control obj)
         {
             return obj.GetValue(ColumnsWidthsProperty);
         }
 
-        public static void SetColumnsWidths(IControl obj, Dictionary<int, GridLength> value)
+        public static void SetColumnsWidths(Control obj, Dictionary<int, GridLength> value)
         {
             obj.SetValue(ColumnsWidthsProperty, value);
         }
 
         public static readonly AttachedProperty<Dictionary<int, GridLength>> ColumnsWidthsProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Dictionary<int, GridLength>>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, Dictionary<int, GridLength>>
             (
                 "ColumnsWidths"
             );
@@ -203,18 +203,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region IconHorizontalAlignment Attached Avalonia Property
-        public static HorizontalAlignment GetIconHorizontalAlignment(IControl obj)
+        public static HorizontalAlignment GetIconHorizontalAlignment(Control obj)
         {
             return obj.GetValue(IconHorizontalAlignmentProperty);
         }
 
-        public static void SetIconHorizontalAlignment(IControl obj, HorizontalAlignment value)
+        public static void SetIconHorizontalAlignment(Control obj, HorizontalAlignment value)
         {
             obj.SetValue(IconHorizontalAlignmentProperty, value);
         }
 
         public static readonly AttachedProperty<HorizontalAlignment> IconHorizontalAlignmentProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, HorizontalAlignment>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, HorizontalAlignment>
             (
                 "IconHorizontalAlignment",
                 HorizontalAlignment.Center
@@ -243,18 +243,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region IconRow Attached Avalonia Property
-        public static int GetIconRow(IControl obj)
+        public static int GetIconRow(Control obj)
         {
             return obj.GetValue(IconRowProperty);
         }
 
-        public static void SetIconRow(IControl obj, int value)
+        public static void SetIconRow(Control obj, int value)
         {
             obj.SetValue(IconRowProperty, value);
         }
 
         public static readonly AttachedProperty<int> IconRowProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, int>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, int>
             (
                 "IconRow"
             );
@@ -262,18 +262,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region IconColumn Attached Avalonia Property
-        public static int GetIconColumn(IControl obj)
+        public static int GetIconColumn(Control obj)
         {
             return obj.GetValue(IconColumnProperty);
         }
 
-        public static void SetIconColumn(IControl obj, int value)
+        public static void SetIconColumn(Control obj, int value)
         {
             obj.SetValue(IconColumnProperty, value);
         }
 
         public static readonly AttachedProperty<int> IconColumnProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, int>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, int>
             (
                 "IconColumn"
             );
@@ -300,18 +300,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region HasVisibleLogicalChildren Attached Avalonia Property
-        public static bool GetHasVisibleLogicalChildren(IAvaloniaObject obj)
+        public static bool GetHasVisibleLogicalChildren(AvaloniaObject obj)
         {
             return obj.GetValue(HasVisibleLogicalChildrenProperty);
         }
 
-        internal static void SetHasVisibleLogicalChildren(IAvaloniaObject obj, bool value)
+        internal static void SetHasVisibleLogicalChildren(AvaloniaObject obj, bool value)
         {
             obj.SetValue(HasVisibleLogicalChildrenProperty, value);
         }
 
         public static readonly AttachedProperty<bool> HasVisibleLogicalChildrenProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, bool>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, bool>
             (
                 "HasVisibleLogicalChildren"
             );
@@ -319,36 +319,36 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region PrimaryIconData Attached Avalonia Property
-        public static Geometry GetPrimaryIconData(IControl obj)
+        public static Geometry GetPrimaryIconData(Control obj)
         {
             return obj.GetValue(PrimaryIconDataProperty);
         }
 
-        public static void SetPrimaryIconData(IControl obj, Geometry value)
+        public static void SetPrimaryIconData(Control obj, Geometry value)
         {
             obj.SetValue(PrimaryIconDataProperty, value);
         }
 
         public static readonly AttachedProperty<Geometry> PrimaryIconDataProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Geometry>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, Geometry>
             (
                 "PrimaryIconData"
             );
         #endregion PrimaryIconData Attached Avalonia Property
 
         #region AlternateIconData Attached Avalonia Property
-        public static Geometry GetAlternateIconData(IControl obj)
+        public static Geometry GetAlternateIconData(Control obj)
         {
             return obj.GetValue(AlternateIconDataProperty);
         }
 
-        public static void SetAlternateIconData(IControl obj, Geometry value)
+        public static void SetAlternateIconData(Control obj, Geometry value)
         {
             obj.SetValue(AlternateIconDataProperty, value);
         }
 
         public static readonly AttachedProperty<Geometry> AlternateIconDataProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, Geometry>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, Geometry>
             (
                 "AlternateIconData"
             );
@@ -374,18 +374,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region Text Attached Avalonia Property
-        public static string GetText(IControl obj)
+        public static string GetText(Control obj)
         {
             return obj.GetValue(TextProperty);
         }
 
-        public static void SetText(IControl obj, string value)
+        public static void SetText(Control obj, string value)
         {
             obj.SetValue(TextProperty, value);
         }
 
         public static readonly AttachedProperty<string> TextProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, string>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, string>
             (
                 "Text"
             );
@@ -393,18 +393,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region TheTextWrapping Attached Avalonia Property
-        public static TextWrapping GetTheTextWrapping(IControl obj)
+        public static TextWrapping GetTheTextWrapping(Control obj)
         {
             return obj.GetValue(TheTextWrappingProperty);
         }
 
-        public static void SetTheTextWrapping(IControl obj, TextWrapping value)
+        public static void SetTheTextWrapping(Control obj, TextWrapping value)
         {
             obj.SetValue(TheTextWrappingProperty, value);
         }
 
         public static readonly AttachedProperty<TextWrapping> TheTextWrappingProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, TextWrapping>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, TextWrapping>
             (
                 "TheTextWrapping"
             );
@@ -412,18 +412,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region TheTextAlignment Attached Avalonia Property
-        public static TextAlignment GetTheTextAlignment(IControl obj)
+        public static TextAlignment GetTheTextAlignment(Control obj)
         {
             return obj.GetValue(TheTextAlignmentProperty);
         }
 
-        public static void SetTheTextAlignment(IControl obj, TextAlignment value)
+        public static void SetTheTextAlignment(Control obj, TextAlignment value)
         {
             obj.SetValue(TheTextAlignmentProperty, value);
         }
 
         public static readonly AttachedProperty<TextAlignment> TheTextAlignmentProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, TextAlignment>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, TextAlignment>
             (
                 "TheTextAlignment"
             );
@@ -431,18 +431,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region TheTextTrimming Attached Avalonia Property
-        public static TextTrimming GetTheTextTrimming(IControl obj)
+        public static TextTrimming GetTheTextTrimming(Control obj)
         {
             return obj.GetValue(TheTextTrimmingProperty);
         }
 
-        public static void SetTheTextTrimming(IControl obj, TextTrimming value)
+        public static void SetTheTextTrimming(Control obj, TextTrimming value)
         {
             obj.SetValue(TheTextTrimmingProperty, value);
         }
 
         public static readonly AttachedProperty<TextTrimming> TheTextTrimmingProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, TextTrimming>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, TextTrimming>
             (
                 "TheTextTrimming"
             );
@@ -450,18 +450,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region TextHorizontalAlignment Attached Avalonia Property
-        public static HorizontalAlignment GetTextHorizontalAlignment(IControl obj)
+        public static HorizontalAlignment GetTextHorizontalAlignment(Control obj)
         {
             return obj.GetValue(TextHorizontalAlignmentProperty);
         }
 
-        public static void SetTextHorizontalAlignment(IControl obj, HorizontalAlignment value)
+        public static void SetTextHorizontalAlignment(Control obj, HorizontalAlignment value)
         {
             obj.SetValue(TextHorizontalAlignmentProperty, value);
         }
 
         public static readonly AttachedProperty<HorizontalAlignment> TextHorizontalAlignmentProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, HorizontalAlignment>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, HorizontalAlignment>
             (
                 "TextHorizontalAlignment",
                 HorizontalAlignment.Center
@@ -470,18 +470,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region TextVerticalAlignment Attached Avalonia Property
-        public static VerticalAlignment GetTextVerticalAlignment(IControl obj)
+        public static VerticalAlignment GetTextVerticalAlignment(Control obj)
         {
             return obj.GetValue(TextVerticalAlignmentProperty);
         }
 
-        public static void SetTextVerticalAlignment(IControl obj, VerticalAlignment value)
+        public static void SetTextVerticalAlignment(Control obj, VerticalAlignment value)
         {
             obj.SetValue(TextVerticalAlignmentProperty, value);
         }
 
         public static readonly AttachedProperty<VerticalAlignment> TextVerticalAlignmentProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, VerticalAlignment>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, VerticalAlignment>
             (
                 "TextVerticalAlignment",
                 VerticalAlignment.Center
@@ -490,18 +490,18 @@ namespace NP.Avalonia.Visuals.Controls
 
 
         #region MainPartTemplate Attached Avalonia Property
-        public static ControlTemplate GetMainPartTemplate(IControl obj)
+        public static ControlTemplate GetMainPartTemplate(Control obj)
         {
             return obj.GetValue(MainPartTemplateProperty);
         }
 
-        public static void SetMainPartTemplate(IControl obj, ControlTemplate value)
+        public static void SetMainPartTemplate(Control obj, ControlTemplate value)
         {
             obj.SetValue(MainPartTemplateProperty, value);
         }
 
         public static readonly AttachedProperty<ControlTemplate> MainPartTemplateProperty =
-            AvaloniaProperty.RegisterAttached<AttachedProperties, IControl, ControlTemplate>
+            AvaloniaProperty.RegisterAttached<AttachedProperties, Control, ControlTemplate>
             (
                 "MainPartTemplate"
             );

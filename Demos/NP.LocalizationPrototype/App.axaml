@@ -7,7 +7,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <np:ThemeLoader Name="ColorLoader"
+        <!--<np:ThemeLoader Name="ColorLoader"
                         SelectedThemeId="Light"
                         StyleResourceName="ColorLoaderStyles">
           <np:ThemeInfo Id="Dark"
@@ -16,7 +16,7 @@
           <np:ThemeInfo Id="Light"
                         ResourceUrl="/ColorDictionaries/LightResources.axaml"
                         StyleUrl="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-        </np:ThemeLoader>
+        </np:ThemeLoader>-->
         <np:ThemeLoader Name="LanguageLoader"
                         SelectedThemeId="English">
             <np:ThemeInfo Id="English"
@@ -30,8 +30,8 @@
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
-    <!--<FluentTheme Mode="Dark"/>-->
-    <np:StyleReference TheStyle="{StaticResource ColorLoaderStyles}"/>
+	  <!--<FluentTheme Mode="Dark"/>-->
+    <!--<np:StyleReference TheStyle="{StaticResource ColorLoaderStyles}"/>-->
     <StyleInclude Source="/Resources/AppStyles.axaml"/>
   </Application.Styles>
 </Application>

@@ -13,8 +13,8 @@ namespace NP.Avalonia.Visuals.Controls
     {        /// <summary>
              /// The default value for the <see cref="ItemsControl.ItemsPanel"/> property.
              /// </summary>
-        private static readonly FuncTemplate<IPanel> DefaultPanel =
-            new FuncTemplate<IPanel>(() => new VirtualizingStackPanel());
+        private static readonly FuncTemplate<Panel> DefaultPanel =
+            new FuncTemplate<Panel>(() => new VirtualizingStackPanel());
 
         FindVisualDescendantBehavior _findVisualDescendantBehavior = 
             new FindVisualDescendantBehavior { DescendantName = "PART_Popup" };
@@ -28,7 +28,7 @@ namespace NP.Avalonia.Visuals.Controls
             this.GetObservable(FindVisualDescendantBehavior.ResultProperty).Subscribe(OnPopupChanged!);
         }
 
-        private void OnPopupChanged(IControl obj)
+        private void OnPopupChanged(Control obj)
         {
             if (obj == null)
             {

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace NP.Avalonia.Visuals.ThemingAndL10N
 {
-    public class ThemeLoader : IThemeLoader, IResourceProvider
+    public class ThemeLoader : ResourceDictionary, IThemeLoader//, IResourceProvider
     {
         public string? Name { get; set; }
 
@@ -21,9 +21,6 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
 
         public IResourceDictionary Loaded => _resourceDictionary;
         public IResourceHost? Owner => Loaded.Owner;
-
-        void IResourceProvider.AddOwner(IResourceHost owner) => Loaded.AddOwner(owner);
-        void IResourceProvider.RemoveOwner(IResourceHost owner) => Loaded.RemoveOwner(owner);
 
         public Uri? BaseUri { get; private set; }
 
@@ -66,7 +63,7 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
                 return true;
             }
 
-            return Loaded.TryGetResource(key, out value);
+            return Loaded.TryGetResource(key, ThemeVariant.Light, out value);
         }
 
         public T GetResource<T>(object key, T defaultValue = default)
@@ -233,6 +230,11 @@ namespace NP.Avalonia.Visuals.ThemingAndL10N
             int nextThemeIdx = currentThemeIdx + 1;
 
             this.SelectedThemeId = Themes.ElementAt(nextThemeIdx).Id;
+        }
+
+        public bool TryGetResource(object key, ThemeVariant? theme, out object? value)
+        {
+            return Loaded.TryGetResource(key, ThemeVariant.Light, out value);
         }
     }
 }

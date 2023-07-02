@@ -12,7 +12,7 @@ namespace NP.Avalonia.Visuals.Converters
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo? culture)
         {
-            IControl? control = value as IControl;
+            Control? control = value as Control;
 
             if (control == null)
                 return value;

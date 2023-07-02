@@ -58,7 +58,7 @@ namespace NP.LocalizationPrototype
 
         private void OnSelectedColorThemeChanged(ColorTheme colorTheme)
         {
-            _colorThemeLoader!.SelectedThemeId = colorTheme.ToString();
+            //_colorThemeLoader!.SelectedThemeId = colorTheme.ToString();
         }
 
         private void ChangeUidButton_Click(object? sender, RoutedEventArgs e)
