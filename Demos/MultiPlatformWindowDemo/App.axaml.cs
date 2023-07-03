@@ -18,10 +18,9 @@ namespace NP.Demos.MultiPlatformWindowDemo
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new StartupTestWindow()
-                {
-                    Classes = new Classes("PlainCustomWindow")
-                };
+                desktop.MainWindow = new StartupTestWindow();
+
+                desktop.MainWindow.Classes.Add("PlainCustomWindow");
             }
 
             NLogWrapper.SetLog();

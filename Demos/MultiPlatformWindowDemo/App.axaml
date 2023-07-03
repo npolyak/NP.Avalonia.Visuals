@@ -7,11 +7,13 @@
     <local:CustomWindowViewModel x:Key="WindowContentAndHeaderViewModel" />
   </Application.Resources>
   <Application.Styles>
-    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-    <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+
+	<SimpleTheme/>
     <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/CustomWindowStyles.axaml"/>
 
     <Style Selector="local|StartupTestWindow">
+		<Setter Property="HeaderBackground"
+				Value="White"/>
       <Setter Property="Title"
               Value="Main Window"/>
       <Setter Property="Width"
@@ -120,8 +122,6 @@
               Value="5"/>
       <Setter Property="Height"
               Value="300"/>
-      <Setter Property="BorderThickness"
-              Value="2"/>
       <Setter Property="TransparencyLevelHint"
               Value="Transparent"/>
       <Setter Property="Background"

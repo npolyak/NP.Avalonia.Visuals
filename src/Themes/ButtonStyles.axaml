@@ -74,8 +74,8 @@
               Value="35"/>
       <Setter Property="np:ClassesBehavior.InsertClasses"
               Value="HeaderIconButton"/>
-      <Setter Property="np:AttachedProperties.IconMargin"
-              Value="5"/>
+      <!--<Setter Property="np:AttachedProperties.IconMargin"
+              Value="5"/>-->
     </Style>
   
     <Style Selector=":is(Button).IconButton:disabled">

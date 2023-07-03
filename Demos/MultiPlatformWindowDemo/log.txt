@@ -1,0 +1,14 @@
+2023-07-02 22:03:21.5508 Info Message Template Auto Format enabled
+2023-07-02 22:03:21.5961 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-07-02 22:03:21.5961 Info Registered target NLog.Targets.ColoredConsoleTarget(Name=console)
+2023-07-02 22:03:21.6178 Info Validating config: TargetNames=logfile, console, ConfigItems=22, FilePath=C:\IDEAS\GITHUB\NP.Avalonia.Visuals\Demos\MultiPlatformWindowDemo\bin\Debug\net6.0\NLog.config
+2023-07-02 22:03:21.6267 Info Configuration initialized.
+2023-07-02 22:03:21.6267 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.1.1.1522. Product version: 5.1.1+b1175f1ad0ce4a4a9d1f4b61538202071d7be513. GlobalAssemblyCache: False
+2023-07-02 22:03:21.6267 Warn Logger: NP.NLogAdapter.NLogWrapper configured with duplicate output to target: FileTarget(Name=logfile). LoggingRule with NamePattern='*' and Level=Info has been skipped.
+2023-07-02 22:03:48.3411 Info Message Template Auto Format enabled
+2023-07-02 22:03:48.3878 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-07-02 22:03:48.3928 Info Registered target NLog.Targets.ColoredConsoleTarget(Name=console)
+2023-07-02 22:03:48.4098 Info Validating config: TargetNames=logfile, console, ConfigItems=22, FilePath=C:\IDEAS\GITHUB\NP.Avalonia.Visuals\Demos\MultiPlatformWindowDemo\bin\Debug\net6.0\NLog.config
+2023-07-02 22:03:48.4098 Info Configuration initialized.
+2023-07-02 22:03:48.4098 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.1.1.1522. Product version: 5.1.1+b1175f1ad0ce4a4a9d1f4b61538202071d7be513. GlobalAssemblyCache: False
+2023-07-02 22:03:48.4229 Warn Logger: NP.NLogAdapter.NLogWrapper configured with duplicate output to target: FileTarget(Name=logfile). LoggingRule with NamePattern='*' and Level=Info has been skipped.

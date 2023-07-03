@@ -16,17 +16,18 @@ using System;
 
 namespace NP.Demos.MultiPlatformWindowDemo
 {
-    public class StartupTestWindow : CustomWindow, IStyleable
+    public class StartupTestWindow : CustomWindow
     {
-        Type IStyleable.StyleKey => typeof(StartupTestWindow);
+        protected override Type StyleKeyOverride => typeof(StartupTestWindow);
 
         public void StartWindowWithCustomHeaderAndViewModel()
         {
             var window = new CustomWindow
             {
-                Classes = new Classes("WindowContentHeaderAndViewModel")
-                ,DragOnBeginMove = false
+                DragOnBeginMove = false
             };
+
+            window.Classes.Add("WindowContentHeaderAndViewModel");
 
             window.Show();
         }
@@ -36,9 +37,10 @@ namespace NP.Demos.MultiPlatformWindowDemo
         {
             var window = new CustomWindow
             {
-                Classes = new Classes("CompleteHeaderRestyling")
+                //Classes = new Classes("CompleteHeaderRestyling")
             };
 
+            Classes.Add("CompleteHeaderRestyling");
             window.Show();
         }
     }

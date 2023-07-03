@@ -123,6 +123,7 @@
 				  behaviors:ClassesBehavior.TheClasses="{Binding $parent[Window].WindowButtonClasses}"
                   controls:AttachedProperties.IconData="{StaticResource MinimizeIcon}"
                   controls:AttachedProperties.IconHeight="2.1"
+				  controls:AttachedProperties.IconMargin="5,15,5,5"
                   controls:AttachedProperties.IconStretch="Fill"
                   behaviors:CallAction.MethodName="Minimize"/>
           <Button x:Name="RestoreButton"
@@ -164,7 +165,7 @@
 	  <Setter Property="WindowButtonClasses"
 			  Value="WindowIconButton IconButton"/>
     <Setter Property="ResizeMargin"
-        Value="5"/>
+            Value="5"/>
 	  <Setter Property="MenuForeground"
 			  Value="Black"/>
     <Setter Property="BorderThickness"
@@ -336,7 +337,7 @@
 		<Setter Property="Title"
 				Value="My Test Window"/>
 		<Setter Property="HeaderBackground"
-				Value="Transparent"/>
+				Value="White"/>
 		<Setter Property="HeaderHeight"
 				Value="30"/>
 		<Setter Property="HeaderSeparatorHeight"
