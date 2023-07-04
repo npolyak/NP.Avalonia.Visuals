@@ -3,6 +3,11 @@
              x:Class="NP.AutoGridTest.App"
              xmlns:np="https://np.com/visuals"
              xmlns:local="clr-namespace:NP.AutoGridTest">
+	<Application.Styles>
+		<!--<FluentTheme Mode="Dark"/>-->
+		<SimpleTheme/>
+		<StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/PieSegmentStyles.axaml"/>
+	</Application.Styles>
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -30,10 +35,5 @@
 			</LinearGradientBrush>
 		</ResourceDictionary>
 	</Application.Resources>
-  <Application.Styles>
-    <!--<FluentTheme Mode="Dark"/>-->
-	  <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"/>
-	  <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-	  <StyleInclude Source="avares://NP.Avalonia.Visuals/Themes/PieSegmentStyles.axaml"/>
-  </Application.Styles>
+
 </Application>

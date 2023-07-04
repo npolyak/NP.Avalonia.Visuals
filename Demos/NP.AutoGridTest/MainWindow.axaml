@@ -6,8 +6,8 @@
         Title="NP.AutoGridTest"
         x:Name="Root"
 		Width="500"
-		Height="400"
-		Background="{StaticResource PrimaryBrush}">
+		Height="400">
+		 <!-- Background="{StaticResource PrimaryBrush}">-->
 	<!--<Button Background="Blue"
 			Foreground="White"
 			CornerRadius="5"
@@ -46,12 +46,12 @@
 					 HorizontalAlignment="Center"
 			         VerticalAlignment="Center"
 					 ShowGridLines="True">
-			<np:AutoGrid.RowsHeights>
+			<!--<np:AutoGrid.RowsHeights>
 				<GridLength x:Key="1">100</GridLength>
 			</np:AutoGrid.RowsHeights>
 			<np:AutoGrid.ColumnsWidths>
 				<GridLength x:Key="0">*</GridLength>
-			</np:AutoGrid.ColumnsWidths>
+			</np:AutoGrid.ColumnsWidths>-->
 			<Border Width="100"
 					Height="100"
 					HorizontalAlignment="Left"
