@@ -22,6 +22,15 @@ namespace NP.AutoGridTest
 #endif
             _autoGrid = this.FindControl<AutoGrid>("MyAutoGrid");
 
+            _autoGrid.RowsHeights[0] = new GridLength(1d, GridUnitType.Star);
+            _autoGrid.ColumnsWidths[0] = new GridLength(1d, GridUnitType.Star);
+
+            _autoGrid.RowsHeights[1] = new GridLength(200d);
+            _autoGrid.ColumnsWidths[1] = new GridLength(200d);
+
+            _autoGrid.RowsHeights[2] = new GridLength(1d, GridUnitType.Star);
+            _autoGrid.ColumnsWidths[2] = new GridLength(1d, GridUnitType.Star);
+
             _themeLoader = 
                 Application.Current.Resources.GetThemeLoader("ColorThemeLoader")!;
 
@@ -46,7 +55,7 @@ namespace NP.AutoGridTest
             else
             {
                 AutoGrid.SetRow(button3, 2);
-                AutoGrid.SetColumn(button3, 1);
+                AutoGrid.SetColumn(button3, 2);
             }
         }
 

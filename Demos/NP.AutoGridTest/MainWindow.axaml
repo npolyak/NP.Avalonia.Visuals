@@ -5,8 +5,8 @@
         x:Class="NP.AutoGridTest.MainWindow"
         Title="NP.AutoGridTest"
         x:Name="Root"
-		Width="500"
-		Height="400">
+		Width="600"
+		Height="600">
 		 <!-- Background="{StaticResource PrimaryBrush}">-->
 	<!--<Button Background="Blue"
 			Foreground="White"
@@ -43,27 +43,31 @@
 	<Grid RowDefinitions="*, Auto"
 		  Margin="10">
 		<np:AutoGrid x:Name="MyAutoGrid" 
-					 HorizontalAlignment="Center"
-			         VerticalAlignment="Center"
+					 HorizontalAlignment="Stretch"
+			         VerticalAlignment="Stretch"
 					 ShowGridLines="True">
 			<!--<np:AutoGrid.RowsHeights>
 				<GridLength x:Key="1">100</GridLength>
 			</np:AutoGrid.RowsHeights>-->
-			<np:AutoGrid.ColumnsWidths>
+			<!--<np:AutoGrid.ColumnsWidths>
 				<GridLength x:Key="0">*</GridLength>
-			</np:AutoGrid.ColumnsWidths>
+			</np:AutoGrid.ColumnsWidths>-->
 			<Border Width="100"
 					Height="100"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Background="{StaticResource MouseOverBrush}"/>
+					Background="Red"/>
 			<Button Content="Button 2"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
 					np:AutoGrid.Row="1"
 					np:AutoGrid.Column="1"/>
 			<Button x:Name="Button3"
-					Content="Button 3"
+					Content="Button 3"					
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
 					np:AutoGrid.Row="2"
-					np:AutoGrid.Column="1"/>
+					np:AutoGrid.Column="2"/>
 		</np:AutoGrid>
 
 		<StackPanel Grid.Row="1" 
