@@ -40,18 +40,29 @@
 			</local:PropertiesChangeObserver>
 		</local:PropertiesChangeObserver.PropChangeObserver>
 	</Button>-->
+	<Window.Resources>
+		<GridLength x:Key="bla">100*</GridLength>
+
+		<np:GridLenDictionary x:Key="MyDictionary">
+			<GridLength x:Key="1">100</GridLength>
+		</np:GridLenDictionary>
+	</Window.Resources>
 	<Grid RowDefinitions="*, Auto"
 		  Margin="10">
-		<np:AutoGrid x:Name="MyAutoGrid" 
-					 HorizontalAlignment="Stretch"
-			         VerticalAlignment="Stretch"
+		<np:AutoGrid x:Name="MyAutoGrid"
+					 HorizontalAlignment="Center"
+			         VerticalAlignment="Center"
 					 ShowGridLines="True">
-			<!--<np:AutoGrid.RowsHeights>
-				<GridLength x:Key="1">100</GridLength>
-			</np:AutoGrid.RowsHeights>-->
-			<!--<np:AutoGrid.ColumnsWidths>
-				<GridLength x:Key="0">*</GridLength>
-			</np:AutoGrid.ColumnsWidths>-->
+			<np:AutoGrid.RowsHeights>
+				<np:GridLenDictionary >
+					<GridLength x:Key="1">200</GridLength>
+				</np:GridLenDictionary>
+			</np:AutoGrid.RowsHeights>
+			<np:AutoGrid.ColumnsWidths>
+				<np:GridLenDictionary>
+					<GridLength x:Key="1">200</GridLength>
+				</np:GridLenDictionary>
+			</np:AutoGrid.ColumnsWidths>
 			<Border Width="100"
 					Height="100"
 					HorizontalAlignment="Left"
