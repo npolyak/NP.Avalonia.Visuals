@@ -1,5 +1,7 @@
 # NP.Avalonia.Visuals
 
+# NOTE - this project is deprecated - please, use (NP.Ava.Visuals)[https://github.com/npolyak/NP.Ava.Visuals] project instead (which works with the latest and greatest Avalonia 11.
+
 contains basic visual paradigms for Avalonia
 
 To checkout (together with the submodules so that you could build the demos) use the following command
