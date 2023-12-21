@@ -1,6 +1,6 @@
 # NP.Avalonia.Visuals
 
-# NOTE - this project is deprecated - please, use (NP.Ava.Visuals)[https://github.com/npolyak/NP.Ava.Visuals] project instead (which works with the latest and greatest Avalonia 11.
+# NOTE - this project is deprecated - please, use [NP.Ava.Visuals](https://github.com/npolyak/NP.Ava.Visuals) project instead (which works with the latest and greatest Avalonia 11.
 
 contains basic visual paradigms for Avalonia
 
